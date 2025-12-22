@@ -9,7 +9,7 @@
 
     <ItemGroup>
       <PackageReference Include="Mapster" Version="7.4.0" />
-      <PackageReference Include="Snowflake.Data" Version="5.1.0" />
+      <PackageReference Include="Snowflake.Data" Version="5.2.1" />
     </ItemGroup>
 
     <ItemGroup>
