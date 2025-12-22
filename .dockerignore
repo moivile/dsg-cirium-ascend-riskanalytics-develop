@@ -1,0 +1,29 @@
+# directories
+**/bin/
+**/obj/
+**/out/
+**/charts
+**/docker-compose*
+**/Dockerfile*
+
+
+# files
+**/*.md
+**/node_modules
+**/npm-debug.log
+**/secrets.dev.yaml
+**/values.dev.yaml
+**/.vs
+**/.vscode
+**/*.*proj.user
+**/*.dbmdl
+**/*.jfm
+**/azds.yaml
+**/.classpath
+**/.dockerignore
+**/.env
+**/.git
+**/.gitignore
+**/.project
+**/.settings
+**/.toolstarget

@@ -1,0 +1,95 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+
+.main-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  padding-left: 32px;
+  padding-right: 46px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+
+  background-color: colors.$airframe-color-neutral-grey-20;
+}
+
+.main-nav__site-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+a.main-nav__logo {
+  color: colors.$airframe-color-primary-normal;
+}
+
+.main-nav__logo {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.main-nav__page-title {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.main-nav__site-list-item {
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+  border-right: 0.5px solid colors.$airframe-color-neutral-grey-90;
+  padding-right: 16px;
+  padding-left: 16px;
+  &:last-child {
+    border-right: none;
+  }
+  a {
+    box-sizing: border-box;
+    padding-top: 6px;
+    padding-bottom: 6px;
+
+    &:not(.active-menu-item):hover {
+      padding-bottom: 4.4px;
+      border-bottom: 1.6px solid colors.$airframe-color-neutral-grey-40;
+    }
+  }
+
+  .active-menu-item {
+    padding-bottom: 4.4px;
+    border-bottom: 1.6px solid colors.$airframe-color-primary-normal;
+    cursor: default;
+  }
+  .menu-item-inaccessible {
+    color: colors.$airframe-color-neutral-grey-40;
+  }
+}
+.main-nav__logo,
+.main-nav__site-list-item a {
+  text-decoration: none;
+  color: colors.$airframe-color-neutral-grey-80;
+}
+
+.main-nav__site-list-item a {
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.93px;
+  text-transform: uppercase;
+  color: colors.$airframe-color-neutral-grey-80;
+}
+
+.main-nav__helptip {
+  margin-left: 22px;
+  font-size: 23px;
+  color: colors.$airframe-color-status-info-extra-dark;
+}

@@ -1,0 +1,66 @@
+@use "node_modules/@airframe/standard/src/scss/foundations/colors";
+@use "@airframe/standard/src/scss/foundations/breakpoints";
+@use "@airframe/standard/src/scss/foundations/font-family";
+
+.helptip {
+	&-container {
+		position: relative;
+		border: none;
+		background-color: transparent;
+	}
+
+	&-text {
+		text-align: start;
+		background-color: colors.$airframe-color-status-info-normal;
+		border-radius: 3px;
+		padding: 12px 12px 24px 12px;
+		word-wrap: break-word;
+		white-space: normal;
+		visibility: hidden;
+		color: colors.$airframe-color-neutral-white;
+		position: absolute;
+		z-index: 100;
+		opacity: 0;
+		transition: opacity 0.3s;
+		width: 314px;
+		cursor: default;
+
+		&::after {
+			content: "";
+			position: absolute;
+			margin-left: -9px;
+			border-width: 8px;
+			border-style: solid;
+			right: 1%;
+			border-color: transparent transparent transparent colors.$airframe-color-status-info-normal;
+			top: 3%;
+
+			@media (min-width: breakpoints.$airframe-breakpoint-sm) {
+				right: -5%;
+			}
+		}
+
+		label {
+			display: block;
+			padding-bottom: 8px;
+            font-family: font-family.$font-family-montserrat;
+		}
+
+		p {
+			font-size: 14px;
+			line-height: 19px;
+            font-family: font-family.$font-family-montserrat;
+            font-weight: 300;
+		}
+	}
+
+	&-body:last-of-type {
+		top: 12px;
+		position: relative;
+	}
+
+	&-container:hover &-text {
+		visibility: visible;
+		opacity: 1;
+	}
+}

@@ -1,0 +1,18 @@
+@use "@airframe/standard/src/scss/foundations/breakpoints";
+@use 'src/app/styles/charts';
+
+.barChartArea {
+  height: 520px;
+  position: relative;
+  margin-top: -13px;
+
+  @media (min-width: breakpoints.$airframe-breakpoint-xm) {
+    top: 39px;
+  }
+}
+
+.modal_icon {
+  position: absolute;
+  right: 0;
+  top: 14px;
+}

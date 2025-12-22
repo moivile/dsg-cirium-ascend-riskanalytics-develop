@@ -1,0 +1,17 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+
+div.p-checkbox .p-checkbox-box.p-highlight {
+  border-color: colors.$airframe-color-primary-normal;
+  background: colors.$airframe-color-primary-normal;
+}
+div.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover {
+  border-color: colors.$airframe-color-primary-normal;
+}
+div.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
+  box-shadow: 0 0 0 0.125rem colors.$airframe-color-foreground-focus;
+  border-color: colors.$airframe-color-primary-normal;
+}
+div.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+  border-color: colors.$airframe-color-primary-extra-light;
+  background: colors.$airframe-color-primary-extra-light;
+}

@@ -1,0 +1,27 @@
+<div class="landing">
+  <div class="row">
+    <h3 class="col welcome-message">
+      Welcome to your Asset Watch Homepage<span *ngIf="userFirstName$ | async as userFirstName">, {{ userFirstName }}</span>
+    </h3>
+    <div class="col landing-flex-right">
+      <button class="airframe__button airframe__button--primary create-button" routerLink="create">
+        <em class="fa-solid fa-plus"></em>Create new portfolio
+      </button>
+    </div>
+  </div>
+  <span class="airframe-caption">Use this page to manage your portfolios.</span>
+
+  <hr class="title-break" />
+
+  <div class="row">
+    <span class="col landing-display-flex">
+      <h4>My Portfolios ({{ appStore.numberOfPortfolios$ | async }})</h4>
+      <em
+        class="fa-regular fa-circle-question"
+        pTooltip="This area of the page shows all the portfolios that have been created by you."
+        tooltipPosition="right"
+        tooltipStyleClass="helptip"></em>
+    </span>
+  </div>
+  <ra-landing-portfolios></ra-landing-portfolios>
+</div>

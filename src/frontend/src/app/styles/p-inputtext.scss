@@ -1,0 +1,41 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+
+input.p-inputtext.airframe__textfield {
+  border-color: colors.$airframe-color-neutral-grey-50;
+
+  &:enabled:hover {
+    background: colors.$airframe-color-neutral-grey-10;
+    border-color: colors.$airframe-color-primary-light;
+  }
+
+  &:enabled:focus,
+  &:enabled:hover:focus {
+    box-shadow: none;
+    background-color: colors.$airframe-color-neutral-white;
+  }
+
+  &:focus-within {
+    border: 2px solid colors.$airframe-color-foreground-focus;
+    border-radius: 2px;
+    background-color: colors.$airframe-color-neutral-white;
+  }
+}
+
+.p-inputtext.ra-inputtext {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  border-color: colors.$airframe-color-neutral-grey-50;
+}
+.p-inputtext.ra-inputtext:enabled:hover {
+  border-color: colors.$airframe-color-primary-light;
+  background-color:  colors.$airframe-color-gray-050;
+}
+.p-inputtext.ra-inputtext:enabled:focus {
+  border-color: colors.$airframe-color-utility-focus;
+  background-color: colors.$airframe-color-neutral-white;
+  box-shadow: 0 0 0 1px colors.$airframe-color-foreground-focus;
+
+}
+.p-inputtext.ra-inputtext.ng-dirty.ng-invalid {
+  border-color: colors.$airframe-color-status-danger-extra-dark;
+}

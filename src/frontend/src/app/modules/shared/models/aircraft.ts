@@ -1,0 +1,32 @@
+export interface Aircraft {
+  aircraftId: number;
+  aircraftSerialNumber?: string;
+  aircraftRegistrationNumber?: string;
+  aircraftAgeYears?: number;
+  aircraftSeries?: string;
+  aircraftSeriesId?: number;
+  aircraftFamily?: string;
+  aircraftFamilyId?: number;
+  aircraftType?: string;
+  aircraftTypeId?: number;
+  aircraftManufacturer?: string;
+  aircraftManufacturerOrganizationId?: number;
+  aircraftMarketClass?: string;
+  aircraftMarketClassId?: number;
+  aircraftMasterSeries?: string;
+  engineSeries?: string;
+  operator?: string;
+  operatorOrganizationId?: number;
+  operatorCountry?: string;
+  manager?: string;
+  managerOrganizationId?: number;
+  owner?: string;
+  ownerOrganizationId?: number
+  lessorOrganization?: string;
+  lessorOrganizationId?: number;
+  cycles: number;
+  hours: number;
+  aircraftUsage?: string;
+  status?: string;
+  statusStartDate?: Date;
+}

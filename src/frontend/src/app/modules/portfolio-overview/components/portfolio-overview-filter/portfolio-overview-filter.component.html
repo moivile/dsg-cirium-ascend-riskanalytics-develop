@@ -1,0 +1,125 @@
+<div class="filters-button">
+  <button class="airframe__button airframe__button--plain" (click)="openFiltersOverlay()">
+    Filters <em class="fa fa-filter"></em> ({{selectedFilterCount}})
+  </button>
+</div>
+
+<div [ngClass]="filtersOverlay || filterOptionsOverlay ? 'filter-overlay-container' : ''">
+  <div class="filters-overlay" #filtersOverlayContainer [style.display]="closeOverlay ? 'block' : 'none'">
+    <div class="row filters-overlay__header">
+      <div class="col filters-overlay__title" *ngIf="filtersOverlay">
+        <h6>Filter By</h6>
+      </div>
+      <div class="col filters-overlay__reset" *ngIf="filtersOverlay">
+        <button type="button" (click)="resetFilters()" class="airframe__button airframe__button--flat">Reset
+          All</button>
+      </div>
+
+      <div class="col filters-overlay__title" *ngIf="filterOptionsOverlay">
+        <em class="fa fa-chevron-left" (click)="openFiltersOverlay()"></em>
+        <h6>{{filterDisplayName}}</h6>
+      </div>
+      <div class="col filters-overlay__reset" *ngIf="filterOptionsOverlay">
+        <button type="button" (click)="resetFiltersOverlay(filterDisplayName)"
+          class="airframe__button airframe__button--flat"> Reset</button>
+      </div>
+    </div>
+
+    <div class="filters-overlay__body">
+      <div *ngIf="filtersOverlay">
+        <button class="row filters-overlay__item filters-overlay__item-filter-name" *ngFor="let filter of filters"
+          (click)="openFilterOptionsOverlay(filter.displayName)">
+          <span class="filters-overlay__display-name">{{filter.displayName}}</span>
+          <div class="filters-overlay__filter-count">
+            <span>{{filter.selectedFilters.length}}</span> <em class="fa fa-chevron-right"></em>
+          </div>
+        </button>
+      </div>
+      <div *ngIf="filterOptionsOverlay">
+        <div *ngFor="let filter of filters">
+          <div *ngIf="filter.displayName === filterDisplayName">
+            <div *ngFor="let filterOption of filter.filterOptions">
+              <button class="row filters-overlay__item" *ngIf="filterOption.count !== 0">
+                <ng-container [ngTemplateOutlet]="filterOptionTemplate"
+                  [ngTemplateOutletContext]="{ $implicit: filterOption, filter:filter }">
+                </ng-container>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row center-xs filters-overlay__footer">
+      <button #viewDataButton class="airframe__button airframe__button--primary" (click)="closeFiltersOverlay()">VIEW
+        DATA</button>
+    </div>
+  </div>
+</div>
+
+<div class="row filters">
+  <div class="row filters__header">
+    <div class="col filters__title">
+      <h6>Filter By</h6>
+    </div>
+    <div class="col filters__reset-all">
+      <button type="button" (click)="resetFilters()" class="airframe__button airframe__button--flat">Reset
+        All</button>
+    </div>
+  </div>
+
+  <div *ngFor="let filter of filters">
+    <div class="row filters__group">
+      <div class="row filters__reset-filters">
+        <button type="button" *ngIf="canResetFilter(filter)" (click)="resetFilter(filter)"
+          class="airframe__button airframe__button--flat">
+          Reset</button>
+      </div>
+      <div class="row filters__display-name">
+        <label>{{filter.displayName}}</label>
+      </div>
+
+      <div class="row">
+        <div *ngIf="showNoResults(filter)">
+          <span class="airframe-caption">No Results</span>
+        </div>
+        <ng-container
+          *ngFor="let filterOption of filter.filterOptions | displayedFilterOptions: filter.showMore: filter.filterOptionsCount">
+          <ng-container [ngTemplateOutlet]="filterOptionTemplate"
+            [ngTemplateOutletContext]="{ $implicit: filterOption, filter:filter }">
+          </ng-container>
+        </ng-container>
+      </div>
+
+      <div class="row filters__show-more-container">
+        <div *ngIf="filter.filterOptionsCount > numberOfFilterOptionsToShow" class="filters__show-more">
+          <button type="button" class="airframe__button airframe__button--flat"
+            (click)="filter.showMore = !filter.showMore">Show
+            <span [innerHtml]="filter.showMore ? 'Less' : 'All (' + filter.filterOptionsCount + ')'">
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #filterOptionTemplate let-filterOption let-filter="filter">
+  <div *ngIf="filterOption.count !== 0" class="row">
+    <div class="filters__container">
+      <label class="filters__label">
+        <div class="col-xs-1 filters__checkbox">
+          <input #filterCheckbox type="checkbox" class="airframe__checkbox airframe__checkbox--primary"
+            [checked]="filter.selectedFilters.includes(filterOption.name) || filter.selectedFilters.includes(filterOption.name.toString())"
+            (change)="updateSelectedFilters(filterCheckbox, filterOption.name, filter.selectedFilters)" />
+        </div>
+        <div class="col filters__option" title (mouseenter)="showHoverText($event.target, filterOption.name)">
+          <span>{{filterOption.name}}</span>
+        </div>
+        <div class="col-xs-2 filters__value">
+          <p class="airframe-caption airframe-subtle-onlight right-aligned"> {{filterOption.count}}</p>
+        </div>
+      </label>
+    </div>
+  </div>
+</ng-template>

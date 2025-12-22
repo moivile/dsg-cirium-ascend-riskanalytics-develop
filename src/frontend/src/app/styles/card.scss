@@ -1,0 +1,10 @@
+@use "@airframe/standard/src/scss/foundations/colors";
+
+.card {
+  border-radius: 5px;
+  background-color: rgb(239, 239, 239, 0.5);
+
+  &--low-contrast-on-dark {
+    background-color: colors.$airframe-color-background-mid-contrast-on-dark-opacity-50;
+  }
+}

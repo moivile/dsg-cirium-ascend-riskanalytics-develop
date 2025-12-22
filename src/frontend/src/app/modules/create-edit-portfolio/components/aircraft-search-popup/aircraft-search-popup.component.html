@@ -1,0 +1,228 @@
+<div class="filters">
+  <span class="p-input-icon-right search-bar">
+    <i class="fa fa-search search-button"></i>
+    <input
+      class="airframe__textfield"
+      [formControl]="textFilterControl"
+      type="text"
+      [disabled]="loading"
+      placeholder="Search by MSN, Registration, Airline, Lessor, Aircraft Family"
+      pInputText />
+  </span>
+
+  <div class="filters-dropdowns" [formGroup]="dropdownForm">
+    <p-multiSelect
+      formControlName="manufacturers"
+      [options]="searchResultDropdownLists?.manufacturers || []"
+      placeholder="Manufacturer"
+      optionLabel="name"
+      emptyMessage="No Results"
+      styleClass="ra-multiselect"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="40"
+      [filter]="true"
+      filterBy="name"
+      [showClear]="true"
+      [disabled]="loading"
+      [showToggleAll]="false"></p-multiSelect>
+
+    <p-multiSelect
+      formControlName="aircraftTypes"
+      [options]="searchResultDropdownLists?.aircraftTypes || []"
+      placeholder="Aircraft Type"
+      optionLabel="name"
+      emptyMessage="No Results"
+      styleClass="ra-multiselect"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="40"
+      [filter]="true"
+      filterBy="name"
+      [showClear]="true"
+      [disabled]="loading"
+      [showToggleAll]="false"></p-multiSelect>
+
+    <p-multiSelect
+      formControlName="aircraftMasterSeriesList"
+      [options]="searchResultDropdownLists?.aircraftMasterSeries || []"
+      placeholder="Aircraft Master Series"
+      optionLabel="name"
+      emptyMessage="No Results"
+      styleClass="ra-multiselect"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="40"
+      [filter]="true"
+      filterBy="name"
+      [showClear]="true"
+      [disabled]="loading"
+      [showToggleAll]="false"></p-multiSelect>
+
+    <p-multiSelect
+      formControlName="statuses"
+      [options]="searchResultDropdownLists?.statuses || []"
+      placeholder="Status"
+      optionLabel="name"
+      emptyMessage="No Results"
+      styleClass="ra-multiselect"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="40"
+      [filter]="true"
+      filterBy="name"
+      [showClear]="true"
+      [disabled]="loading"
+      [showToggleAll]="false"></p-multiSelect>
+
+    <p-multiSelect
+      formControlName="aircraftOperators"
+      [options]="searchResultDropdownLists?.aircraftOperators || []"
+      placeholder="Operator"
+      optionLabel="name"
+      emptyMessage="No Results"
+      styleClass="ra-multiselect"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="40"
+      [filter]="true"
+      filterBy="name"
+      [showClear]="true"
+      [disabled]="loading"
+      [showToggleAll]="false"></p-multiSelect>
+
+    <p-multiSelect
+      formControlName="lessors"
+      [options]="searchResultDropdownLists?.lessors || []"
+      placeholder="Lessor"
+      optionLabel="name"
+      emptyMessage="No Results"
+      styleClass="ra-multiselect"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="40"
+      [filter]="true"
+      filterBy="name"
+      [showClear]="true"
+      [disabled]="loading"
+      [showToggleAll]="false"></p-multiSelect>
+
+    <p-multiSelect
+      formControlName="operatorCountries"
+      [options]="searchResultDropdownLists?.operatorCountries || []"
+      placeholder="Operator Country/subregion"
+      optionLabel="name"
+      emptyMessage="No Results"
+      styleClass="ra-multiselect"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="40"
+      [filter]="true"
+      filterBy="name"
+      [showClear]="true"
+      [disabled]="loading"
+      [showToggleAll]="false"></p-multiSelect>
+
+      <p-multiSelect
+      formControlName="companyTypes"
+      [options]="searchResultDropdownLists?.companyTypes || []"
+      placeholder="ABS/EETC"
+      optionLabel="name"
+      emptyMessage="No Results"
+      styleClass="ra-multiselect"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="40"
+      [filter]="true"
+      filterBy="name"
+      [showClear]="true"
+      [disabled]="loading"
+      [showToggleAll]="false"></p-multiSelect>
+  </div>
+</div>
+
+<div class="search-results-header-row">
+  <span class="search-results-header">
+    <h4>Search Results ({{ aircraftList.length }})</h4>
+    <em
+      class="fa-regular fa-circle-question"
+      pTooltip="This area of the page shows all the aircraft that can be added to your portfolio."
+      tooltipPosition="right"
+      tooltipStyleClass="helptip"></em>
+  </span>
+  <div class="aircraft-selected">
+    <span class="aircraft-selected-text">Aircraft Selected</span>
+    <span class="aircraft-selected-number">{{ numberOfSelectedAircraft }} / {{ maxNumberOfSelectedAircraft }}</span>
+  </div>
+</div>
+
+<p-table
+  [value]="aircraftList"
+  [scrollable]="true"
+  scrollHeight="400px"
+  [rows]="pageSize"
+  [virtualScroll]="true"
+  [virtualScrollItemSize]="53"
+  [lazy]="true"
+  [loading]="loading"
+  dataKey="aircraftId"
+  [selection]="checkedAircraftList"
+  (onRowSelect)="onRowSelect($event.data)"
+  (onRowUnselect)="onRowUnselect($event.data)"
+  styleClass="airframe-table">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 4rem">
+        <p-checkbox
+          class="select-all-checkbox"
+          [binary]="true"
+          [tooltipDisabled]="!selectAllControl.disabled || loading"
+          [formControl]="selectAllControl"
+          pTooltip="You cannot add all the aircraft from the current search without exceeding the limit of {{
+            maxNumberOfSelectedAircraft
+          }}. Please reduce the search results by selecting more specific filters.">
+        </p-checkbox>
+      </th>
+      <th>MSN</th>
+      <th>Registration</th>
+      <th>Aircraft Master Series</th>
+      <th>Engine Series</th>
+      <th>Age</th>
+      <th>Status</th>
+      <th>Operator</th>
+      <th>Manager</th>
+      <th>Owner</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-aircraft>
+    <tr>
+      <td>
+        <p-tableCheckbox
+          [value]="aircraft"
+          [disabled]="IsCheckboxDisabled(aircraft.aircraftId)"
+          [tooltipDisabled]="!IsCheckboxDisabled(aircraft.aircraftId)"
+          pTooltip="You cannot select more than {{ maxNumberOfSelectedAircraft }} aircraft."></p-tableCheckbox>
+      </td>
+      <td>{{ aircraft.aircraftSerialNumber }}</td>
+      <td>{{ aircraft.aircraftRegistrationNumber }}</td>
+      <td>{{ aircraft.aircraftMasterSeries }}</td>
+      <td>{{ aircraft.engineSeries }}</td>
+      <td class="right-text">{{ aircraft.aircraftAgeYears }}</td>
+      <td>{{ aircraft.status }}</td>
+      <td>{{ aircraft.operator }}</td>
+      <td>{{ aircraft.manager }}</td>
+      <td>{{ aircraft.owner }}</td>
+    </tr>
+  </ng-template>
+</p-table>
+<div class="p-dialog-footer">
+  <button
+    id="cancel-button-js"
+    class="airframe__button airframe__button--plain"
+    pButton
+    type="button"
+    label="Cancel"
+    (click)="closeDialog()">
+    CANCEL
+  </button>
+  <button
+    id="add-aircraft-button-js"
+    class="airframe__button airframe__button--primary"
+    (click)="addAircraft()"
+    [ngClass]="{ 'is-disabled': numberOfSelectedAircraft === 0 }"
+    [attr.disabled]="numberOfSelectedAircraft === 0 ? '' : null">
+    ADD AIRCRAFT
+  </button>
+</div>

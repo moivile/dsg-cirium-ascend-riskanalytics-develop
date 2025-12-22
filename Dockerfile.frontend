@@ -1,0 +1,35 @@
+# Stage 0 to be used for running tests
+FROM nexus-docker-proxy.aero.ctv.cirium.dev/node:20.11.1 as base
+
+WORKDIR /app/
+
+COPY ./src/frontend/package.json ${WORKDIR}
+COPY ./src/frontend/package-lock.json ${WORKDIR}
+COPY ./src/frontend/.npmrc ${WORKDIR}
+
+RUN npm ci
+
+COPY ./src/frontend/ ${WORKDIR}
+
+# This is from Puppeteer themselves
+# https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-puppeteer-in-docker
+
+RUN apt-get update \
+    && apt-get install -y wget gnupg \
+    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
+    && apt-get update \
+    && apt-get install -y google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 \
+      --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
+# Stage 1 build the application
+FROM base as builder
+
+RUN npm run build
+
+# Stage 2
+FROM nexus-docker-proxy.aero.ctv.cirium.dev/nginx:1.25 as runtime
+
+COPY --from=builder /app/dist/riskanalytics /usr/share/nginx/html
+COPY ./src/frontend/nginx.conf /etc/nginx/nginx.conf

@@ -1,0 +1,34 @@
+# https://hub.docker.com/_/microsoft-dotnet-core
+FROM nexus-docker-proxy.aero.ctv.cirium.dev/dotnet/sdk:8.0 AS base
+WORKDIR /src
+
+## # Copy the solution and all the csproj files to WORKDIR
+COPY ./src/api/*.sln ./
+COPY ./src/api/*/*.csproj ./
+
+# Move all the csproj files to its folder, assuming the folder and the csproj
+# have the same name, and restores. In this way, docker caches the restored files.
+RUN for file in $(ls *.csproj); do mkdir -p ${file%.*}/ && mv $file ${file%.*}/; done \
+    && dotnet restore
+
+# Copy the sources after restore
+COPY ./src/api/ .
+
+WORKDIR "/src/RiskAnalytics.Api"
+RUN dotnet build RiskAnalytics.Api.csproj -c Release -o /app/build
+
+FROM base AS publish
+ARG VERSION
+RUN dotnet publish RiskAnalytics.Api.csproj -c Release -o /app/publish --no-restore /p:Version=${VERSION}
+
+FROM nexus-docker-proxy.aero.ctv.cirium.dev/dotnet/aspnet:8.0
+COPY deploy/rds-ca-rsa2048-g1_eu-west-1.pem /usr/local/share/ca-certificates/rds-ca-rsa2048-g1_eu-west-1.crt
+RUN update-ca-certificates
+
+WORKDIR /app
+COPY --from=publish /app/publish .
+
+COPY /entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
+CMD ["/app/entrypoint.sh"]

@@ -1,0 +1,102 @@
+@use "@airframe/standard/src/scss/foundations/colors";
+@use "@airframe/standard/src/scss/foundations/font-family";
+@use "@airframe/standard/src/scss/foundations/breakpoints";
+
+#jitterChartArea {
+	height: 520px;
+	position: relative;
+    margin-top: -6px;
+}
+
+.selectedAverage {
+	float: left;
+	width: 80px;
+}
+
+.icon-container {
+	margin: auto;
+	display: flex;
+	justify-content: flex-end;
+	position: relative;
+}
+
+.icon-column {
+	padding-bottom: 0;
+}
+
+.icon {
+	display: inline;
+	padding: 0 10px 0 10px;
+	color: colors.$airframe-color-primary-normal;
+}
+
+.modal_icon {
+	position: absolute;
+	right: 0;
+	top: 8px;
+}
+
+#explanationIcon {
+	padding-right: 12px;
+}
+
+.explanation-icon {
+	color: colors.$airframe-color-status-info-extra-dark;
+	padding-right: 26px;
+	font-weight: 500;
+
+	&:hover {
+		color: colors.$airframe-color-status-info-normal;
+	}
+}
+
+.helptip {
+	&-text {
+		top: -24%;
+		right: 99%;
+		left: auto;
+	}
+
+	&-body:last-of-type {
+		top: 4px;
+	}
+}
+
+::ng-deep .explanation-tooltip.p-tooltip-top .p-tooltip-text {
+	margin-bottom: 6px;
+}
+
+::ng-deep .explanation-tooltip.p-tooltip-bottom .p-tooltip-text {
+	margin-top: 6px;
+}
+
+::ng-deep .explanation-tooltip.p-tooltip-top .p-tooltip-arrow {
+	margin-bottom: 0;
+	left: 19%;
+}
+
+::ng-deep .explanation-tooltip.p-tooltip-bottom .p-tooltip-arrow {
+	left: 19%;
+}
+
+::ng-deep #jitter-tooltip {
+	position: absolute;
+	background-color: colors.$airframe-color-neutral-grey-80-opacity-80;
+	color: colors.$airframe-color-neutral-white;
+	border-radius: 3px;
+	font-weight: 300;
+	font-size: 12px;
+	pointer-events: none;
+	padding: 4px;
+	font-family: font-family.$font-family-montserrat;
+	z-index: 100000;
+}
+
+::ng-deep .tooltip-title {
+	text-align: left;
+	padding-bottom: 8px;
+}
+
+::ng-deep .modal-tooltip .p-tooltip-text {
+	width: auto;
+}

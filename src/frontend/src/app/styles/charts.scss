@@ -1,0 +1,55 @@
+﻿@use "@airframe/standard/src/scss/foundations/colors";
+@use "@airframe/standard/src/scss/foundations/font-family";
+
+.legend {
+  &__container {
+    padding: 8px;
+    height: 60px;
+    padding-top: 23px;
+    position: relative;
+  }
+
+  &__item {
+    display: flex;
+    padding: 2px;
+
+    &:last-of-type {
+      padding-right: 26px;
+    }
+  }
+
+  &__box {
+    width: 16px;
+    height: 16px;
+    border: 1px solid colors.$airframe-color-chart-primary-border;
+  }
+
+  &__label {
+    padding: 0 8px 0 4px;
+  }
+}
+
+::ng-deep {
+  #chart-tooltip,
+  #stacked-bar-tooltip {
+    position: absolute;
+    background-color: colors.$airframe-color-neutral-grey-80-opacity-80;
+    color: colors.$airframe-color-neutral-white;
+    border-radius: 3px;
+    font-weight: 300;
+    font-size: 12px;
+    pointer-events: none;
+    font-family: font-family.$font-family-montserrat;
+    z-index: 100000;
+    padding: 4px;
+  }
+
+  .tooltip-title {
+    text-align: left;
+  }
+
+  .tooltip-body-value {
+    text-align: end;
+    padding-left: 20px;
+  }
+}

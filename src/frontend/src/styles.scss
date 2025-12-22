@@ -1,0 +1,88 @@
+@import '~primeng/resources/themes/saga-blue/theme.css';
+@import '~primeng/resources/primeng.min.css';
+@import '~primeicons/primeicons.css';
+
+@import '@airframe/standard/src/scss/foundations/font-family';
+@import '@airframe/standard/src/scss/foundations/colors';
+@import '@airframe/standard/src/scss/foundations/breakpoints';
+@import '@airframe/standard/src/scss/airframe-standard';
+@import '@airframe/standard/src/scss/components/basic-elements/textfield/textfield';
+
+@import './app/styles/airframe-tooltip.scss';
+@import './app/styles/airframe-dropdown.scss';
+@import './app/styles/airframe-table.scss';
+@import './app/styles/airframe-modal.scss';
+@import './app/styles/airframe-calendar.scss';
+@import './app/styles/airframe-autocomplete.scss';
+
+@import '@drewbot/sass-flexbox-grid/public/sass-flexbox/main.css';
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+@import './app/styles/dialog.scss';
+@import './app/styles/tooltip.scss';
+@import './app/styles/p-checkbox.scss';
+@import './app/styles/p-inputtext.scss';
+@import './app/styles/p-treeselect';
+@import './app/styles/card.scss';
+@import './app/styles/p-dropdown';
+@import './app/styles/p-multiselect.scss';
+@import './app/styles/helptip.scss';
+@import './app/styles/paper.scss';
+@import './app/styles/p-inputNumber.scss';
+@import './app/styles/main-nav.scss';
+@import './app/styles/p-inputswitch.scss';
+@import './app/styles/ev-badge.scss';
+@import './app/styles/divider-panel-container.scss';
+@import './app/styles/page-content.scss';
+@import './app/styles/page-section.scss';
+
+body {
+  font-family: $font-family-montserrat;
+  background-color: $airframe-color-neutral-grey-10;
+  color: $airframe-color-neutral-grey-80;
+
+  hr {
+    padding-top: 24px;
+    border: 0 solid $airframe-color-neutral-black;
+    box-shadow: 0 2px 0 $airframe-color-neutral-black-opacity-10;
+
+    &.title-break {
+      box-shadow: 0 4px 0 $airframe-color-neutral-black-opacity-10;
+    }
+  }
+}
+
+:root {
+  --airframe-color-chart-primary-1:#{$airframe-color-chart-primary-1};
+  --airframe-color-chart-primary-2:#{$airframe-color-chart-primary-2};
+  --airframe-color-chart-primary-3:#{$airframe-color-chart-primary-3};
+  --airframe-color-chart-primary-4:#{$airframe-color-chart-primary-4};
+  --airframe-color-chart-primary-5:#{$airframe-color-chart-primary-5};
+  --airframe-color-chart-primary-6:#{$airframe-color-chart-primary-6};
+  --airframe-color-chart-primary-border:#{$airframe-color-chart-primary-border};
+  --airframe-color-chart-primary-1-opacity-50:#{$airframe-color-chart-primary-1-opacity-50};
+  --airframe-color-chart-primary-2-opacity-50:#{$airframe-color-chart-primary-2-opacity-50};
+  --airframe-color-chart-primary-3-opacity-50:#{$airframe-color-chart-primary-3-opacity-50};
+  --airframe-color-chart-primary-4-opacity-50:#{$airframe-color-chart-primary-4-opacity-50};
+  --airframe-color-chart-primary-5-opacity-50:#{$airframe-color-chart-primary-5-opacity-50};
+  --airframe-color-chart-primary-6-opacity-50:#{$airframe-color-chart-primary-6-opacity-50};
+
+  --airframe-color-chart-tertiary-1:#{$airframe-color-chart-tertiary-1};
+  --airframe-color-chart-tertiary-2:#{$airframe-color-chart-tertiary-2};
+  --airframe-color-chart-tertiary-3:#{$airframe-color-chart-tertiary-3};
+  --airframe-color-chart-tertiary-4:#{$airframe-color-chart-tertiary-4};
+  --airframe-color-chart-tertiary-5:#{$airframe-color-chart-tertiary-5};
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}

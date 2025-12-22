@@ -1,0 +1,21 @@
+<div class="emissions-upsell-tab">
+  <div class="header-section">
+    <span>
+      <h3 class="col"><ng-content select=".header"></ng-content></h3>
+    </span>
+    <span class="corner-button--top-right-primary">
+      <em class="fa fa-unlock"></em>
+    </span>
+  </div>
+  <span class="airframe-caption"><ng-content select=".page-description"></ng-content></span>
+  <hr class="title-break" />
+  <div class="upsell-message">
+    <div>Your current subscription does not include the <ng-content select=".module-name"></ng-content> module.</div>
+    <div>We would love the opportunity to demo it to you.</div>
+    <div>
+      Please
+      <a class="airframe__button airframe__button--flat" target="_blank" href="https://www.cirium.com/about/contact-us/">Request a Demo</a>
+      and we will get in touch with you. Else, please reach out to your Cirium account manager.
+    </div>
+  </div>
+</div>

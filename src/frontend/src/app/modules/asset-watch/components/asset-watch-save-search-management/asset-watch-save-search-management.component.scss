@@ -1,0 +1,88 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+@use '@airframe/standard/src/scss/foundations/breakpoints';
+@use '@airframe/standard/src/scss/foundations/font-family';
+
+.save-search-management {
+  background-color: colors.$airframe-color-neutral-white;
+  padding-top: 20px;
+  padding-right: 60px;
+  padding-bottom: 10px;
+  padding-left: 60px;
+
+  h3 {
+    padding-bottom: 20px;
+    padding-left: 0;
+  }
+
+  .email-preferences {
+    display: flex;
+    flex-direction: column;
+    width: 506px;
+    margin-left: auto;
+    padding: 12px 10px;
+    background-color: colors.$airframe-color-neutral-grey-10;
+    .email-preferences-info {
+      margin-bottom: 10px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 16px;
+      letter-spacing: 0.047px;
+    }
+
+    .email-preferences-title {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 24px;
+
+      em {
+        color: colors.$airframe-color-primary-normal;
+        font-size: 15px;
+      }
+    }
+
+    .airframe__radiogroup {
+      width: 100%;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 18px;
+    }
+  }
+
+  .saved-search-list {
+    margin-top: 24px;
+    width: 100%;
+    ::ng-deep .airframe-table {
+      font-size: 14px;
+    }
+  }
+
+  i.delete-saved-search-icon {
+    color: colors.$airframe-color-input-default-text-danger;
+  }
+}
+
+.alert-toggle-tooltip-content {
+  &-title {
+    font-weight: bold;
+  }
+  div {
+    margin-bottom: 5px;
+  }
+}
+
+::ng-deep .delete-saved-search-dialog.p-dialog .delete-saved-search-name {
+  font-weight: bold;
+}
+
+.back-link {
+  &::before {
+    color: colors.$airframe-color-primary-normal;
+  }
+  a {
+    margin-left: 19px;
+    color: colors.$airframe-color-primary-normal;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+  }
+}

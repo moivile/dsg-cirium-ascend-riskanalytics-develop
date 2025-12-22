@@ -1,0 +1,140 @@
+{
+    "networkMode": "awsvpc",
+
+    "cpu": "2048",
+    "executionRoleArn": "${EXECUTION_ROLE}",
+    "taskRoleArn": "${EXECUTION_ROLE}",
+    "volumes": [],
+    "memory": "4096",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "tags": [
+        {
+           "key": "Environment",
+           "value": "${ENVIRONMENT_NAME}"
+        },
+        {
+            "key": "Description",
+            "value": "ECS Risk Analytics API Task Definition"
+        },
+        {
+            "key": "Terraform",
+            "value": "false"
+        },
+        {
+            "key": "Squad",
+            "value": "riskanalytics"
+        },
+		{
+            "key": "dsg.io/asset",
+            "value": "car-218"
+        },
+        {
+            "key": "Market",
+            "value": "Aerospace"
+        }
+     ],
+
+    "containerDefinitions": [
+        {
+            "environment": [
+                {
+                    "name": "DOTNET_ENVIRONMENT",
+                    "value": "${ENVIRONMENT_NAME}"
+                }
+            ],
+            "name": "riskanalyticsapi",
+            "mountPoints": [],
+            "secrets": [
+                {
+                    "valueFrom" : "${ENVIRONMENT_NAME}_riskanalytics_api_postgres_sql_password",
+                    "name": "Repository__PostgreSqlPassword"
+                },
+                {
+                    "valueFrom" : "${ENVIRONMENT_NAME}_riskanalytics_email_alerts_postgres_sql_password",
+                    "name": "Repository__PostgreSqlAlertingPassword"
+                },
+                {
+                    "valueFrom" : "${ENVIRONMENT_NAME}_riskanalytics_api_auth0_client_secret",
+                    "name": "Auth0MachineToMachine__ClientSecret"
+                },
+                {
+                    "valueFrom" : "${ENVIRONMENT_NAME}_riskanalytics_api_snowflake_rsa_key_base64",
+                    "name": "SNOWFLAKE_USER_PRIVATE_KEY_BASE64"
+                }
+            ],
+            "image": "${API_IMAGE_NAME}",
+            "logConfiguration": {
+                "logDriver": "awsfirelens"
+            },
+            "portMappings": [
+                {
+                    "containerPort": 8054,
+                    "hostPort": 8054,
+                    "protocol": "tcp"
+                }
+            ],
+            "command": [],
+            "essential": true,
+            "volumesFrom": []
+        },
+        {
+            "environment": [
+                {
+                    "name"  : "AWS_REGION",
+                    "value" : "eu-west-1"
+                  },
+                {
+                    "name"  : "LOG_GROUP_NAME",
+                    "value" : "/ecs/riskanalyticsapi"
+                },
+                {
+                    "name"  : "HTTP_USER",
+                    "value" : "878209"
+                },
+                {
+                    "name"  : "REMOVE_KEYS",
+                    "value" : "container_id,ecs_task_arn"
+                },
+                {
+                    "name"  : "LABELS",
+                    "value" : "cluster=ascend,job=riskanalytics-api,env=ascend-${ENVIRONMENT_NAME}"
+                },
+                {
+                    "name"  : "LABEL_KEYS",
+                    "value" : "$${q}ecs_cluster,$${q}container_name"
+                }
+            ],
+            "name": "log_router",
+            "image": "${FLUENTBIT_IMAGE_NAME}",
+            "mountPoints": [],
+            "secrets": [
+                {
+                    "valueFrom" : "${ENVIRONMENT_NAME}_riskanalytics_fluentbit_grafana",
+                    "name": "HTTP_PASSWD"
+                }
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-region": "eu-west-1",
+                    "awslogs-stream-prefix": "riskanalytics",
+                    "awslogs-multiline-pattern" : "(?:DEBUG:|INFO:|WARN:|ERROR:|FATAL:)",
+                    "awslogs-group": "/ecs/riskanalyticsapi"
+                }
+            },
+            "firelensConfiguration" : {
+                "type" : "fluentbit",
+                "options" : {
+                  "enable-ecs-log-metadata" : "true",
+                  "config-file-type"        : "file",
+                  "config-file-value"       : "/logDestinationBoth.conf"
+                }
+            },
+            "command": [],
+            "essential": true,
+            "volumesFrom": []
+        }
+    ]
+}

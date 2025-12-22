@@ -1,0 +1,86 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+@use '@airframe/standard/src/scss/foundations/breakpoints';
+@use '@airframe/standard/src/scss/foundations/font-family';
+@use '../../../../styles/p-table';
+
+.create {
+  background-color: colors.$airframe-color-neutral-white;
+  padding-top: 20px;
+  padding-right: 60px;
+  padding-bottom: 10px;
+  padding-left: 60px;
+
+  h3 {
+    padding-bottom: 20px;
+    padding-left: 0;
+  }
+
+  h4 {
+    padding-left: 0;
+  }
+
+  &-flex-right {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+  }
+
+  &-display-flex {
+    display: flex;
+    padding-left: 0;
+
+    em {
+      color: colors.$airframe-color-neutral-grey-50 !important;
+      padding: 0 8px 8px 8px;
+    }
+  }
+
+  &-margin-right {
+    margin-right: 20px;
+  }
+}
+
+.save-button {
+  align-items: flex-start;
+}
+
+.portfolio-name {
+  width: 610px;
+}
+
+.aircraft-in-portfolio-header {
+  display: flex;
+  margin-right: auto;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  em {
+    color: colors.$airframe-color-neutral-grey-50;
+    padding: 0 8px 8px 8px;
+  }
+}
+
+.remove_aircraft_button,
+.add_aircraft_button {
+  align-self: center;
+  margin-right: 16px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.search-bar {
+  margin-bottom: 24px;
+  input {
+    width: 610px;
+  }
+}
+
+.search-button::before {
+  color: colors.$airframe-color-primary-normal;
+}
+
+.search-div {
+  min-height: 64px;
+}
+:host ::ng-deep p-checkbox.select-all-checkbox .p-checkbox-box.p-focus {
+  box-shadow: none;
+}

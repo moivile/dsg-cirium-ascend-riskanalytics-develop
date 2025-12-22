@@ -1,0 +1,27 @@
+@use '@airframe/standard/src/scss/foundations/font-family';
+@use '@airframe/standard/src/scss/foundations/colors';
+
+.helptip .p-tooltip-text {
+  background-color: colors.$airframe-color-status-info-normal !important;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.0466667px;
+  font-family: font-family.$font-family-montserrat;
+  padding: 12px 12px 12px 12px;
+  width: 280px;
+}
+
+.helptip.p-tooltip-right .p-tooltip-text {
+  margin-bottom: 6px;
+  background-color: colors.$airframe-color-status-info-normal !important;
+}
+
+.helptip.p-tooltip-right .p-tooltip-arrow {
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid transparent;
+  border-right: 10px solid colors.$airframe-color-status-info-normal !important;
+  margin-left: -15px;
+  margin-top: -20px;
+}

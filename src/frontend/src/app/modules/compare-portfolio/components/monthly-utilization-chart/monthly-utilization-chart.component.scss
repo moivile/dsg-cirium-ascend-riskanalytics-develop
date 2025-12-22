@@ -1,0 +1,44 @@
+@use '../../../../../app/styles/charts.scss';
+@use '@airframe/standard/src/scss/foundations/colors';
+@use '@airframe/standard/src/scss/foundations/breakpoints';
+
+.chart-title {
+  font-weight: 700;
+}
+
+.chart-container {
+  width: 100%;
+  height: calc(100% - 60px);
+  position: relative;
+
+  .upsell-overlay {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+
+    p {
+      padding-bottom: 20px;
+    }
+  }
+}
+
+.no_rightpadding {
+  padding-right: 0px;
+}
+
+.float_right {
+  float: right;
+}
+
+.modal_icon {
+  align-self: right;
+  position: absolute;
+  right: 0;
+  top: 14px;
+}

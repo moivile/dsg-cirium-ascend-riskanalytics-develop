@@ -1,0 +1,41 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+@use '@airframe/standard/src/scss/foundations/breakpoints';
+@use '@airframe/standard/src/scss/foundations/font-family';
+@use '../../../../styles/p-table';
+
+.search-bar {
+  margin-bottom: 24px;
+  input {
+    width: 608px;
+  }
+}
+
+.search-button::before {
+  color: colors.$airframe-color-primary-normal;
+}
+
+.portfolio-name {
+  min-width: 250px;
+}
+
+.number-of-aircraft {
+  width: 180px;
+}
+
+.fa-solid.fa-trash-can {
+  color: #e0004d;
+}
+
+.no-portfolios {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 32px;
+}
+.no-portfolios-message {
+  margin-bottom: 32px;
+  font-family: font-family.$font-family-montserrat;
+  font-weight: 400;
+  font-size: 16px;
+  color: colors.$airframe-color-neutral-grey-70;
+}

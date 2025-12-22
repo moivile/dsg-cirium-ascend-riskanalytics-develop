@@ -1,0 +1,45 @@
+<div class="portfolio-detail">
+
+  <ra-portfolio-detail-options
+    (portfolioDetailOptionsChange)="onPortfolioDetailOptionsChange($event)"
+    [isHoursAndCycle]="isHoursAndCycle"
+    [isEmissions]="isEmissions"
+    [isComparisonPortfolio]="isComparisonPortfolio">
+  </ra-portfolio-detail-options>
+
+  <div *ngIf="isHoursAndCycle" class="row main-chart-title">
+    <h6>Utilization Trend</h6>
+    <em
+      class="fa-regular fa-circle-question"
+      [pTooltip]="chartTitleToolTipMessage"
+      tooltipPosition="right"
+      tooltipStyleClass="helptip"></em>
+  </div>
+
+  <div *ngIf="isEmissions" class="row main-chart-title">
+    <h6>Emissions Trend</h6>
+    <em
+      class="fa-regular fa-circle-question"
+      [pTooltip]="chartTitleToolTipMessage"
+      tooltipPosition="right"
+      tooltipStyleClass="helptip"></em>
+  </div>
+
+  <div class="row">
+    <ra-monthly-utilization-chart
+      [metric]="metricOptions.metric"
+      [monthlyUtilizationChartData]="monthlyUtilizationChartData"
+      [yScaleSuggestedMax]="10"
+      [isComparisonPortfolio]="isComparisonPortfolio"
+      [isHoursAndCycle]="isHoursAndCycle"
+      [isEmissions]="isEmissions"
+      [yMax]="yMax"
+      [graphNoticeMessage]="graphNoticeMessage"
+      [portfolioName]="selectedPortfolioName"
+      (yAxisScaleChange)="yMaxChange($event)"
+      [chartLabels]="chartLabels"
+      [upsell]="showEmissionUpsell"
+      [chartXAxisTitle]="chartXAxisTitle">
+    </ra-monthly-utilization-chart>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+export const emissionsUpsellRoute = 'portfolios/emissions/upsell';
+export const assetWatchUpsellRoute = 'portfolios/asset-watch/upsell';
+export const assetWatchSavedSearchesRoute = 'portfolios/asset-watch/saved-searches';
+export const assetWatchRoute = 'portfolios/asset-watch';
+export const fleetInsightsRoute = 'fleet-insights';
+export const fleetDistributionPath = 'fleet-distribution';
+export const fleetDistributionRoute = `${fleetInsightsRoute}/${fleetDistributionPath}`;
+export const fleetTrendsPath = 'fleet-trends';
+export const fleetTrendsRoute = `${fleetInsightsRoute}/${fleetTrendsPath}`;
+export const marketActivityPath = 'market-activity';
+export const marketActivityRoute = `${fleetInsightsRoute}/${marketActivityPath}`;

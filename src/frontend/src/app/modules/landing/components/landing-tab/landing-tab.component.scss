@@ -1,0 +1,51 @@
+@use "@airframe/standard/src/scss/foundations/colors";
+@use "@airframe/standard/src/scss/foundations/breakpoints";
+@use "@airframe/standard/src/scss/foundations/font-family";
+
+.landing {
+  background-color: colors.$airframe-color-neutral-white;
+  padding: 50px 60px;
+
+  h3 {
+    padding-bottom: 20px;
+    padding-left: 0;
+  }
+
+  h4 {
+    padding-left: 0;
+  }
+
+  &-flex-right {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+  }
+
+  &-display-flex {
+    display: flex;
+
+    em {
+      color: colors.$airframe-color-neutral-grey-50 !important;
+      padding: 0 8px 8px 8px;
+    }
+  }
+
+  &-margin-right {
+    margin-right: 20px;
+  }
+
+  em.fa-plus {
+    padding-right: 8px;
+    font-size: 16px;
+    position: relative;
+    top: 1px;
+  }
+}
+
+.create-button {
+  align-self: center;
+}
+
+span.col.landing-display-flex {
+  padding-left: 0px;
+}

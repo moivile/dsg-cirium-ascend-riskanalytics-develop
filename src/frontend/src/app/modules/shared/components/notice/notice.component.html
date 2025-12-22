@@ -1,0 +1,9 @@
+<div class="airframe__notice airframe__notice--{{ message.severity === 'warn' ? 'warning' : message.severity }}">
+  <span class="airframe__notice-severity-icon fa fa-exclamation-circle fa-sm"> </span>
+  <label class="airframe__notice-heading">
+    {{ message.summary }}
+  </label>
+  <div class="airframe__notice-body">
+    {{ message.detail }}
+  </div>
+</div>

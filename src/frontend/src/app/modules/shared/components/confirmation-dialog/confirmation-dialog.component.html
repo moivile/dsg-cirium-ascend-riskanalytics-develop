@@ -1,0 +1,12 @@
+<div class="dialog-content" [innerHTML]="dynamicDialogConfig.data?.body"></div>
+<div class="dialog-footer">
+  <button class="cancel-button airframe__button airframe__button--neutral" (click)="onCancelClick()">
+    {{ dynamicDialogConfig.data?.cancelButtonText || 'Cancel' }}
+  </button>
+  <button
+    class="airframe__button"
+    (click)="onOkClick()"
+    [class]="dynamicDialogConfig.data?.okButtonCssModifier || 'airframe__button--danger'">
+    {{ dynamicDialogConfig.data?.okButtonText || 'OK' }}
+  </button>
+</div>

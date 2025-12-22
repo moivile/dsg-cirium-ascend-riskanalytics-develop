@@ -1,0 +1,33 @@
+<div class="row center-xs legend__container" *ngIf="legendItems">
+  <div class="legend__item" *ngFor="let legendItem of legendItems">
+    <div class="legend__box" [ngStyle]="{'background-color': legendItem.colour}"></div>
+    <span class="legend__label airframe-footnote">{{legendItem.label}}</span>
+  </div>
+  <button *ngIf="!this.isModal" class="airframe__icon-button modal_icon" (click)="showModal()" pTooltip="Full screen" tooltipPosition="top" tooltipStyleClass="airframe-tooltip">
+    <em class="fa fa-expand"></em></button>
+</div>
+
+<div *ngIf="barChartDataSets" [ngStyle]="{'height.px': chartHeight}" class="barChartArea" (mouseout)="removeTooltip()">
+  <canvas
+    baseChart
+    type="bar"
+    [options]="barChartOptions"
+    [datasets]="barChartDataSets"
+    [labels]="barChartLabels">
+  </canvas>
+</div>
+
+<p-dialog
+  *ngIf="displayModal"
+  class="airframe-modal"
+  styleClass="dialog-fullscreen"
+  [ngClass]="displayModal ? 'dialog-open-modal' : ''"
+  [header]="modalTitle"
+  [(visible)]="displayModal">
+  <ra-portfolio-overview-stacked-bar-chart
+    [countBy]=this.countBy
+    [xAxisTitle]=this.xAxisTitle
+    [pivot]=this.pivot
+    [isModal]="true">
+  </ra-portfolio-overview-stacked-bar-chart>
+</p-dialog>

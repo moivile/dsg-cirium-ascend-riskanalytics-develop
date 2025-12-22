@@ -1,0 +1,47 @@
+<span class="p-input-icon-right search-bar">
+  <i class="fa fa-search search-button"></i>
+  <input
+    class="airframe__textfield"
+    type="text"
+    [formControl]="textFilterControl"
+    placeholder="Search my portfolios by name"
+    pInputText />
+</span>
+
+<p-table [value]="(filteredPortfolios$ | async)!" class="airframe-table">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Portfolio Name</th>
+      <th class="number-of-aircraft">Number of Aircraft</th>
+      <th>Last Modified</th>
+      <th>Date Created</th>
+      <th>Manage Portfolio</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-portfolio>
+    <tr>
+      <td class="portfolio-name">
+        <a class="airframe__link airframe__link--inline" [routerLink]="[portfolio.id]">{{ portfolio.name }}</a>
+      </td>
+      <td class="right-text number-of-aircraft">{{ portfolio.numberOfAircraft }}</td>
+      <td>{{ dayjs(portfolio.dateModified).format('DD-MMM-YYYY') }}</td>
+      <td>{{ dayjs(portfolio.dateCreated).format('DD-MMM-YYYY') }}</td>
+      <td>
+        <button class="airframe__icon-button news-articles__icon" (click)="onEditPortfolioClick(portfolio)">
+          <em class="fa-solid fa-pen-to-square"></em>
+        </button>
+        <button class="airframe__icon-button news-articles__icon" (click)="openDeletePortfolioDialog(portfolio)">
+          <em class="fa-solid fa-trash-can"></em>
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p class="no-portfolios" *ngIf="(appStore.numberOfPortfolios$ | async) === 0">
+  <span class="no-portfolios-message"> No portfolios created yet, click create new portfolio to get started! </span>
+
+  <button class="airframe__button airframe__button--primary" routerLink="create">
+    <em class="fa-solid fa-plus"></em> Create new portfolio
+  </button>
+</p>

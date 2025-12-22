@@ -1,0 +1,40 @@
+services:
+  frontend:
+    container_name: riskanalytics_frontend
+    depends_on:
+      - api
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      target: base
+    command: bash -c "npm ci && npm run start"
+    volumes:
+      - ./src/frontend:/app/
+      - /app/node_modules
+
+  api:
+    container_name: riskanalytics_api
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      target: base
+    environment:
+      - DOTNET_ENVIRONMENT=local
+      - DOTNET_WATCH_RESTART_ON_RUDE_EDIT=true
+      - BUILD_VERSION=${BUILD_VERSION:-1.0.0}
+      - Repository__PostgreSqlPassword=somepassword
+      - Repository__PostgreSqlAlertingPassword=somepassword
+      - SNOWFLAKE_DEFAULT_CONNECTION_NAME=riskanalytics.dev
+      - SNOWFLAKE_HOME=/root/.snowflake
+    env_file:
+      - secrets.env
+    command: dotnet watch run
+    volumes:
+      - ./src/api:/src
+      - /c/Temp/.vsdbg:/remote_debugger
+      - /app/RiskAnalytics.Api/bin
+      - /app/RiskAnalytics.Api/obj
+      - ${HOME}/.snowflake/:/root/.snowflake/
+    ports:
+      - "8054:8054"
+

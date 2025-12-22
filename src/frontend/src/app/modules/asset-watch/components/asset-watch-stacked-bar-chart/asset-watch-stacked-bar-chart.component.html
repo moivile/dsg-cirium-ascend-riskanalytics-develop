@@ -1,0 +1,46 @@
+<div #chartContainer>
+  <div [ngClass]="{ 'bar-chart-loading-overlay': loading }">
+    <ng-container *ngIf="barChartLabels && barChartLabels.length > 0; else noDataBlock">
+      <div class="row legend__container" *ngIf="legendItems">
+        <div class="legend__item" *ngFor="let legendItem of legendItems">
+          <div class="legend__box" [ngStyle]="{ 'background-color': legendItem.colour }"></div>
+          <span class="legend__label airframe-footnote">{{ legendItem.label }}</span>
+        </div>
+        <button
+          *ngIf="!this.isModal"
+          class="airframe__icon-button modal_icon exclude-element"
+          (click)="showModal()"
+          pTooltip="Full screen"
+          tooltipPosition="top"
+          tooltipStyleClass="airframe-tooltip">
+          <em class="fa fa-expand"></em>
+        </button>
+      </div>
+
+      <div *ngIf="barChartDataSets" [ngStyle]="{ 'height.px': chartHeight }" class="barChartArea" (mouseout)="removeTooltip()">
+        <canvas baseChart type="bar" [options]="barChartOptions" [datasets]="barChartDataSets" [labels]="barChartLabels"> </canvas>
+      </div>
+    </ng-container>
+
+    <ng-template #noDataBlock>
+      <div class="no-data-block">No data for this period</div>
+    </ng-template>
+
+    <div class="loading-overlay">
+      <div class="spinner"></div>
+    </div>
+  </div>
+</div>
+<p-dialog
+  *ngIf="displayModal"
+  class="airframe-modal"
+  styleClass="dialog-fullscreen"
+  [ngClass]="displayModal ? 'dialog-open-modal' : ''"
+  [(visible)]="displayModal">
+  <ra-asset-watch-stacked-bar-chart
+    [portfolioName]="this.portfolioName"
+    [chartname]="this.chartname"
+    [inputData$]="this.inputData$"
+    [isModal]="true">
+  </ra-asset-watch-stacked-bar-chart>
+</p-dialog>

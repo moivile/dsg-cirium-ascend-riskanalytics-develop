@@ -1,0 +1,26 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+
+input.p-inputnumber-input {
+  border-color: colors.$airframe-color-neutral-grey-50;
+
+  &:enabled:hover {
+    background: colors.$airframe-color-neutral-grey-10;
+    border-color: colors.$airframe-color-primary-light;
+  }
+
+  &:enabled:focus,
+  &:enabled:hover:focus {
+    box-shadow: none;
+    background-color: colors.$airframe-color-neutral-white;
+  }
+
+  &:focus-within {
+    border: 2px solid colors.$airframe-color-foreground-focus;
+    border-radius: 2px;
+    background-color: colors.$airframe-color-neutral-white;
+  }
+}
+
+.input-number-button {
+  background: colors.$airframe-color-primary-normal;
+}

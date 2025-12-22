@@ -1,0 +1,62 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+@use '@airframe/standard/src/scss/foundations/breakpoints';
+
+.emissions-upsell-tab {
+  background-color: colors.$airframe-color-neutral-white;
+  padding: 50px 60px;
+  padding-top: 26px;
+  min-width: breakpoints.$airframe-breakpoint-md;
+  flex-wrap: nowrap;
+  min-height: calc(100vh - 130px);
+
+  .header-section {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .corner-button--top-right-primary {
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    cursor: pointer;
+    background: colors.$airframe-color-primary-normal;
+    color: colors.$airframe-color-neutral-white;
+    height: 36px;
+    width: 36px;
+    border-radius: 0 5px 0 36px;
+
+    .fa {
+      font-size: 16px;
+      position: relative;
+      left: 4px;
+      top: -4px;
+    }
+  }
+
+  .row {
+    position: relative;
+    display: flex;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    border-radius: 5px;
+  }
+
+  h3 {
+    padding-bottom: 20px;
+    padding-left: 0;
+  }
+
+  .upsell-message {
+    padding-top: 30px;
+    padding-left: 10px;
+    font-size: 1rem;
+    div {
+      padding-bottom: 20px;
+      a {
+        text-decoration: underline;
+      }
+    }
+  }
+}

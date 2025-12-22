@@ -1,0 +1,14 @@
+services:
+  frontend:
+    build:
+      target: base
+    command: bash -c "npm run test-for-build-pipeline"
+    volumes:
+      - ./src/frontend/coverage/riskanalytics:/app/coverage/riskanalytics
+
+  api:
+    build:
+      target: base
+    command: dotnet test
+    volumes:
+      - ./src/api/TestResults:/src/TestResults

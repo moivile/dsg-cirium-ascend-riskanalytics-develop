@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col icon-column">
+    <div class="selectedAverage">
+      <label class="airframe__radiogroup">Mean
+        <input type="radio" name="selectedAverage" (change)="toggleSelectedAverage(Average.Mean)" [checked]="selectedAverage === Average.Mean">
+        <span></span>
+      </label>
+    </div>
+    <div class="selectedAverage">
+      <label class="airframe__radiogroup">Median
+        <input type="radio" name="selectedAverage" (change)="toggleSelectedAverage(Average.Median)" [checked]="selectedAverage === Average.Median">
+        <span></span>
+      </label>
+    </div>
+  </div>
+  <div class="col icon-column icon-container">
+    <div *ngIf="!this.isModal">
+      <button class="icon explanation-icon helptip-container">
+        <em id="explanationIcon" class="fa fa-question-circle"></em>Explanation
+        <span class="helptip-text">
+          <label>Age Distribution Chart</label>
+          <p class="helptip-body">
+            {{tooltipText}}
+          </p>
+        </span>
+      </button>
+      <button class="airframe__icon-button modal_icon" (click)="showModal()" pTooltip="Full screen" tooltipPosition="top" tooltipStyleClass="airframe-tooltip"><em class="fa fa-expand"></em></button>
+    </div>
+    <button *ngIf="this.isModal" class="icon explanation-icon helptip-container">
+      <em id="explanationIcon" class="fa fa-question-circle"></em>Explanation
+      <span class="helptip-text">
+        <label>Age Distribution Chart</label>
+        <p class="helptip-body">
+          {{tooltipText}}
+        </p>
+      </span>
+    </button>
+  </div>
+</div>
+
+<div class="row" id="jitterChartArea" [ngStyle]="{'height.px': chartHeight}" (mouseout)="removeTooltip()">
+  <canvas baseChart
+  type= "scatter"
+  [options]="jitterChartOptions"
+  [datasets]="jitterChartDataSets">
+  </canvas>
+</div>
+
+<p-dialog *ngIf="!this.isModal" class="airframe-modal" styleClass="dialog-fullscreen" [ngClass]="displayModal ? 'dialog-open-modal' : ''" [header]="modalTitle" [(visible)]="displayModal" (onHide)="recheckSelectedAverageRadioButton()" #jitterModal>
+  <ra-portfolio-overview-jitter-chart [jitterBy]=this.jitterBy [xAxisTitle]=this.xAxisTitle [tooltipLabel]=this.tooltipLabel [selectedAverage]=this.selectedAverage (averageChanged)="toggleSelectedAverage($event)" [isModal]=true></ra-portfolio-overview-jitter-chart>
+</p-dialog>

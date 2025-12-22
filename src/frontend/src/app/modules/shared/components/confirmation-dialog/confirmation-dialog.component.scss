@@ -1,0 +1,41 @@
+@use '@airframe/standard/src/scss/foundations/font-family';
+@use '@airframe/standard/src/scss/foundations/colors';
+
+.dialog-footer {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+button.cancel-button {
+  margin-right: 80px;
+}
+
+::ng-deep .p-dialog {
+  .p-dialog-header {
+    justify-content: center;
+    padding-top: 32px;
+
+    .p-dialog-title {
+      // same as h2 from airframe typography.scss
+      font-size: 2.5rem !important;
+      font-weight: 300 !important;
+      letter-spacing: 0.008125rem;
+      line-height: 3rem;
+      margin: 0;
+    }
+
+    button.p-dialog-header-icon {
+      right: 16px;
+      top: 26px;
+    }
+  }
+
+  p {
+    font-weight: 400;
+    line-height: 24px;
+    color: colors.$airframe-color-neutral-black;
+    padding-bottom: 24px;
+    text-align: center;
+  }
+}

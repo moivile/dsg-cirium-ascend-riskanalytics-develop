@@ -1,0 +1,109 @@
+<div #assetWatchDetailsTableContainer class="asset-watch-details-table">
+  <div *ngIf="!this.isModal" class="table-buttons-row">
+    <div class="assetGridTableHeading">
+      <h5>
+        Aircraft Watchlist <span>({{ this.tableData.length || 0 }})</span>
+      </h5>
+    </div>
+    <div class="assetGridTableButtons">
+      <button
+        class="airframe__icon-button table__icon rightFloat"
+        [disabled]="!this.tableData.length"
+        (click)="showModal()"
+        pTooltip="Full screen"
+        tooltipPosition="left"
+        tooltipStyleClass="airframe-tooltip">
+        <em class="fa fa-expand"></em>
+      </button>
+      <button
+        class="airframe__icon-button rightFloat"
+        [disabled]="!this.tableData.length"
+        (click)="exportExcel()"
+        pTooltip="Download to Excel"
+        tooltipPosition="left"
+        tooltipStyleClass="airframe-tooltip">
+        <em class="fa fa-download"></em>
+      </button>
+    </div>
+  </div>
+
+  <p-table
+    [columns]="tableHeaders"
+    [value]="tableData"
+    [scrollable]="true"
+    [scrollHeight]="tableHeight"
+    [paginator]="true"
+    [rows]="50"
+    [virtualScrollItemSize]="28"
+    [reorderableColumns]="true"
+    [resizableColumns]="true"
+    scrollDirection="both"
+    responsiveLayout="scroll"
+    [loading]="loading"
+    sortMode="single"
+    [sortField]="this.sortBy.name"
+    [sortOrder]="this.sortBy.sortDescending ? -1 : 1"
+    [style]="{ 'width.px': tableWidth }"
+    (sortFunction)="customSort($event)"
+    [customSort]="gridCustomSort"
+    class="airframe-table">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <ng-container *ngFor="let column of columns; let i = index">
+          <th
+            *ngIf="!column.hidden"
+            [ngClass]="[column.type === 'number' ? 'right-text cell-width-small' : 'cell-width-small']"
+            [ngStyle]="{ 'min-width': column.width + 'px' }"
+            scope="col"
+            [pSortableColumn]="column.field"
+            pResizableColumn
+            pReorderableColumn
+            (click)="showSortIcon(column.field,i)"
+            (mouseenter)="hoverSortIcon(column.field,i, true)"
+            (mouseleave)="hoverSortIcon(column.field,i, false)">
+            <div class="column-header">
+              <span class="header-overflow">{{ column.header }}</span>
+              <p-sortIcon class="sort-icon" field="{{ column.field }}"></p-sortIcon>
+            </div>
+          </th>
+        </ng-container>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-row let-columns="columns">
+      <tr class="row-overflow">
+        <ng-container *ngFor="let column of columns">
+          <td
+          *ngIf="!column.hidden"
+          [ngClass]="getClassOf(column)"
+          [ngStyle]="{ 'min-width': column.width + 'px' }"
+          id="table-row-flexed">
+           <div *ngIf="column.header === 'Serial'"><a (click)="clickSerial(row)">{{ row[column.field] || '-' }}</a>
+            </div>
+            <div *ngIf="column.type !== 'number' && column.header !== 'Serial' && column.type !== 'date' && column.type !== 'boolean'">{{
+              row[column.field] || '-' }}</div>
+            <div *ngIf="column.type === 'number' && column.header !== 'Serial'">{{ (row[column.field] | number:
+              column.pipeFormat) || '-' }}</div>
+            <div *ngIf="column.type === 'date'">{{ (row[column.field] | date: 'dd-MMM-yyyy') || '-' }}</div>
+            <div *ngIf="column.type === 'boolean'">{{  row[column.field] | booleanToWord }}</div>
+          </td>
+        </ng-container>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-dialog
+  *ngIf="displayModal"
+  class="airframe-modal p-dialog-mask open-modal asset-watch-modal-class"
+  header="Details Table"
+  [(visible)]="displayModal"
+  (onShow)="maximizeModal(tableModal)"
+  (onHide)="closeModal()"
+  #tableModal>
+  <ra-asset-watch-details-table
+    [filterPanelForm]="filterPanelForm"
+    [selectedTimePeriodControl]="selectedTimePeriodControl"
+    [aircraftWatchlistFilterForm]="aircraftWatchlistFilterForm"
+    [isModal]="true"></ra-asset-watch-details-table>
+</p-dialog>

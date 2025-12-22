@@ -1,0 +1,39 @@
+﻿@use '@airframe/standard/src/scss/foundations/font-family';
+@use '@airframe/standard/src/scss/foundations/colors';
+
+div.p-dialog {
+  font-family: font-family.$font-family-montserrat;
+
+  .p-dialog-header {
+    position: relative;
+
+    .p-dialog-title {
+      color: colors.$airframe-color-neutral-black;
+    }
+
+    .p-dialog-header-icon {
+      position: absolute;
+      right: 20px;
+      top: 29px;
+      color: colors.$airframe-color-neutral-black;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+.dialog {
+  &-fullscreen {
+    width: 100% !important;
+    max-height: 100% !important;
+    z-index: 100 !important;
+    height: 100% !important;
+  }
+}
+
+.p-dialog-mask.open-modal {
+  background-color: colors.$airframe-color-neutral-white;
+  z-index: 100000;
+}

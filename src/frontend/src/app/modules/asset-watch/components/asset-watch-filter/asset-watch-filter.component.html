@@ -1,0 +1,287 @@
+<div [ngClass]="'row filters ' + filterExpandedCollapsedClass">
+  <div class="row filters__header">
+    <div class="col filters__title">
+      <h6>Filter By</h6>
+    </div>
+    <div class="col filters__reset-all">
+      <button type="button" (click)="resetFilters()" class="airframe__button airframe__button--flat">Reset All</button>
+    </div>
+  </div>
+
+  <ng-container [formGroup]="filterPanelForm">
+    <div class="row filters__group">
+      <div class="row filters__display-name filters__geography-name">
+        <label>Region</label>
+      </div>
+      <div class="row filters__item filter__multiselect ra-multiselect-with-chips">
+        <p-multiSelect
+          styleClass="airframe-dropdown"
+          [options]="(assetWatchStore.filterOptions$ | async)?.regions || []"
+          formControlName="regions"
+          placeholder="Select regions"
+          optionLabel="name"
+          optionValue="id"
+          filterMatchMode="startsWith"
+          scrollHeight="190px"
+          [showToggleAll]="false"
+          [resetFilterOnHide]="true"
+          [virtualScroll]="true"
+          [virtualScrollItemSize]="30"
+          [filter]="true"
+          display="chip"
+          [showClear]="true">
+        </p-multiSelect>
+      </div>
+
+      <div class="row filters__display-name filters__country-name">
+        <label>Country/Subregion</label>
+      </div>
+      <div class="row filters__item filter__multiselect ra-multiselect-with-chips">
+        <p-multiSelect
+          styleClass="airframe-dropdown"
+          [options]="(filteredCountries$ | async) || []"
+          formControlName="countries"
+          placeholder="Select Countries/Subregions"
+          optionLabel="name"
+          optionValue="id"
+          filterMatchMode="startsWith"
+          scrollHeight="190px"
+          [showToggleAll]="false"
+          [resetFilterOnHide]="true"
+          [virtualScroll]="true"
+          [virtualScrollItemSize]="30"
+          [filter]="true"
+          display="chip"
+          [showClear]="true">
+        </p-multiSelect>
+      </div>
+
+      <div class="row filters__display-name filters__cities-name">
+        <label>City</label>
+      </div>
+      <div class="row filters__item filter__multiselect ra-multiselect-with-chips">
+        <p-multiSelect
+          styleClass="airframe-dropdown"
+          [options]="(assetWatchStore.filterOptions$ | async)?.cities || []"
+          formControlName="cities"
+          placeholder="Select cities"
+          optionLabel="name"
+          optionValue="id"
+          filterMatchMode="startsWith"
+          scrollHeight="190px"
+          [showToggleAll]="false"
+          [resetFilterOnHide]="true"
+          [virtualScroll]="true"
+          [virtualScrollItemSize]="30"
+          [filter]="true"
+          display="chip"
+          [showClear]="true">
+        </p-multiSelect>
+      </div>
+
+      <div class="row filters__display-name filters__airports-name">
+        <label>Airport</label>
+      </div>
+      <div class="row filters__item filter__multiselect ra-multiselect-with-chips">
+        <p-multiSelect
+          styleClass="airframe-dropdown"
+          [options]="(assetWatchStore.filterOptions$ | async)?.airports || []"
+          formControlName="airports"
+          placeholder="Select airports"
+          optionLabel="name"
+          optionValue="id"
+          filterMatchMode="contains"
+          scrollHeight="190px"
+          [showToggleAll]="false"
+          [resetFilterOnHide]="true"
+          [virtualScroll]="true"
+          [virtualScrollItemSize]="30"
+          [filter]="true"
+          display="chip"
+          [showClear]="true">
+        </p-multiSelect>
+      </div>
+
+      <div class="row filters__display-name filters__route-category-name">
+        <label>Route Category</label>
+      </div>
+      <div class="row filters__item">
+        <div *ngFor="let routeCategoryFilterOption of routeCategoryFilterOptions">
+          <div class="filters__route-category-container">
+            <label class="filters__label">
+              <div class="col-xs-1 filters__checkbox">
+                <input
+                  #routeCategoryFilterCheckbox
+                  type="checkbox"
+                  class="airframe__checkbox airframe__checkbox--primary"
+                  [(ngModel)]="routeCategoryFilterOption.isSelected"
+                  [ngModelOptions]="{ standalone: true }"
+                  (change)="updateSelectedRouteCategoryFilter()" />
+              </div>
+              <div class="col filters__option">
+                <span>{{ routeCategoryFilterOption.name }}</span>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row filters__display-name filters__date-range-name">
+        <label>Date Range</label>
+      </div>
+
+      <div class="row filters__item filter__multiselect ra-multiselect-with-chips">
+        <p-dropdown
+          [formControl]="selectedTimePeriodControl"
+          [options]="timePeriodOptions"
+          placeholder="Time Period"
+          styleClass="airframe-dropdown"
+          dropdownIcon="fa fa-chevron-down"></p-dropdown>
+      </div>
+      <div class="row filters__display-name">
+        <label>Start Date - End Date</label>
+      </div>
+      <ng-container [formGroup]="periodForm">
+        <div class="row filters__item date-option">
+          <p-calendar
+            [ngClass]="{ 'p-calendar-invalid-value': periodForm.controls.periodFormStartDate.invalid }"
+            formControlName="periodFormStartDate"
+            styleClass="airframe-calendar"
+            [showIcon]="true"
+            icon="fa fa-calendar-day"
+            dateFormat="dd-M-yy"
+            [maxDate]="maximumDate"></p-calendar>
+        </div>
+        <div class="row filters__item date-option">
+          <p-calendar
+            [ngClass]="{ 'p-calendar-invalid-value': periodForm.controls.periodFormEndDate.invalid }"
+            formControlName="periodFormEndDate"
+            styleClass="airframe-calendar"
+            placeholder="Select an end date"
+            [showIcon]="true"
+            icon="fa fa-calendar-day"
+            dateFormat="dd-M-yy"
+            [maxDate]="maximumDate">
+          </p-calendar>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="row filters__group">
+      <div class="row filters__display-name">
+        <label>Operator</label>
+      </div>
+      <div class="row filters__item filter__multiselect ra-multiselect-with-chips">
+        <p-multiSelect
+          styleClass="airframe-dropdown"
+          [options]="(assetWatchStore.filterOptions$ | async)?.operators || []"
+          formControlName="operators"
+          placeholder="Select operators"
+          optionLabel="name"
+          optionValue="id"
+          filterMatchMode="startsWith"
+          scrollHeight="190px"
+          [showToggleAll]="false"
+          [resetFilterOnHide]="true"
+          [virtualScroll]="true"
+          [virtualScrollItemSize]="30"
+          [filter]="true"
+          display="chip"
+          [showClear]="true">
+        </p-multiSelect>
+      </div>
+
+      <div class="row filters__display-name">
+        <label>Lessor</label>
+      </div>
+      <div class="row filters__item filter__multiselect ra-multiselect-with-chips">
+        <p-multiSelect
+          styleClass="airframe-dropdown"
+          [options]="(assetWatchStore.filterOptions$ | async)?.lessors || []"
+          formControlName="lessors"
+          placeholder="Select lessors"
+          optionLabel="name"
+          optionValue="id"
+          filterMatchMode="startsWith"
+          scrollHeight="190px"
+          [showToggleAll]="false"
+          [resetFilterOnHide]="true"
+          [virtualScroll]="true"
+          [virtualScrollItemSize]="30"
+          [filter]="true"
+          display="chip"
+          [showClear]="true">
+        </p-multiSelect>
+      </div>
+
+      <div class="row filters__display-name">
+        <label>Aircraft Series</label>
+      </div>
+      <div class="row filters__item filter__multiselect ra-multiselect-with-chips">
+        <p-multiSelect
+          styleClass="airframe-dropdown"
+          [options]="(assetWatchStore.filterOptions$ | async)?.aircraftSeries || []"
+          formControlName="aircraftSeries"
+          placeholder="Select aircraft series"
+          optionLabel="name"
+          optionValue="id"
+          filterMatchMode="startsWith"
+          scrollHeight="190px"
+          [showToggleAll]="false"
+          [resetFilterOnHide]="true"
+          [virtualScroll]="true"
+          [virtualScrollItemSize]="30"
+          [filter]="true"
+          display="chip"
+          [showClear]="true">
+        </p-multiSelect>
+      </div>
+
+      <div class="row filters__display-name">
+        <label>Engine Series</label>
+      </div>
+      <div class="row filters__item filter__multiselect ra-multiselect-with-chips">
+        <p-multiSelect
+          styleClass="airframe-dropdown"
+          [options]="(assetWatchStore.filterOptions$ | async)?.engineSeries || []"
+          formControlName="engineSeries"
+          placeholder="Select engine series"
+          optionLabel="name"
+          optionValue="id"
+          filterMatchMode="startsWith"
+          scrollHeight="190px"
+          [showToggleAll]="false"
+          [resetFilterOnHide]="true"
+          [virtualScroll]="true"
+          [virtualScrollItemSize]="30"
+          [filter]="true"
+          display="chip"
+          [showClear]="true">
+        </p-multiSelect>
+      </div>
+
+      <div class="row filters__display-name">
+        <label>Serial</label>
+      </div>
+      <div class="row filters__item filter__multiselect ra-multiselect-with-chips">
+        <p-multiSelect
+          styleClass="airframe-dropdown"
+          [options]="(assetWatchStore.filterOptions$ | async)?.aircraftSerialNumbers || []"
+          formControlName="aircraftSerialNumbers"
+          placeholder="Select serial numbers"
+          optionLabel="name"
+          optionValue="id"
+          filterMatchMode="startsWith"
+          scrollHeight="190px"
+          [showToggleAll]="false"
+          [resetFilterOnHide]="true"
+          [virtualScroll]="true"
+          [virtualScrollItemSize]="30"
+          [filter]="true"
+          display="chip"
+          [showClear]="true">
+        </p-multiSelect>
+      </div>
+    </div>
+  </ng-container>
+</div>

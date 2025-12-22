@@ -1,0 +1,68 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+
+.portfolio-picker-section {
+  min-height: 48px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: colors.$airframe-color-neutral-grey-80;
+  &-dropdown-wrapper {
+    display: flex;
+    width: 625px;
+    margin-left: auto;
+    margin-right: auto;
+
+    label {
+      padding-right: 50px;
+      padding-left: 50px;
+      margin-right: 1px;
+      display: flex;
+      align-items: center;
+      border-radius: 2px 0 0 2px;
+      background-color: colors.$airframe-color-background-mid-contrast-on-dark;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 125%;
+      color: colors.$airframe-color-neutral-black;
+    }
+
+    p-dropdown {
+      flex-grow: 1;
+    }
+  }
+}
+.globalHeader {
+  height: 40px;
+  background-color: colors.$airframe-color-neutral-grey-80;
+}
+
+::ng-deep div.p-toast {
+  width: 75%;
+  opacity: 1;
+  z-index: 999999 !important;
+}
+
+::ng-deep div.p-toast div.p-toast-message {
+  border-width: 0 !important;
+  div.p-toast-message-content {
+    position: relative;
+    padding: 0;
+  }
+  .p-toast-icon-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+}
+
+ra-notice {
+  flex-grow: 1;
+}
+
+.right-text {
+  text-align: right;
+}
+
+.clickable-item {
+  cursor: pointer;
+}

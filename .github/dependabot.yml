@@ -1,0 +1,42 @@
+
+version: 2
+updates:
+
+  - package-ecosystem: "nuget"
+    directory: "/src/api" 
+    schedule:
+      interval: "daily"
+      time: "09:00"
+    pull-request-branch-name:
+      separator: "-"
+    groups:
+      csharpNuget:
+        patterns:
+          - "*"
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: "npm"
+    directory: "/src/frontend" 
+    schedule:
+      interval: "daily"
+      time: "09:00"
+    pull-request-branch-name:
+      separator: "-"
+    groups:
+      npmPackages:
+        patterns:
+          - "*"
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: "docker"
+    directory: "/" 
+    schedule:
+      interval: "daily"
+      time: "09:00"
+    pull-request-branch-name:
+      separator: "-"
+    groups:
+      dockerPackages:
+        patterns:
+          - "*"
+    open-pull-requests-limit: 10

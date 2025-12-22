@@ -1,0 +1,78 @@
+@use '@airframe/standard/src/scss/foundations/font-family' as airframe-font;
+@use '@airframe/standard/src/scss/foundations/colors' as airframe-colors;
+
+.airframe-dropdown {
+  height: 40px;
+  width: 100%;
+  border: 1px solid airframe-colors.$airframe-color-border-on-light;
+  border-radius: 2px;
+
+  &:not(.p-disabled):hover {
+    border: 1px solid airframe-colors.$airframe-color-primary-light;
+    border-radius: 2px;
+    background-color: airframe-colors.$airframe-color-neutral-grey-10;
+    border-color: airframe-colors.$airframe-color-primary-light;
+  }
+
+  &:not(.p-disabled).p-focus {
+    box-shadow: none;
+    border: 2px solid airframe-colors.$airframe-color-foreground-focus;
+  }
+
+  .p-dropdown-trigger {
+    color: airframe-colors.$airframe-color-primary-normal;
+    border-left: 1px solid airframe-colors.$airframe-color-neutral-grey-30;
+    height: 26px;
+    margin-top: 6.5px;
+  }
+
+  .p-inputtext {
+    padding: 9px 10.5px 12px 10.5px;
+  }
+
+  .p-dropdown-label {
+    color: airframe-colors.$airframe-color-neutral-grey-80;
+    font-family: airframe-font.$font-family-montserrat;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.05px;
+
+    &.p-placeholder {
+      color: airframe-colors.$airframe-color-neutral-grey-60;
+      font-weight: 300;
+    }
+  }
+
+  .p-dropdown-items-wrapper {
+    max-height: 216px !important;
+  }
+
+  .p-dropdown-panel {
+    border-bottom: 4px solid airframe-colors.$airframe-color-primary-normal;
+
+    .p-dropdown-items {
+      padding: 0;
+      font-family: airframe-font.$font-family-montserrat;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.05px;
+
+      .p-dropdown-item {
+        height: 40px;
+        padding-top: 10px;
+      }
+
+      .p-dropdown-item.p-highlight,
+      .p-dropdown-item.p-focus {
+        background-color: airframe-colors.$airframe-color-primary-normal;
+        color: airframe-colors.$airframe-color-neutral-white;
+      }
+
+      .p-dropdown-item:not(.p-highlight):not(.p-disabled) {
+        &:hover {
+          background-color: airframe-colors.$airframe-color-primary-extra-extra-light;
+        }
+      }
+    }
+  }
+}

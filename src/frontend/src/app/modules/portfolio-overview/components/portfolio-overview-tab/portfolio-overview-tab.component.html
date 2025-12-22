@@ -1,0 +1,221 @@
+<div class="row center-xs">
+  <div
+    [ngClass]="isTabletScreenSize ? 'overview-tablet-filters' : 'col-md-2 col-sm-3 overview-filter-panel ' + filterPanelExpandedCollapsedClass"
+    id="overview-filter-panel">
+    <ra-portfolio-overview-filter
+      [ngClass]="!isTabletScreenSize ? filterExpandedCollapsedClass : ''"></ra-portfolio-overview-filter>
+    <span *ngIf="!isTabletScreenSize" class="clickable-border" (click)="expandCollapseFilterPanel()"></span>
+  </div>
+
+  <div class="col-md-10 col-sm-9 col-xs-12 overview" id="overview-content"
+    [ngClass]="filterExpanded ? '' : 'overview-content-full-width'">
+    <span class="expand-collapse-button" (click)="expandCollapseFilterPanel()"
+      pTooltip="{{expandCollapseButtonHoverText}}" tooltipPosition="right"
+      tooltipStyleClass="expand-collapse-button-tooltip airframe-tooltip">
+      <em class="fa" [ngClass]="filterExpanded ? 'fa-chevron-left' : 'fa-chevron-right'"></em>
+    </span>
+    <div class="overview-header-summary">
+      <div class="overview-header">
+        <div class="row">
+          <h3 class="col" *ngIf="(portfolioOverviewStore.portfolio$ | async) as portfolio">{{portfolio.name}}</h3>
+        </div>
+        <span class="airframe-caption">
+          Use this page to view the details of your portfolio.
+        </span>
+        <hr class="title-break" />
+      </div>
+
+      <div class="row start-xs paper">
+        <div class="row">
+          <div class="col overview-summary-title">
+            <h5 *ngIf="(portfolioOverviewStore.portfolio$ | async) as portfolio">{{portfolio.name}} Fleet Summary</h5>
+          </div>
+          <div class="col fa-download-all-button">
+            <button class=" airframe__button airframe__button--primary big-screen" (click)="exportExcel()"
+              pTooltip="Download to Excel" tooltipPosition="left" tooltipStyleClass="airframe-tooltip">Download All<em
+                class="fa fa-download"></em></button>
+          </div>
+        </div>
+        <div class="row">
+          <ra-portfolio-overview-summary-counts></ra-portfolio-overview-summary-counts>
+        </div>
+
+        <div class="row start-xs">
+          <div class="col card overview__container">
+            <ra-portfolio-overview-summary-metrics countBy="status"
+              summaryTitle="Status"></ra-portfolio-overview-summary-metrics>
+          </div>
+          <div class="col card overview__container">
+            <ra-portfolio-overview-summary-metrics countBy="aircraftType"
+              summaryTitle="Aircraft Types"></ra-portfolio-overview-summary-metrics>
+          </div>
+          <div class="col card overview__container">
+            <ra-portfolio-overview-summary-metrics countBy="aircraftAgeYears"
+              summaryTitle="Age"></ra-portfolio-overview-summary-metrics>
+          </div>
+          <div class="col card overview__container">
+            <ra-portfolio-overview-summary-metrics countBy="lessorOrganization"
+              summaryTitle="Lessors"></ra-portfolio-overview-summary-metrics>
+          </div>
+          <div class="col card overview__container">
+            <ra-portfolio-overview-summary-metrics countBy="operator"
+              summaryTitle="Operators"></ra-portfolio-overview-summary-metrics>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="paper overview__content">
+      <div class="row start-xs">
+        <div class="col overview__title">
+          <h5 *ngIf="(portfolioOverviewStore.portfolio$ | async) as portfolio">{{portfolio.name}} Fleet Breakdown</h5>
+        </div>
+        <div class="col overview-grouping">
+          <div class="overview-grouping__title">
+            <label>
+              Group By
+            </label>
+          </div>
+          <ra-portfolio-overview-grouping class="overview-grouping__dropdown"></ra-portfolio-overview-grouping>
+        </div>
+      </div>
+
+      <div class="overview__sub-title-bar overview__sub-title-bar-status">
+        <h5>Status</h5>
+      </div>
+      <div class="row">
+        <div class="overview__description">This section shows the aircraft status grouped by
+          <span class="overview__description-group"
+            *ngIf="(portfolioOverviewStore.groupBy$ | async) as groupBy">{{groupBy.displayName}}</span>.
+        </div>
+      </div>
+
+      <div class="overview__two-column-layout">
+        <div class="row overview__accordion" id="statusAccordion">
+          <div class="row">
+            <div class="col-md-6">
+              <ra-portfolio-overview-stacked-bar-chart countBy="status" xAxisTitle="Total Aircraft">
+              </ra-portfolio-overview-stacked-bar-chart>
+            </div>
+            <div class="col-md-6">
+              <ra-portfolio-overview-table countBy="status"></ra-portfolio-overview-table>
+            </div>
+          </div>
+        </div>
+        <ra-portfolio-overview-accordion accordionContentId="statusAccordion"
+          defaultHeight="415px"></ra-portfolio-overview-accordion>
+      </div>
+
+      <div class="overview__sub-title-bar">
+        <h5>Age</h5>
+      </div>
+      <div class="row">
+        <div class="overview__description">This section shows the aircraft age distribution grouped by
+          <span class="overview__description-group"
+            *ngIf="(portfolioOverviewStore.groupBy$ | async) as groupBy">{{groupBy.displayName}}</span>.
+          Only delivered aircraft are included i.e. aircraft with a valid age. Aircraft groups are excluded if
+          they contain no aircraft with a valid age.
+        </div>
+      </div>
+
+      <div class="overview__two-column-layout">
+        <div class="row overview__accordion" id="ageAccordion">
+          <div class="row">
+            <div class="col-md-6">
+              <ra-portfolio-overview-jitter-chart jitterBy="aircraftAgeYears" xAxisTitle="Aircraft Age"
+                tooltipLabel="years">
+              </ra-portfolio-overview-jitter-chart>
+            </div>
+            <div class="col-md-6">
+              <ra-portfolio-overview-table countBy="aircraftAgeYears"></ra-portfolio-overview-table>
+            </div>
+          </div>
+        </div>
+        <ra-portfolio-overview-accordion accordionContentId="ageAccordion"
+          defaultHeight="420px"></ra-portfolio-overview-accordion>
+      </div>
+
+      <div class="overview__sub-title-bar">
+        <h5>Operators</h5>
+      </div>
+      <div class="row">
+        <div class="overview__description">This section shows the aircraft operators grouped by
+          <span class="overview__description-group"
+            *ngIf="(portfolioOverviewStore.groupBy$ | async) as groupBy">{{groupBy.displayName}}</span>.
+        </div>
+      </div>
+
+      <div class="row selected-value-row">
+        <div>
+          <label class="airframe__radiogroup">Name
+            <input type="radio" name="selectedValue" (change)="toggleSelectedOperatorValue(OperatorToggleValue.Name)"
+              [checked]="selectedValue === OperatorToggleValue.Name">
+            <span></span>
+          </label>
+        </div>
+        <div class="country-radio-btn-container">
+          <label class="airframe__radiogroup">Country/Subregion
+            <input type="radio" name="selectedValue" (change)="toggleSelectedOperatorValue(OperatorToggleValue.Country)"
+              [checked]="selectedValue === OperatorToggleValue.Country">
+            <span></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="overview__two-column-layout">
+        <div class="row overview__accordion" id="airlineAccordion">
+          <div class="row">
+            <div class="col-md-6">
+              <ra-portfolio-overview-stacked-bar-chart countBy="operator" xAxisTitle="Total Aircraft" [pivot]=true>
+              </ra-portfolio-overview-stacked-bar-chart>
+            </div>
+            <div class="col-md-6">
+              <ra-portfolio-overview-table countBy="operator" [pivot]=true
+                pivotColumnHeader="Operators"></ra-portfolio-overview-table>
+            </div>
+          </div>
+        </div>
+        <ra-portfolio-overview-accordion accordionContentId="airlineAccordion" defaultHeight="420px"
+          countBy="operator"></ra-portfolio-overview-accordion>
+      </div>
+
+      <div class="overview__sub-title-bar">
+        <h5>Lessors</h5>
+      </div>
+      <div class="row">
+        <div class="overview__description">This section shows the aircraft lessors grouped by
+          <span class="overview__description-group"
+            *ngIf="(portfolioOverviewStore.groupBy$ | async) as groupBy">{{groupBy.displayName}}</span>.
+        </div>
+      </div>
+
+      <div class="overview__two-column-layout">
+        <div class="row overview__accordion" id="lessorsAccordion">
+          <div class="row">
+            <div class="col-md-6">
+              <ra-portfolio-overview-stacked-bar-chart countBy="lessorOrganization" xAxisTitle="Total Lessors"
+                [pivot]=true>
+              </ra-portfolio-overview-stacked-bar-chart>
+            </div>
+            <div class="col-md-6">
+              <ra-portfolio-overview-table countBy="lessorOrganization" [pivot]=true
+                pivotColumnHeader="Lessors"></ra-portfolio-overview-table>
+            </div>
+          </div>
+        </div>
+        <ra-portfolio-overview-accordion accordionContentId="lessorsAccordion" defaultHeight="420px"
+          countBy="lessorOrganization"></ra-portfolio-overview-accordion>
+      </div>
+
+      <div class="overview__sub-title-bar">
+        <h5>Details</h5>
+      </div>
+      <div class="row">
+        <div class="overview__description">This section shows information for individual aircraft.</div>
+      </div>
+      <div class="row" id="detailsRow">
+        <ra-portfolio-overview-details-table></ra-portfolio-overview-details-table>
+      </div>
+    </div>
+  </div>
+</div>

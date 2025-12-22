@@ -1,0 +1,13 @@
+<div class="table-heading">Filters Set</div>
+<p-table styleClass="airframe-table" [value]="savedSearchCriteriaList" [scrollable]="true" scrollHeight="500px">
+  <ng-template pTemplate="body" let-filter>
+    <tr>
+      <td class="filter-criteria">
+        {{ filter.criteria }}
+      </td>
+      <td>
+        {{ filter.selection }}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

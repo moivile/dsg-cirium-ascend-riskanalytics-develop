@@ -1,0 +1,93 @@
+<div class="portfolio-details">
+  <div class="row">
+    <div class="col-md-6">
+      <h5 *ngIf="!isComparisonPortfolio && !shouldCompareAgainstGlobalBenchmark">Portfolio</h5>
+      <h5 *ngIf="isComparisonPortfolio && !shouldCompareAgainstGlobalBenchmark">Comparison Portfolio</h5>
+      <h5 *ngIf="shouldCompareAgainstGlobalBenchmark">Global Fleet</h5>
+      <p-dropdown
+        *ngIf="isComparisonPortfolio"
+        styleClass="airframe-dropdown"
+        [options]="(appStore.portfolios$ | async) ?? []"
+        optionLabel="name"
+        (onChange)="onPortfolioChange()"
+        placeholder="Select a portfolio"
+        [formControl]="selectedPortfolioControl">
+      </p-dropdown>
+      <div class="portfolio-name" *ngIf="!isComparisonPortfolio">
+        <h5>{{ shouldCompareAgainstGlobalBenchmark ? '' : appStore.selectedPortfolioName$ | async }}</h5>
+      </div>
+    </div>
+
+    <div class="portfolio-option-radio-buttons col-md-6">
+      <label class="airframe__radiogroup"
+        >Portfolio<input
+          type="radio"
+          name="{{ isComparisonPortfolio ? 'comparisonOptions' : 'options' }}"
+          (change)="compareAgainstPortfolio()"
+          [checked]="true" /><span></span
+      ></label>
+      <label class="airframe__radiogroup"
+        >Global Fleet<input
+          type="radio"
+          name="{{ isComparisonPortfolio ? 'comparisonOptions' : 'options' }}"
+          (change)="compareAgainstGlobalBenchmark()" /><span></span
+      ></label>
+    </div>
+  </div>
+
+  <div class="row filters">
+    <div class="filter">
+      <label>Grouping</label>
+      <p-treeSelect
+        #groupOptionsTreeSelect
+        [options]="(groupOptions$ | async) ?? []"
+        [metaKeySelection]="false"
+        placeholder="Select up to 5 items from one group"
+        selectionMode="checkbox"
+        [filter]="true"
+        [filterInputAutoFocus]="true"
+        [propagateSelectionUp]="false"
+        [propagateSelectionDown]="false"
+        [resetFilterOnHide]="true"
+        display="chip"
+        (onNodeSelect)="onGroupOptionSelect($event.node)"
+        [showClear]="true"
+        [formControl]="selectedGroupOptionsControl">
+      </p-treeSelect>
+    </div>
+
+    <div class="filter">
+      <label>Operator</label>
+      <p-dropdown
+        *ngIf="(operatorOptions$ | async) ?? []; let operatorOptions"
+        [showClear]="true"
+        styleClass="airframe-dropdown"
+        [options]="operatorOptions"
+        optionLabel="name"
+        placeholder="Select an operator"
+        [formControl]="selectedOperatorControl"
+        [virtualScroll]="operatorOptions.length > 10"
+        [virtualScrollItemSize]="40"
+        [filter]="operatorOptions.length > 10"
+        filterBy="name">
+      </p-dropdown>
+    </div>
+
+    <div class="filter">
+      <label>Lessor</label>
+      <p-dropdown
+        *ngIf="(lessorOptions$ | async) ?? []; let lessorOptions"
+        [showClear]="true"
+        styleClass="airframe-dropdown"
+        [options]="lessorOptions"
+        optionLabel="name"
+        placeholder="Select an lessor"
+        [formControl]="selectedLessorControl"
+        [virtualScroll]="lessorOptions.length > 10"
+        [virtualScrollItemSize]="40"
+        [filter]="lessorOptions.length > 10"
+        filterBy="name">
+      </p-dropdown>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+
+.divider-panel-container {
+  display: flex;
+  min-height: calc(100vh - 130px);
+
+  &__left-panel {
+    width: 260px;
+    transition: width 0.4s ease-in-out;
+
+    &--collapsed {
+      width: 10px;
+    }
+  }
+
+  &__divider {
+    position: relative;
+    width: 4px;
+    border-right: 1px solid colors.$airframe-color-neutral-grey-30;
+    box-shadow: 2px 0 2px -2px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+
+    &:hover {
+      background-color: colors.$airframe-color-foreground-focus;
+    }
+  }
+
+  &__button {
+    position: absolute;
+    left: -10px;
+    top: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    color: colors.$airframe-color-primary-normal;
+    background-color: colors.$airframe-color-background-high-contrast-on-dark;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+    transition: transform 0.4s ease-in-out;
+
+    &:hover {
+      color: colors.$airframe-color-background-high-contrast-on-dark;
+      background-color: colors.$airframe-color-primary-normal;
+    }
+
+    &--reverse {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__right-panel {
+    flex: 1;
+    background-color: colors.$airframe-color-neutral-white;
+  }
+
+  &--fleet-insights {
+    min-height: calc(100vh - 130px - 50px);
+  }
+}

@@ -1,0 +1,10 @@
+# See https://prettier.io/docs/en/ignore.html for more about ignoring files.
+
+package.json
+package-lock.json
+angular.json
+tsconfig.json
+tsconfig.*.json
+ng-package.json
+ng-package.*.json
+

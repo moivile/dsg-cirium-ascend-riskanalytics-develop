@@ -1,0 +1,196 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+@use '@airframe/standard/src/scss/foundations/breakpoints';
+@use '@airframe/standard/src/scss/foundations/font-family';
+
+.filters {
+  display: block;
+
+  &__header {
+    border-bottom: 1px solid colors.$airframe-color-neutral-grey-30;
+    padding: 0 0 6px 3px;
+  }
+
+  &__title {
+    padding: 0 0 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+
+    h6 {
+      font-weight: bold;
+    }
+  }
+
+  &__reset-all {
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    padding: 0;
+    padding-right: 5px;
+    margin-top: -8px;
+  }
+
+  &__group {
+    border-bottom: 1px solid colors.$airframe-color-neutral-grey-30;
+    margin-left: 3px;
+    padding-top: 16px;
+
+    &-routes {
+      border-bottom: none;
+    }
+  }
+
+  &__route-category-container {
+    height: 10px;
+  }
+
+  &__display-name {
+    width: inherit;
+    margin: 0;
+  }
+
+  &__geography-name {
+    display: flex;
+
+    em {
+      color: colors.$airframe-color-neutral-grey-50 !important;
+      padding: 0 8px 8px 8px;
+    }
+  }
+
+  &__checkbox {
+    padding: 6px 4px 3px 0;
+    float: left;
+    display: inline-table;
+  }
+
+  &__option {
+    padding: 6px 6px 8px;
+    display: inline-block;
+    margin: auto;
+    font-weight: 500;
+    line-height: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: initial;
+    color: colors.$airframe-color-neutral-grey-80;
+
+    @media (min-width: breakpoints.$airframe-breakpoint-md) {
+        width: 136px;
+    }
+
+    @media (min-width: breakpoints.$airframe-breakpoint-lg) {
+        width: 156px;
+    }
+
+    @media (min-width: breakpoints.$airframe-breakpoint-xl) {
+        width: 204px;
+    }
+
+    span {
+      font-size: 0.875rem;
+      letter-spacing: 0.003125rem;
+      line-height: 1.5rem;
+    }
+  }
+
+  &__item {
+    margin-bottom: 24px;
+    p-treeSelect {
+      width: inherit;
+    }
+    p-dropdown {
+      width: inherit;
+    }
+  }
+
+  &__route-category-name {
+    border-top: 1px solid #B3B3B3;
+    padding: 15px 0 0 0;
+  }
+
+  &__date-range-name {
+    border-top: 1px solid #B3B3B3;
+    padding: 15px 0 0 0;
+  }
+}
+
+:host ::ng-deep .date-option {
+  margin-bottom: 12px;
+
+  &:last-of-type {
+    margin-bottom: 24px;
+  }
+
+  p-calendar {
+    width: 100%;
+    .p-calendar {
+      width: 100%;
+    }
+  }
+}
+
+:host ::ng-deep p-checkbox.select-all-checkbox .p-checkbox-box.p-focus {
+  box-shadow: none;
+}
+
+.asset-watch-choose-portfolio {
+  padding-bottom: 32px;
+  p-dropdown {
+    width: 100%;
+  }
+}
+
+:host ::ng-deep p-calendar.p-calendar-invalid-value .p-button {
+  border-color: #f44336;
+}
+
+::ng-deep .filter__multiselect {
+  & p-multiselect,
+  .p-multiselect {
+    width: 100%;
+  }
+
+  & .p-multiselect-token-label {
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  & .p-multiselect:not(.p-disabled).p-focus {
+    box-shadow: none;
+    border: solid 1px colors.$airframe-color-primary-normal;
+  }
+
+  & .p-multiselect.p-multiselect-chip .p-multiselect-token {
+    max-width: 100%;
+    background-color: colors.$airframe-color-primary-normal !important;
+    margin: 0.1rem;
+    padding: 0.05rem 0.4rem;
+    &-label {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: inline-block;
+    }
+
+    & .p-icon-wrapper {
+      height: 16px;
+      width: 21px;
+    }
+  }
+
+  & .p-multiselect-panel .p-multiselect-close {
+    display: none;
+  }
+
+  & .p-multiselect-panel .p-multiselect-item {
+    padding: 0.2rem 0.5rem;
+
+    span {
+      font-size: 12px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 158px;
+    }
+  }
+}

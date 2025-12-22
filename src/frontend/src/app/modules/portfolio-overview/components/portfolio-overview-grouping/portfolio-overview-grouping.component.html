@@ -1,0 +1,11 @@
+<div class="grouping">
+  <p-dropdown
+    styleClass="airframe-dropdown"
+    [options]="groups"
+    [(ngModel)]="selectedGroupName"
+    optionLabel="displayName"
+    optionValue="groupName"
+    dropdownIcon="fa fa-chevron-down"
+    (onChange)="changeGroupBy($event.value)">
+  </p-dropdown>
+</div>

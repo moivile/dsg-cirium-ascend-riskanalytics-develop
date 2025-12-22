@@ -1,0 +1,50 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+
+th {
+  height: 53px;
+  font-size: 12px;
+}
+
+td {
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+  font-size: 12px;
+}
+
+.table-buttons-row {
+  display: flex;
+  padding-top: 10px;
+  padding-right: 25px;
+}
+
+.sort-icon {
+  display: none;
+}
+
+.row-overflow > td > div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.row-overflow:hover > td {
+  hyphens: auto;
+  overflow: visible;
+  white-space: pre-wrap;
+}
+
+.asset-watch-details-table ::ng-deep .airframe-table .p-datatable .p-sortable-column.p-highlight {
+  background-color: colors.$airframe-color-primary-extra-extra-light !important;
+}
+
+.asset-watch-details-table ::ng-deep .p-datatable-scrollable-both .p-datatable-tbody > tr > td,
+::ng-deep .p-datatable-scrollable-both .p-datatable-thead > tr > th {
+  flex: 1 1 0 !important;
+}
+
+.flightDetailsTableHeading {
+  float: left;
+  width: 98%;
+}
+.assetGridTableButtons {
+  float: right;
+}

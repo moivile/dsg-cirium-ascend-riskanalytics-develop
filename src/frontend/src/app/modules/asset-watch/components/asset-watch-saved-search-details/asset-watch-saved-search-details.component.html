@@ -1,0 +1,44 @@
+<div class="dialog-content">
+  <form [formGroup]="form" (ngSubmit)="onSaveClick()">
+    <label>
+      <span class="required">Name </span>
+      <input class="ra-inputtext" type="text" maxlength="100" placeholder="Enter Save Search Name" pInputText formControlName="name" />
+      <div *ngIf="form?.get('name')?.hasError('duplicateSaveSearch')" class="duplicate-name-error">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        This name already exists. Enter in a unique name.
+      </div>
+    </label>
+    <label>
+      Description
+      <textarea
+        class="ra-inputtext description"
+        maxlength="200"
+        placeholder="Enter Description"
+        pInputTextarea
+        formControlName="description"></textarea>
+      <div class="description-character-count">{{ (form.controls['description'].value || '').length }}/200</div>
+    </label>
+    <fieldset *ngIf="!dynamicDialogConfig.data.updateNameAndDescription">
+      <legend>Email Alert Status</legend>
+      <div class="toggle-container">
+        <label class="airframe__toggle">
+          <input type="checkbox" formControlName="isActive" />
+          <span></span>
+        </label>
+        <span class="email-alert-status-value">{{ form.controls['isActive'].value ? 'Active' : 'Inactive' }}</span>
+      </div>
+
+      <label>
+        Email Frequency
+        <span class="email-frequency-value">Daily</span>
+        <div class="email-info">This email will be sent to {{ this.appStore.userEmailAddress$ | async }}</div>
+      </label>
+    </fieldset>
+  </form>
+</div>
+<div class="dialog-footer">
+  <button class="cancel-button airframe__button airframe__button--secondary" (click)="onCancelClick()">Cancel</button>
+  <button class="airframe__button airframe__button--primary" (click)="onSaveClick()" [disabled]="form.pristine || form.invalid">
+    Save
+  </button>
+</div>

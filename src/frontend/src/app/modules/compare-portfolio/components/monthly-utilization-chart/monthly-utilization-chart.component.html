@@ -1,0 +1,85 @@
+<div #chartContainer>
+  <div class="row">
+    <div class="chart-title col-lg-10 col-md-10 col-sm-10 col-xs-10">
+      {{metric.name}}
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 no_rightpadding">
+      <button
+      class="airframe__icon-button float_right exclude-element"
+      (click)="downloadChart()"
+      [pTooltip]="chartDownloadToolTip"
+      tooltipPosition="left"
+      tooltipStyleClass="airframe-tooltip"
+      [disabled]="!showDownloadChart || !showChartForZoom">
+      <em class="fa fa-download"></em>
+    </button>
+    </div>
+  </div>
+  <div *ngIf="showNoticeMessage">
+  <ra-notice [message]="message"></ra-notice></div>
+  <div class="row">
+    <div class="row legend__container" *ngIf="legendItems">
+      <div class="legend__item" *ngFor="let legendItem of legendItems">
+        <div class="legend__box" [ngStyle]="{'background-color': legendItem.colour}"></div>
+        <span class="legend__label airframe-footnote">{{legendItem.label}}</span>
+      </div>
+      <button *ngIf="!this.isModal" class="airframe__icon-button modal_icon exclude-element" (click)="showModal()" pTooltip="Full screen" tooltipPosition="top" tooltipStyleClass="airframe-tooltip">
+        <em class="fa fa-expand"></em></button>
+    </div>
+  </div>
+  
+  <div class="chart-container" *ngIf="!upsell" (mouseout)="removeTooltip()">
+    <canvas baseChart
+            [type]="'line'"
+            [datasets]="chartDataSets"
+            [labels]="chartLabels"
+            [options]="chartOptions">
+    </canvas>
+  </div>
+  
+  <div class="chart-container " *ngIf="upsell" (mouseout)="removeTooltip()">
+    <canvas baseChart
+            [type]="'line'"
+            [datasets]="[]"
+            [labels]="chartLabels"
+            [options]="chartOptions"
+            [plugins]="[upsellOverlayPlugin]">
+    </canvas>
+    <div class="upsell-overlay exclude-element">
+      <div>
+        <p>
+          Interested in viewing the emissions data?
+        </p>
+        <div>
+          <a href="{{marketingUrl}}" target="_blank" rel="noopener" class="airframe__button airframe__button--primary">Learn more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+  <p-dialog
+    *ngIf="displayModal"
+    class="airframe-modal exclude-element"
+    styleClass="dialog-fullscreen"
+    [ngClass]="displayModal ? 'dialog-open-modal' : ''"
+    [header]="metric.name"
+    [(visible)]="displayModal">
+    <ra-monthly-utilization-chart
+      [monthlyUtilizationChartData]="monthlyUtilizationChartData"
+      [metric]="metric"
+      [yScaleSuggestedMax]="yScaleSuggestedMax"
+      [chartLabels]="chartLabels"
+      [chartXAxisTitle]="chartXAxisTitle"
+      [isModal]="true" 
+      [isComparisonPortfolio]="isComparisonPortfolio"
+      [isHoursAndCycle]="isHoursAndCycle"
+      [isEmissions]="isEmissions"
+      [yMax]="yMax"
+      [graphNoticeMessage]="graphNoticeMessage"
+      [portfolioName]="portfolioName"
+      >
+    </ra-monthly-utilization-chart>
+  </p-dialog>
+  
+  

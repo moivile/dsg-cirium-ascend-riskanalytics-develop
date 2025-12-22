@@ -1,0 +1,33 @@
+# Editor configuration, see https://editorconfig.org
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[**.{md,rst}]
+max_line_length = off
+trim_trailing_whitespace = false
+
+[{*.sh, *.bash}]
+indent_style = space
+indent_size = 4
+switch_case_indent = true
+
+[*.ts]
+quote_type = single
+indent_size = 2
+
+[*.{csproj,props,targets,ruleset,config,nuspec,resx,vsixmanifest,vsct}]
+indent_size = 2
+
+
+#[*.cs]
+#Please do not add dotnet/csharp editorconfig rules just yet
+#Since that requires build configuration changes.
+#We ought to decide on the path we'll take for dotnet, be it
+#SonarLint, StyleCop or EditorConfig.

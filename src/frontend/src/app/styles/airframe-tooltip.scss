@@ -1,0 +1,20 @@
+@use '@airframe/standard/src/scss/foundations/font-family' as airframe-font;
+@use '@airframe/standard/src/scss/foundations/colors' as airframe-colors;
+
+.airframe-tooltip .p-tooltip-text {
+  background-color: airframe-colors.$airframe-color-neutral-grey-80 !important;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.05px;
+  line-height: 14px;
+  padding: 8px;
+  width: 314px;
+  box-shadow: none !important;
+  width: auto;
+  font-family: airframe-font.$font-family-montserrat;
+}
+
+.airframe-tooltip .p-tooltip-arrow {
+  border: none;
+}

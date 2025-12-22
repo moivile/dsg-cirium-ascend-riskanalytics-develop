@@ -1,0 +1,12 @@
+@use "@airframe/standard/src/scss/foundations/breakpoints";
+
+.accordion-button{
+    margin: 0 auto;
+    display: block;
+    margin-top: 24px;
+    margin-bottom: 32px;
+
+    @media (min-width: breakpoints.$airframe-breakpoint-xm) {
+        margin-bottom: 32px;
+    }
+}

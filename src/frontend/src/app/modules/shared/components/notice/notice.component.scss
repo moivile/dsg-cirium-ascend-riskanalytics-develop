@@ -1,0 +1,18 @@
+.airframe__notice {
+    &-heading {
+        padding-right: 24px;
+    }
+    &-close-icon {
+        padding-right: 8px;
+        margin-top: -56px;
+
+        @media (min-width: 365px) {
+            margin-top: -29px;
+          }
+    }
+
+    &-severity-icon {
+        padding-top: 11px;
+        flex-basis: 0;
+    }
+}

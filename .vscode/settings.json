@@ -1,0 +1,10 @@
+{
+    "remote.WSL.fileWatcher.polling": true,
+    "files.eol": "\n",
+    "angular-schematics.schematicsDefaultOptions": {
+        "angular-*": {
+            "externalTemplate": true,
+            "style": "scss"
+        }
+    }
+}

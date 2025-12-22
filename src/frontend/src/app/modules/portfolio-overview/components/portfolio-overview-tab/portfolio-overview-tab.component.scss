@@ -1,0 +1,366 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+@use '@airframe/standard/src/scss/foundations/breakpoints';
+@use '@airframe/standard/src/scss/foundations/font-family';
+
+.overview {
+  padding: 50px 40px 0 40px;
+
+  &-header {
+    background-color: colors.$airframe-color-neutral-white;
+    padding: 0 16px 0 16px;
+
+    h4 {
+      padding: 32px 0;
+    }
+
+    h3 {
+      padding: 12px 0 12px 0;
+    }
+
+    .title-break {
+      padding-top: 8px;
+    }
+
+  }
+
+  &-header-summary {
+    background-color: colors.$airframe-color-neutral-white;
+    border-radius: 5px;
+  }
+
+  &-back-link {
+    background-color: colors.$airframe-color-neutral-white;
+    padding: 16px;
+  }
+
+  @media (max-width: breakpoints.$airframe-breakpoint-md - 1) {
+    max-width: 100%;
+    flex-basis: 100%;
+    padding-left: 16px !important;
+  }
+
+  &__content {
+    padding: 0 16px 16px 16px;
+    margin-top: 16px;
+    display: none;
+
+    @media (min-width: breakpoints.$airframe-breakpoint-sm) {
+      display: block;
+    }
+  }
+
+  &-filter {
+    margin-right: 10px;
+    padding: 20px;
+    background-color: colors.$airframe-color-neutral-grey-10;
+
+    &__expanded {
+      display: block;
+    }
+
+    &__collapsed {
+      display: none;
+    }
+  }
+
+  &-filter-panel {
+    position: relative;
+    background-color: colors.$airframe-color-neutral-grey-10;
+    margin-top: 3px;
+    left: 0;
+    transition: 0.5s;
+    border-right: 1px solid colors.$airframe-color-neutral-grey-30;
+    box-shadow: 2px 0 2px -2px rgba(0, 0, 0, 0.5);
+
+    @media (max-width: breakpoints.$airframe-breakpoint-md - 1) {
+      display: none;
+    }
+
+    @media (min-width: breakpoints.$airframe-breakpoint-md) {
+      padding: 14px;
+      width: 226px;
+    }
+
+    @media (min-width: breakpoints.$airframe-breakpoint-lg) {
+      padding: 16px;
+      width: 258px;
+    }
+
+    @media (min-width: breakpoints.$airframe-breakpoint-xl) {
+      width: 316px;
+    }
+
+    &__expanded {
+      margin: 0;
+      margin-top: 3px;
+    }
+
+    &__collapsed {
+      transition: none !important;
+      background-color: colors.$airframe-color-neutral-white;
+
+      @media (min-width: breakpoints.$airframe-breakpoint-md) {
+        margin-left: -24%;
+      }
+
+      @media (min-width: 1040px) {
+        margin-left: -16%;
+      }
+    }
+  }
+
+  &-tablet-filters {
+    display: none;
+
+    @media (min-width: breakpoints.$airframe-breakpoint-sm) {
+      display: flex;
+    }
+
+    @media (min-width: breakpoints.$airframe-breakpoint-md) {
+      display: none !important;
+    }
+  }
+
+  &-content-full-width {
+    box-sizing: border-box;
+    flex-basis: 98%;
+    max-width: 98%;
+    transition: 0.5s;
+  }
+
+
+  &-flex-right {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+  }
+
+  &-edit-button {
+    margin-right: 16px;
+  }
+
+  &__container {
+    position: relative;
+    height: 367px;
+    margin-right: 16px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding-left: 12px;
+    padding-right: 12px;
+
+    @media (max-width: breakpoints.$airframe-breakpoint-sm - 1) {
+      flex-basis: 272px;
+      height: auto;
+      margin-bottom: 4px;
+
+      &:first-of-type {
+        margin-top: 28px;
+      }
+    }
+
+    @media (min-width: breakpoints.$airframe-breakpoint-sm) {
+      width: 109px;
+      height: 464px;
+    }
+
+    @media (min-width: breakpoints.$airframe-breakpoint-md) {
+      width: 137px;
+      height: 464px;
+    }
+
+    @media (min-width: breakpoints.$airframe-breakpoint-xm) {
+      width: 190px;
+      height: 367px;
+    }
+
+    @media (min-width: breakpoints.$airframe-breakpoint-lg) {
+      width: 212px;
+    }
+
+    @media (min-width: breakpoints.$airframe-breakpoint-xl) {
+      width: 283px;
+    }
+  }
+
+  &__title {
+    padding: 24px 0 0 0;
+  }
+
+  &-grouping {
+    padding: 12px 0 0 0;
+    width: 100%;
+    display: flex;
+    flex: 0 1 auto;
+
+    @media (min-width: breakpoints.$airframe-breakpoint-md) {
+      display: flex;
+      justify-content: flex-end;
+      padding: 16px 0 0 16px;
+      flex: 1;
+    }
+
+    &__title {
+      margin-top: 8px;
+    }
+
+    &__dropdown {
+      padding: 0 0 0 10px;
+    }
+  }
+
+  &__sub-title-bar {
+    height: 48.46px;
+    border-radius: 5px;
+    background-color: colors.$airframe-color-neutral-grey-10-opacity-50;
+    width: 100%;
+    padding: 12px 16px;
+    margin-top: 32px;
+
+    &-status {
+      margin-top: 12px;
+    }
+  }
+
+  &__description {
+    padding-top: 16px;
+    padding-left: 16px;
+  }
+
+  &__description-group {
+    font-weight: bold;
+  }
+
+  &__two-column-layout {
+    display: none;
+
+    @media (min-width: breakpoints.$airframe-breakpoint-xm) {
+      display: block;
+    }
+  }
+
+  &__accordion {
+    overflow-y: hidden;
+    position: relative;
+  }
+
+  &__accordion:after {
+    //fade effect
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 20px;
+    bottom: 0;
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+  }
+
+  &__edit-compare-buttons {
+    align-items: flex-start;
+    padding: 16px 0 0 16px;
+  }
+}
+
+#overview-content {
+  padding: 16px;
+
+  @media (min-width: breakpoints.$airframe-breakpoint-sm) {
+    padding: 20px 16px 16px 0;
+  }
+}
+
+.expand-collapse-button {
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: colors.$airframe-color-background-high-contrast-on-dark;
+  padding: 4px 8px;
+  color: colors.$airframe-color-primary-normal;
+  margin-left: -12px;
+  z-index: 99;
+  position: fixed;
+  top: 200px;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+  letter-spacing: 0;
+  line-height: 1.142;
+  display: none;
+
+  &:hover {
+    color: colors.$airframe-color-background-high-contrast-on-dark;
+    background-color: colors.$airframe-color-primary-normal;
+    border: 1px solid colors.$airframe-color-primary-normal;
+    box-shadow: 0 0 2px 0 colors.$airframe-color-primary-normal;
+  }
+
+  @media (min-width: breakpoints.$airframe-breakpoint-md) {
+    display: inline;
+  }
+
+  &-is-showcase {
+    @media (min-width: breakpoints.$airframe-breakpoint-md) {
+      top: 370px;
+    }
+  }
+}
+
+.clickable-border {
+  width: 2px;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding-right: 4px;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: colors.$airframe-color-foreground-focus;
+      cursor: pointer;
+    }
+  }
+
+  &:active {
+    background-color: colors.$airframe-color-foreground-focus;
+    cursor: pointer;
+  }
+}
+
+::ng-deep .expand-collapse-button-tooltip .p-tooltip-text {
+  width: 65px;
+  margin-left: 2%;
+}
+
+.fa-download-all-button {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+  padding-bottom: 0;
+
+  em {
+    padding: 0 8px;
+  }
+
+  .big-screen {
+    display: block;
+  }
+
+  @media (max-width: breakpoints.$airframe-breakpoint-sm) {
+    display: none;
+  }
+
+  @media (min-width: breakpoints.$airframe-breakpoint-sm) and (max-width: breakpoints.$airframe-breakpoint-md) {
+    .big-screen {
+      display: none;
+    }
+  }
+}
+
+.selected-value-row {
+  padding: 16px 0 0 16px;
+  .country-radio-btn-container {
+    ::ng-deep .airframe__radiogroup {
+      width: 13.75rem;
+    }
+  }
+}
+
+.asset-watch-button {
+  margin-left: 16px;
+}

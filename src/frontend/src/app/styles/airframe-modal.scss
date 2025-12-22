@@ -1,0 +1,38 @@
+@use '@airframe/standard/src/scss/foundations/colors' as airframe-colors;
+
+.airframe-modal {
+  .p-dialog {
+    border-bottom: 5px solid airframe-colors.$airframe-color-primary-normal;
+
+    .p-dialog-header .p-dialog-title {
+      font-size: 24px;
+    }
+
+    .p-dialog-header .p-dialog-header-icon {
+      height: 40px;
+      width: 40px;
+      border-radius: 3px;
+    }
+
+    .p-dialog-header .p-dialog-header-icon:enabled:focus {
+      border: 2px solid airframe-colors.$airframe-color-foreground-focus;
+      background-color: airframe-colors.$airframe-color-neutral-white;
+      box-shadow: none;
+    }
+
+    .p-dialog-header .p-dialog-header-icon:enabled:hover {
+      height: 40px;
+      width: 40px;
+      border-radius: 3px;
+      background-color: airframe-colors.$airframe-color-neutral-grey-20;
+    }
+  }
+
+  .pi-times::before {
+    font-size: 18px;
+    color: airframe-colors.$airframe-color-neutral-grey-45;
+    content: '\f00d';
+    font-family: 'Font Awesome 5 Free', sans-serif;
+    font-weight: 900;
+  }
+}

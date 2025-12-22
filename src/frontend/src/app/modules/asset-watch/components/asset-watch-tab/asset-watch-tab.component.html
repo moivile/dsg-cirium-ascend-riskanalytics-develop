@@ -1,0 +1,363 @@
+<div class="row center-xs asset-watch-wrapper" [ngClass]="{ 'visually-hidden': saveSearchManagementIsActive }">
+  <div [ngClass]="'col-xl-2 col-lg-2 col-md-2 col-sm-3 col-4 asset-watch-filter-panel ' + filterPanelExpandedCollapsedClass">
+    <ra-asset-watch-filter
+      [filterExpandedCollapsedClass]="filterExpandedCollapsedClass"
+      [filterPanelForm]="filterPanelForm"
+      [selectedTimePeriodControl]="selectedTimePeriodControl"
+      [watchlistFilterValues]="watchlistFilterValues"
+      [aircraftWatchlistFilterForm]="aircraftWatchlistFilterForm"
+      [canDeactivate]="canDeactivate"
+      [triggerOpenSavedSearch$]="triggerOpenSavedSearch$"></ra-asset-watch-filter>
+    <span class="clickable-border" (click)="expandCollapseFilterPanel()"></span>
+  </div>
+
+  <div
+    class="col-xl-10 col-lg-10 col-md-10 col-sm-9 col-8"
+    id="asset-watch-content"
+    [ngClass]="filterExpanded ? '' : 'asset-watch-content-full-width'">
+    <span
+      class="expand-collapse-button"
+      (click)="expandCollapseFilterPanel()"
+      pTooltip="{{ expandCollapseButtonHoverText }}"
+      tooltipPosition="right"
+      tooltipStyleClass="expand-collapse-button-tooltip airframe-tooltip">
+      <em class="fa" [ngClass]="filterExpanded ? 'fa-chevron-left' : 'fa-chevron-right'"></em>
+    </span>
+    <div class="asset-watch-header-summary">
+      <div class="asset-watch-header">
+        <ng-container>
+          <div class="row asset-watch-portfolio-name">
+            <h5>{{ appStore.selectedPortfolioName$ | async }}</h5>
+          </div>
+          <div class="row">
+            <h3 class="col">
+              Flights:
+              <span>{{ (assetWatchStore.savedSearchName$ | async) ?? 'Untitled Search' }}</span>
+            </h3>
+          </div>
+          <!-- <span class="airframe-caption">Monitor the flight and ground activity of your portfolio </span> -->
+          <div class="asset-watch-save-search">
+            <div class="asset-watch-save-search-email-alerts-status">
+              {{ emailAlertStatusText$ | async }}
+
+              <ng-template #trueEmailAlertStatusTooltipContent>
+                Go to My Saved Searches to turn off your email alerts for this saved search.
+              </ng-template>
+              <ng-template #falseEmailAlertStatusIsTooltipContent>
+                Go to My Saved Searches to turn on your email alerts for this saved search.
+              </ng-template>
+              <ng-template #defaultEmailAlertStatusDefaultTooltipContent>
+                <div><b>Email Alerts</b></div>
+                To create an alert, you need to have at least one of the following criteria added:
+                <ul>
+                  <li>Min. Number of Flights</li>
+                  <li>Min. Total Ground Stay</li>
+                  <li>Min. Individual Ground Stay</li>
+                  <li>Max. Individual Ground Stay</li>
+                  <li>Min. Current Ground Stay</li>
+                </ul>
+                You also need to save all selected filters as a Saved Search.
+              </ng-template>
+
+              <em
+                class="fa fa-info-circle"
+                [pTooltip]="
+                  (assetWatchStore.isActive$ | async) === true
+                    ? trueEmailAlertStatusTooltipContent
+                    : (assetWatchStore.isActive$ | async) === false
+                    ? falseEmailAlertStatusIsTooltipContent
+                    : defaultEmailAlertStatusDefaultTooltipContent
+                "
+                tooltipStyleClass="helptip"></em>
+            </div>
+            <ev-badge *ngIf="(assetWatchStore.searchIsDirty$ | async) && isAtLeastOneAircraftWatchlistStepperSelected"
+              >Unsaved Changes</ev-badge
+            >
+
+            <button
+              type="button"
+              class="airframe__button airframe__button--plain asset-watch-save-search-my-saved-searches"
+              (click)="openSaveSearchManagement()">
+              My saved searches
+            </button>
+            <button
+              type="button"
+              class="airframe__button airframe__button--primary asset-watch-save-search-save-menu"
+              (click)="menu.toggle($event)"
+              [disabled]="(assetWatchStore.searchIsDirty$ | async) === false || !isAtLeastOneAircraftWatchlistStepperSelected">
+              Save <i class="fa fa-chevron-down"></i>
+            </button>
+            <p-menu #menu [popup]="true" [model]="saveSearchMenuItems"></p-menu>
+          </div>
+        </ng-container>
+
+        <hr class="title-break" />
+      </div>
+      <div class="row start-xs paper">
+        <div class="row operational-exposure-header">
+          <div class="col asset-watch-summary-title">
+            <h5>Operational Exposure</h5>
+            <div class="operational-exposure-description">This section shows the flight and ground exposure across geographies.</div>
+          </div>
+          <div class="col asset-watch-group-by">
+            <label>Group By</label>
+            <p-dropdown [options]="groupingOptions" [formControl]="selectedGroupingControl" styleClass="airframe-dropdown"> </p-dropdown>
+          </div>
+        </div>
+        <div class="row start-xs paper">
+          <div class="row operational-exposure-header">
+            <div class="col asset-watch-export-options">
+              <label>Export Options</label>
+              <button
+                type="button"
+                class="airframe__button airframe__button--primary asset-watch-save-search-save-menu"
+                (click)="exportMenu.toggle($event)">
+                Export <i class="fa fa-chevron-down"></i>
+              </button>
+              <p-menu
+                #exportMenu
+                tooltipPosition="left"
+                tooltipStyleClass="airframe-tooltip"
+                [pTooltip]="showMenuTooltip ? menuTooltip : undefined"
+                [popup]="true"
+                [model]="exportMenuItems">
+              </p-menu>
+            </div>
+          </div>
+        </div>
+        <div class="row start-xs asset-watch-charts-headings">
+          <div class="col-md-6 asset-watch-charts-flights-heading">
+            <h5 class="asset-watch__title summary-chart-title">Flights</h5>
+          </div>
+          <div class="col-md-6 asset-watch-charts-ground-stays-heading">
+            <h5 class="asset-watch__title summary-chart-title">Ground Stays</h5>
+          </div>
+        </div>
+
+        <div class="row start-xs">
+          <div class="row asset-watch__accordion asset-watch-charts" id="summaryCharts">
+            <div class="col-md-6 asset-watch-stacked-bar-chart">
+              <ra-asset-watch-stacked-bar-chart
+                [inputData$]="flightsChartInputData$"
+                [portfolioName]="appStore.selectedPortfolioName$ | async"
+                [downloadChart$]="downloadFlightChart$"
+                [chartname]="'Flights'"
+                [loading]="flightsChartLoading"></ra-asset-watch-stacked-bar-chart>
+            </div>
+            <div class="col-md-6 asset-watch-stacked-bar-chart">
+              <ra-asset-watch-stacked-bar-chart
+                [inputData$]="groundStaysChartInputData$"
+                [portfolioName]="appStore.selectedPortfolioName$ | async"
+                [downloadChart$]="downloadGroundChart$"
+                [chartname]="'Ground Stays'"
+                [loading]="groundStaysChartLoading"></ra-asset-watch-stacked-bar-chart>
+            </div>
+          </div>
+          <ra-asset-watch-accordion
+            class="asset-watch-charts-accordion"
+            accordionContentId="summaryCharts"
+            defaultHeight="420px"
+            [groupCount$]="chartGroupCount$"></ra-asset-watch-accordion>
+        </div>
+      </div>
+    </div>
+
+    <div class="paper asset-watch__content">
+      <div [formGroup]="aircraftWatchlistFilterForm">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="row start-xs">
+              <div class="col asset-watch__title">
+                <h5>Aircraft of Interest</h5>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="asset-watch__description">This section shows the aircraft matching the selected criteria.</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="col asset-watch__content asset-watch__title-current-aog">
+              <label>Filter By</label>
+              <p-treeSelect
+                #filterByAOGTreeSelect
+                [options]="(assetWatchStore.filterByOptions$ | async) ?? []"
+                [metaKeySelection]="false"
+                placeholder="Aircraft on Ground"
+                selectionMode="checkbox"
+                [filter]="true"
+                [filterInputAutoFocus]="true"
+                [propagateSelectionUp]="true"
+                formControlName="filterByOptions"
+                [propagateSelectionDown]="true"
+                [resetFilterOnHide]="true"
+                display="chip"
+                (onClear)="aircraftOnGroundDeSelected()"
+                (onNodeSelect)="onFilterByOptionSelect($event.node)"
+                (onNodeUnselect)="onFilterByOptionDeSelect($event.node)"
+                [showClear]="true">
+              </p-treeSelect>
+            </div>
+          </div>
+        </div>
+
+        <div class="row asset-watch__aircraft_of_interest_section">
+          <div *ngIf="!isAOGSelected" class="asset-watch__aircraft_of_interest_input">
+            <label class="min-no-of-flights"
+              >Min. No. of Flights
+              <em
+                class="fa-regular fa-circle-question minflights"
+                pTooltip="Use to set a minimum number of flights in the selected time period."
+                tooltipPosition="right"
+                tooltipStyleClass="helptip"></em>
+            </label>
+            <p-inputNumber
+              class="input-number-button-min-no-of-flights"
+              formControlName="minNoOfFlights"
+              [showButtons]="true"
+              buttonLayout="horizontal"
+              inputId="min-no-of-flights"
+              [step]="1"
+              decrementButtonClass="input-number-button"
+              incrementButtonClass="input-number-button"
+              incrementButtonIcon="fa fa-plus"
+              decrementButtonIcon="fa fa-minus"
+              mode="decimal"
+              [min]="0"></p-inputNumber>
+          </div>
+
+          <div *ngIf="!isAOGSelected" class="asset-watch__aircraft_of_interest_input">
+            <label for="min-total-ground-stay"
+              >Min. Total Ground Stay (Hours)
+              <em
+                class="fa-regular fa-circle-question groundStay"
+                pTooltip="Use to set a minimum sum of all hours that an aircraft has spent on the ground in the selected time period."
+                tooltipPosition="right"
+                tooltipStyleClass="helptip"></em>
+            </label>
+            <p-inputNumber
+              formControlName="minTotalGroundStay"
+              [showButtons]="true"
+              buttonLayout="horizontal"
+              inputId="min-total-ground-stay"
+              [step]="1"
+              decrementButtonClass="input-number-button"
+              incrementButtonClass="input-number-button"
+              incrementButtonIcon="fa fa-plus"
+              decrementButtonIcon="fa fa-minus"
+              mode="decimal"
+              [min]="0"></p-inputNumber>
+          </div>
+
+          <div *ngIf="!isAOGSelected" class="asset-watch__aircraft_of_interest_input">
+            <label for="min-individual-ground-stay"
+              >Min. Individual Ground Stay (Hours)
+              <em
+                class="fa-regular fa-circle-question minIndGroundStay"
+                pTooltip="Use to set a minimum duration for each individual ground stay in the selected time period."
+                tooltipPosition="right"
+                tooltipStyleClass="helptip"></em>
+            </label>
+            <p-inputNumber
+              formControlName="minIndividualGroundStay"
+              [showButtons]="true"
+              buttonLayout="horizontal"
+              inputId="min-individual-ground-stay"
+              [step]="1"
+              decrementButtonClass="input-number-button"
+              incrementButtonClass="input-number-button"
+              incrementButtonIcon="fa fa-plus"
+              decrementButtonIcon="fa fa-minus"
+              mode="decimal"
+              [min]="0"></p-inputNumber>
+          </div>
+
+          <div *ngIf="!isAOGSelected" class="asset-watch__aircraft_of_interest_input">
+            <label for="max-individual-ground-stay"
+              >Max. Individual Ground Stay (Hours)
+              <em
+                class="fa-regular fa-circle-question maxIndGroundStay"
+                pTooltip="Use to set a maximum duration for each individual ground stay in the selected time period."
+                tooltipPosition="right"
+                tooltipStyleClass="helptip"></em>
+            </label>
+            <p-inputNumber
+              id="max-individual-ground-stay"
+              formControlName="maxIndividualGroundStay"
+              [showButtons]="true"
+              buttonLayout="horizontal"
+              inputId="max-individual-ground-stay"
+              [step]="1"
+              decrementButtonClass="input-number-button"
+              incrementButtonClass="input-number-button"
+              incrementButtonIcon="fa fa-plus"
+              decrementButtonIcon="fa fa-minus"
+              mode="decimal"
+              [min]="0"></p-inputNumber>
+          </div>
+
+          <div *ngIf="isAOGSelected" class="asset-watch__aircraft_of_interest_input">
+            <label for="min-current-ground-stay"
+              >Min. Current Ground Stay (Hours)
+              <em
+                class="fa-regular fa-circle-question"
+                pTooltip="Shows aircraft that have been on the ground for a minimum of 12 hours."
+                tooltipPosition="right"
+                tooltipStyleClass="helptip"></em>
+            </label>
+            <p-inputNumber
+              [showButtons]="true"
+              buttonLayout="horizontal"
+              inputId="min-current-stay"
+              [step]="1"
+              decrementButtonClass="input-number-button"
+              incrementButtonClass="input-number-button"
+              incrementButtonIcon="fa fa-plus"
+              decrementButtonIcon="fa fa-minus"
+              [(ngModel)]="watchlistFilterValues.currentGroundStayAOG"
+              [ngModelOptions]="{ standalone: true }"
+              (onInput)="incrementDecrementMinCurrentGroundStay($event)"
+              (onBlur)="inputMinCurrentGroundStay($event)"
+              mode="decimal"
+              [min]="0"></p-inputNumber>
+          </div>
+          <div *ngIf="isAOGSelected" class="asset-watch__aircraft_of_interest_input">
+            <label for="max-current-ground-stay"
+              >Max. Current Ground Stay (Hours)
+              <em
+                class="fa-regular fa-circle-question max-current-ground-stay"
+                pTooltip="Use to set a maximum duration for current ground stay."
+                tooltipPosition="right"
+                tooltipStyleClass="helptip"></em>
+            </label>
+            <p-inputNumber
+              [showButtons]="true"
+              buttonLayout="horizontal"
+              inputId="max-current-stay"
+              [step]="1"
+              decrementButtonClass="input-number-button"
+              incrementButtonClass="input-number-button"
+              incrementButtonIcon="fa fa-plus"
+              decrementButtonIcon="fa fa-minus"
+              [(ngModel)]="watchlistFilterValues.currentMaxGroundStayAOG"
+              [ngModelOptions]="{ standalone: true }"
+              (onInput)="incrementDecrementMaxCurrentGroundStay($event)"
+              (onBlur)="inputMaxCurrentGroundStay($event)"
+              mode="decimal"
+              [min]="0"></p-inputNumber>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="detailsRow">
+        <ra-asset-watch-details-table
+          [filterPanelForm]="filterPanelForm"
+          [selectedTimePeriodControl]="selectedTimePeriodControl"
+          [aircraftWatchlistFilterForm]="aircraftWatchlistFilterForm"></ra-asset-watch-details-table>
+      </div>
+    </div>
+  </div>
+</div>
+<ra-asset-watch-save-search-management
+  *ngIf="saveSearchManagementIsActive"
+  (backClicked)="closeSaveSearchManagementAfterBackClicked()"
+  (openSavedSearchClicked)="closeSaveSearchManagementAfterOpenSavedSearchClicked($event)"></ra-asset-watch-save-search-management>

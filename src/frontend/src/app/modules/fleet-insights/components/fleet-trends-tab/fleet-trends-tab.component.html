@@ -1,0 +1,78 @@
+<section class="page-content">
+  <header class="page-content__header">
+    <h1 class="page-content__title">Fleet Trends</h1>
+    <p class="page-content__description">View the global distribution of the global fleet</p>
+  </header>
+
+  <section class="page-section page-content__section">
+    <header class="page-section__header">
+      <div class="page-section__left-header">
+        <h2 class="page-section__title">Summary</h2>
+      </div>
+      <div class="page-section__right-header">
+        <div class="page-section__select">
+          <label>Group by</label>
+          <p-dropdown styleClass="airframe-dropdown" [options]="['Status']"> </p-dropdown>
+        </div>
+      </div>
+    </header>
+    <div class="page-section__controls">
+      <div class="page-section__left-controls">
+        <div class="page-section__metrics">
+          <span class="page-section__metrics-label">Show data by</span>
+          <div class="page-section__metrics-radiogroup">
+            <label class="airframe__radiogroup">
+              Number of Aircraft
+              <input type="radio" name="metric" value="number" [checked]="true" />
+              <span></span>
+            </label>
+            <label class="airframe__radiogroup">
+              % of Total Aircraft
+              <input type="radio" name="metric" value="percentage" />
+              <span></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="page-section__right-controls">
+        <div class="page-section__actions">
+          <button class="airframe__icon-button" pTooltip="Download to Excel" tooltipPosition="left" tooltipStyleClass="airframe-tooltip">
+            <em class="fa fa-download"></em>
+          </button>
+          <button class="airframe__icon-button" pTooltip="Full screen" tooltipPosition="left" tooltipStyleClass="airframe-tooltip">
+            <em class="fa fa-expand"></em>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="page-section__data-visualization">Chart will go here</div>
+  </section>
+
+  <section class="page-section page-content__section">
+    <header class="page-section__header">
+      <h2 class="page-section__title">Details</h2>
+    </header>
+
+    <div class="page-section__controls">
+      <div class="page-section__left-controls">
+        <div class="page-section__navigation-tabs-control airframe__navigation-tabs">
+          <a *ngFor="let tab of tabs" (click)="selectTab(tab)" [class.current-tab]="tab.active">
+            {{ tab.title }}
+          </a>
+        </div>
+      </div>
+      <div class="page-section__right-controls">
+        <div class="page-section__actions">
+          <button class="airframe__icon-button" pTooltip="Download to Excel" tooltipPosition="left" tooltipStyleClass="airframe-tooltip">
+            <em class="fa fa-download"></em>
+          </button>
+          <button class="airframe__icon-button" pTooltip="Full screen" tooltipPosition="left" tooltipStyleClass="airframe-tooltip">
+            <em class="fa fa-expand"></em>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="page-section__data-visualization" *ngIf="tabs[0].active">Table 1 will go here</div>
+    <div class="page-section__data-visualization" *ngIf="tabs[1].active">Table 2 will go here</div>
+  </section>
+</section>

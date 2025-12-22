@@ -1,0 +1,48 @@
+@use "@airframe/standard/src/scss/foundations/colors";
+
+.container {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: colors.$airframe-color-background-high-contrast-on-light;
+
+  .content {
+
+    border-radius: 5px;
+    width: 474px;
+    background-color: colors.$airframe-color-background-high-contrast-on-dark;
+    padding: 24px;
+
+    text-align: center;
+
+    img
+    {
+      width: 160px;
+      padding-top: 6px;
+      padding-bottom: 16px;
+    }
+
+    h4 {
+      padding-bottom: 10px;
+    }
+
+    label
+    {
+      display: block;
+      padding-bottom: 16px;
+    }
+
+    .buttons {
+
+      button {
+        width: 207px;
+      }
+
+      a:first-child {
+        padding-right: 12px;
+      }
+    }
+  }
+}

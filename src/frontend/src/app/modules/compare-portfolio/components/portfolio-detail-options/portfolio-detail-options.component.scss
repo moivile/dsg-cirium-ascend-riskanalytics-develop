@@ -1,0 +1,80 @@
+.portfolio-details {
+
+  h5 {
+    padding-bottom: 10px;
+  }
+
+  .portfolio-name {
+    min-height: 34px; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    position: relative;
+    white-space: nowrap;
+    word-break: break-word;
+    text-align: justify;
+    min-width: 180px;
+    margin-bottom: 3px;
+    margin-top: 4px;
+  }
+
+  .filters {
+
+    margin-top: 20px;
+
+    .filter {
+
+      label {
+        display: block;
+      }
+
+      p-dropdown {
+        margin-bottom: 24px;
+        margin-right: 17px;
+
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .filter:first-child {
+      margin-right: 20px;
+    }
+
+    .filter:nth-child(2) {
+      margin-right: 20px;
+    }
+  }
+
+  .portfolio-option-radio-buttons {
+    display: flex;
+    margin-left: auto;
+
+    .airframe__radiogroup:last-of-type {
+      width: 180px;
+    }
+  }
+}
+
+:host::ng-deep {
+  .p-treeselect {
+    width: 242px;
+
+    .p-tree {
+      .p-checkbox {
+        display: none;
+      }
+
+      .p-treenode-children .p-checkbox {
+        display: block;
+      }
+    }
+  }
+
+  .p-dropdown {
+    width: 242px;
+  }
+}
+
+
+

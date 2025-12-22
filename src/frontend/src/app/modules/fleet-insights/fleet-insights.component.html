@@ -1,0 +1,43 @@
+<nav class="main-nav main-nav--fleet-insights">
+  <span class="main-nav__page-title"> Fleet Insights </span>
+  <ul class="main-nav__site-list">
+    <li class="main-nav__site-list-item">
+      <a [routerLink]="fleetDistributionPath" *ngIf="(isFleetDistributionPage$ | async) === false; else fleetDistribution">
+        Fleet Distribution
+      </a>
+      <ng-template #fleetDistribution>
+        <a class="active-menu-item"> Fleet Distribution </a>
+      </ng-template>
+    </li>
+    <li class="main-nav__site-list-item">
+      <a [routerLink]="fleetTrendsPath" *ngIf="(isFleetTrendsPage$ | async) === false; else fleetTrends"> Fleet Trends </a>
+      <ng-template #fleetTrends>
+        <a class="active-menu-item">Fleet Trends</a>
+      </ng-template>
+    </li>
+    <li class="main-nav__site-list-item">
+      <a [routerLink]="marketActivityPath" *ngIf="(isMarketActivityPage$ | async) === false; else marketActivity"> Market Activity </a>
+      <ng-template #marketActivity>
+        <a class="active-menu-item">Market Activity</a>
+      </ng-template>
+    </li>
+  </ul>
+</nav>
+
+<div class="divider-panel-container divider-panel-container--fleet-insights">
+  <div class="divider-panel-container__left-panel" [ngClass]="{ 'divider-panel-container__left-panel--collapsed': isCollapsed }">
+    <ra-fleet-insights-filter-panel></ra-fleet-insights-filter-panel>
+  </div>
+  <div class="divider-panel-container__divider" (click)="togglePanel()">
+    <button
+      type="button"
+      class="divider-panel-container__button"
+      (click)="togglePanel($event)"
+      [ngClass]="{ 'divider-panel-container__button--reverse': isCollapsed }">
+      <i class="fa fa-chevron-left"></i>
+    </button>
+  </div>
+  <div class="divider-panel-container__right-panel">
+    <router-outlet></router-outlet>
+  </div>
+</div>

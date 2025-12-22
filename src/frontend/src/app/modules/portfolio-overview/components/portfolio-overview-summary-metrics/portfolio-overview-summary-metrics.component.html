@@ -1,0 +1,22 @@
+<div class="summary-metrics__title">
+  <h5>
+    {{summaryTitle}}
+  </h5>
+
+</div>
+<div *ngIf="summaryMetrics">
+  <div *ngFor="let summaryMetric of summaryMetrics ">
+    <div class="summary-metrics__label">
+      <div class="summary-metrics__name" title="{{summaryMetric.label}}">
+        {{summaryMetric.label}}
+      </div>
+      <div class="summary-metrics__value airframe-subtle-onlight">
+        <p class="airframe-footnote">
+          <span class="summary-metrics__value-total">{{summaryMetric.total}}</span> ({{summaryMetric.percentage}}%)
+        </p>
+      </div>
+    </div>
+    <progress max="100" value={{summaryMetric.percentage}}
+      [ngClass]="summaryMetric.grouped ? 'summary-metrics--grouped' : ''"></progress>
+  </div>
+</div>

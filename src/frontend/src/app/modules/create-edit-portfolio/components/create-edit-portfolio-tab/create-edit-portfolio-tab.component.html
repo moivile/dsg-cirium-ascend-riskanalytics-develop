@@ -1,0 +1,116 @@
+<div class="create">
+  <div class="row">
+    <ra-back-link backLink="/portfolios"></ra-back-link>
+  </div>
+  <div class="row">
+    <h3 class="col" *ngIf="(store.id$ | async) === undefined">Create a new portfolio</h3>
+    <h3 class="col" *ngIf="(store.id$ | async) !== undefined">Edit Portfolio</h3>
+    <div class="col create-flex-right save-button">
+      <button
+        class="airframe__button airframe__button--primary"
+        [ngClass]="{ 'is-disabled': formControlName.invalid }"
+        (click)="onSavePortfolio()"
+        [attr.disabled]="formControlName.invalid ? '' : null">
+        Save
+      </button>
+    </div>
+  </div>
+  <span class="airframe-caption" *ngIf="(store.id$ | async) === undefined">
+    Use this page to create a portfolio of aircraft using the search function and/or additional filters.
+  </span>
+
+  <span class="airframe-caption" *ngIf="(store.id$ | async) !== undefined">
+    Use this page to modify your portfolio of assets by adding and/or removing aircraft.
+  </span>
+
+  <hr class="title-break" />
+
+  <div class="row">
+    <h4 class="col">Portfolio Name</h4>
+  </div>
+  <div class="row">
+    <input
+      class="airframe__textfield portfolio-name"
+      type="text"
+      maxlength="100"
+      placeholder="Enter portfolio name"
+      pInputText
+      [formControl]="formControlName" />
+  </div>
+
+  <hr />
+
+  <div class="row">
+    <span class="aircraft-in-portfolio-header">
+      <h4>Aircraft in Portfolio ({{ store.numberOfAircraft$ | async }})</h4>
+      <em
+        class="fa-regular fa-circle-question"
+        pTooltip="This area of the page shows all the aircraft that will be added to your portfolio."
+        tooltipPosition="right"
+        tooltipStyleClass="helptip"></em>
+    </span>
+
+    <button
+      class="remove_aircraft_button airframe__button airframe__button--secondary"
+      [ngClass]="{ 'is-disabled': checkedAircraftIds.length === 0 }"
+      [attr.disabled]="checkedAircraftIds.length === 0 ? '' : null"
+      (click)="onRemoveAircraftClick()">
+      REMOVE AIRCRAFT ({{ checkedAircraftIds.length }})
+    </button>
+    <button class="add_aircraft_button airframe__button airframe__button--primary" (click)="onAddAircraftClick()">ADD AIRCRAFT</button>
+  </div>
+  <div class="row search-div">
+    <span *ngIf="store.numberOfAircraft$ | async" class="p-input-icon-right search-bar">
+      <i class="fa fa-search search-button"></i>
+      <input
+        class="airframe__textfield"
+        type="text"
+        [formControl]="textFilterControl"
+        placeholder="Search by MSN, Registration, Airline, Lessor, Aircraft Family"
+        pInputText />
+    </span>
+  </div>
+  <p-table
+    styleClass="airframe-table"
+    [value]="(this.filteredAircraftList$ | async)!"
+    [selection]="checkedAircraftIds"
+    [scrollable]="true"
+    scrollHeight="500px"
+    [virtualScroll]="true"
+    [virtualScrollItemSize]="28"
+    (onRowSelect)="onRowSelect($event.data)"
+    (onRowUnselect)="onRowUnselect($event.data)">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 4rem">
+          <p-checkbox [binary]="true" class="select-all-checkbox" (onChange)="onHeaderCheckboxClick($event.checked)"></p-checkbox>
+        </th>
+        <th>MSN</th>
+        <th>Registration</th>
+        <th>Aircraft Master Series</th>
+        <th>Engine Series</th>
+        <th>Age</th>
+        <th>Status</th>
+        <th>Operator</th>
+        <th>Manager</th>
+        <th>Owner</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-aircraft>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="aircraft.aircraftId"></p-tableCheckbox>
+        </td>
+        <td>{{ aircraft.aircraftSerialNumber }}</td>
+        <td>{{ aircraft.aircraftRegistrationNumber }}</td>
+        <td>{{ aircraft.aircraftMasterSeries }}</td>
+        <td>{{ aircraft.engineSeries }}</td>
+        <td class="right-text">{{ aircraft.aircraftAgeYears }}</td>
+        <td>{{ aircraft.status }}</td>
+        <td>{{ aircraft.operator }}</td>
+        <td>{{ aircraft.manager }}</td>
+        <td>{{ aircraft.owner }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

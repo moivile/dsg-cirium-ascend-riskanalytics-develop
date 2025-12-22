@@ -1,0 +1,41 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+
+.ra-inputswitch .p-inputswitch {
+  width: 2rem;
+  height: 1rem;
+
+  .p-inputswitch-slider:before {
+    width: 0.75rem;
+    height: 0.75rem;
+    margin-top: -0.375rem;
+    left: 0.15px;
+  }
+
+  &.p-inputswitch-checked .p-inputswitch-slider:before {
+    transform: translateX(1.15rem);
+  }
+
+  .p-inputswitch-slider {
+    background: colors.$airframe-color-neutral-grey-30;
+  }
+
+  &.p-focus .p-inputswitch-slider {
+    box-shadow: 0 0 0 1px colors.$airframe-color-foreground-focus;
+  }
+
+  &:not(.p-disabled):hover .p-inputswitch-slider {
+    background: colors.$airframe-color-neutral-grey-20;
+  }
+
+  &.p-inputswitch-checked .p-inputswitch-slider {
+    background: colors.$airframe-color-green--600;
+  }
+
+  &.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
+    background: colors.$airframe-color-primary-light;
+  }
+}
+
+p-inputswitch.ra-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
+  border-color: colors.$airframe-color-status-danger-extra-dark;
+}

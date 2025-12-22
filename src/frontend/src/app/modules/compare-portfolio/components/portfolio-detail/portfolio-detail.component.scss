@@ -1,0 +1,26 @@
+@use "@airframe/standard/src/scss/foundations/colors";
+
+.portfolio-detail {
+  padding-top: 40px;
+  padding-left: 40px;
+  padding-right: 20px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: colors.$airframe-color-neutral-grey-20;
+  border-radius: 6px;
+  box-shadow: 5px 5px colors.$airframe-color-neutral-grey-10-opacity-50;
+
+  .main-chart-title {
+    padding-top: 24px;
+    padding-bottom: 24px;
+
+    em {
+      color: colors.$airframe-color-neutral-grey-50;
+      padding-left: 8px;
+    }
+  }
+
+  ra-monthly-utilization-chart {
+    width: 100%;
+  }
+}

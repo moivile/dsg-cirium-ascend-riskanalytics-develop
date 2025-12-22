@@ -1,0 +1,82 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+
+.page-section {
+  border-top: 4px solid rgba(0, 0, 0, 0.1);
+  padding: 20px 0;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  &__left-header {
+    flex-grow: 1;
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  &__left-controls {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  &__metrics {
+    display: flex;
+    flex-direction: column;
+
+    &-radiogroup {
+      display: flex;
+      flex-direction: row;
+
+      label {
+        width: auto;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  &__navigation-tabs-control {
+    margin-left: 0;
+
+  }
+
+  &__data-visualization {
+    margin-top: 10px;
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: colors.$airframe-color-neutral-grey-10-opacity-50;
+  }
+
+  &__metrics-label {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 24px;
+  }
+}
+
+.page-section__title,
+h2.page-section__title {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.page-section__description {
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 16px;
+}
+
+.page-section__data-visualization-title {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+}

@@ -1,0 +1,15 @@
+version: "3.5"
+
+services:
+  frontend:
+    image: "${REGISTRY_URL}/${IMAGE_NAME}-frontend:${TAG}"
+    environment:
+      - BUILD_VERSION=${BUILD_VERSION:-1.0.0}
+
+  api:
+    build:
+      args:
+        - VERSION=${VERSION:-1.0.0.0}
+    image: "${REGISTRY_URL}/${IMAGE_NAME}-api:${TAG}"
+    environment:
+      - BUILD_VERSION=${BUILD_VERSION:-1.0.0}

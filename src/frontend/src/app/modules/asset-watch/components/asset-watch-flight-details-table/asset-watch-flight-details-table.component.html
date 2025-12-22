@@ -1,0 +1,75 @@
+<div #flightDetailsTableContainer class="asset-watch-details-table">
+<div class="table-buttons-row">
+  <div class="flightDetailsTableHeading">
+    <h5>Flight Details <span>({{recordCount}}) for Serial: {{aircraftSerialNumber}}; Registration: {{aircraftRegistrationNumber}}; Aircraft Series: {{aircraftSeries}}</span></h5>
+  </div>
+  <div class="assetGridTableButtons">
+    <button
+    class="airframe__icon-button rightFloat"
+    (click)="exportExcel()"
+    pTooltip="Download to Excel"
+    tooltipPosition="left"
+    tooltipStyleClass="airframe-tooltip">
+      <em class="fa fa-download"></em>
+    </button>
+  </div>
+</div>
+
+<p-table
+[columns]="tableHeaders"
+[value]="tableData"
+[paginator]="true"
+[rows]="50"
+[totalRecords]="recordCount"
+[reorderableColumns]="true"
+[loading]="loading"
+[resizableColumns]="true"
+sortMode="single"
+[sortField]="this.sortBy.name"
+[sortOrder]="this.sortBy.sortDescending ? -1 : 1"
+[style]="{ 'width.px': tableWidth }"
+[lazy]="true"
+(onLazyLoad)="tableLazyLoad($event, $event.sortField, $event.sortOrder === -1)"
+class="airframe-table">
+<ng-template pTemplate="header" let-columns>
+  <tr>
+    <ng-container *ngFor="let column of columns; let i = index">
+      <th
+        [ngClass]="[column.type === 'number' ? 'right-text cell-width-small' : 'cell-width-small']"
+        [ngStyle]="{ 'min-width': column.width + 'px' }"
+        scope="col"
+        [pSortableColumn]="column.field"
+        pResizableColumn
+        pReorderableColumn
+        (click)="showSortIcon(column.field,i)"
+        (mouseenter)="hoverSortIcon(column.field,i, true)"
+        (mouseleave)="hoverSortIcon(column.field,i, false)">
+        <div class="column-header">
+          <span class="header-overflow">{{ column.header }}</span>
+          <p-sortIcon class="sort-icon" field="{{ column.field }}"></p-sortIcon>
+        </div>
+      </th>
+    </ng-container>
+  </tr>
+</ng-template>
+
+<ng-template pTemplate="body" let-row let-columns="columns">
+  <tr class="row-overflow">
+    <ng-container *ngFor="let column of columns">
+      <td
+      [ngClass]="column.type === 'number' ? 'right-text' : ''"
+      [ngStyle]="{ 'min-width': column.width + 'px' }"
+      id="table-row-flexed">
+       <div *ngIf="column.header === 'Serial'"><a>{{ row[column.field] || '-' }}</a>
+        </div>
+        <div *ngIf="column.type !== 'number' && column.type !== 'date'">{{
+          (row[column.field]| titlecase) || '-' }}</div>
+        <div *ngIf="column.type === 'number'">{{ (row[column.field] | number:
+          column.pipeFormat) || '-' }}</div>
+        <div *ngIf="column.type === 'date'">{{ (row[column.field] | date: 'dd-MMM-yyyy') || '-' }}</div>
+      </td>
+    </ng-container>
+  </tr>
+</ng-template>
+</p-table>
+</div>

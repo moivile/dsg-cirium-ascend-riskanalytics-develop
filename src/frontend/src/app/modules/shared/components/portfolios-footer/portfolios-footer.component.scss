@@ -1,0 +1,74 @@
+@use "@airframe/standard/src/scss/foundations/breakpoints";
+@import "@airframe/standard/src/scss/foundations/colors";
+
+.portfolios-footer {
+    bottom: 0;
+    width: 100%;
+
+    &__link-container {
+        height: 234px;
+
+        @media (min-width: breakpoints.$airframe-breakpoint-sm) {
+            height: 86px;
+        }
+        @media (min-width: breakpoints.$airframe-breakpoint-md) {
+            height: 49px;
+        }
+
+        background-color: $airframe-color-neutral-grey-70;
+        text-align: center;
+
+        a {
+            font-weight: 400;
+        }
+
+        .col {
+            @media (max-width: breakpoints.$airframe-breakpoint-sm - 1) {
+                flex-basis: 320px;
+                padding-bottom: 0;
+            }
+            @media (max-width: breakpoints.$airframe-breakpoint-md - 1) {
+                padding: 16px 0 0 0;
+            }
+        }
+
+        .col-sm {
+            @media (max-width: breakpoints.$airframe-breakpoint-md - 1) {
+                flex-basis: 1020px;
+                padding: 16px 0 0 0;
+            }
+        }
+    }
+
+    &__copyright {
+        height: 41px;
+        background-color: $airframe-color-neutral-grey-80;
+        color: $airframe-color-neutral-white;
+        padding: 8px;
+        vertical-align: middle;
+
+        @media (min-width: breakpoints.$airframe-breakpoint-sm) {
+            padding: 12px;
+            display: flex;
+        }
+    }
+
+    &__right {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-right: 4px;
+        padding: 0;
+    }
+}
+
+.ot-sdk-show-settings {
+    color: $airframe-color-neutral-white !important;
+    border: none !important;
+    font-size: 12px !important;
+    padding: 0 !important;
+
+    &:hover {
+        background-color: $airframe-color-neutral-grey-70 !important;
+    }
+}

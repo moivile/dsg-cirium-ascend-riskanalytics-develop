@@ -1,0 +1,16 @@
+@use '@airframe/standard/src/scss/foundations/font-family';
+@use '@airframe/standard/src/scss/foundations/colors';
+
+p-table th {
+  background: none;
+  color: colors.$airframe-color-neutral-grey-70;
+  font-family: 'Varela Round', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+p-table td {
+  font-family: 'Varela Round', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}

@@ -1,0 +1,111 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+@use '@airframe/standard/src/scss/foundations/breakpoints';
+@use '@airframe/standard/src/scss/foundations/font-family';
+@use '../../../../styles/p-table';
+
+.search-bar {
+  margin-bottom: 24px;
+  input {
+    width: 610px;
+  }
+}
+
+.search-button::before {
+  color: colors.$airframe-color-primary-normal;
+}
+
+div.filters-dropdowns {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  p-multiselect {
+    margin-bottom: 24px;
+    margin-right: 17px;
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}
+.search-results-header-row {
+  display: flex;
+}
+.search-results-header {
+  display: flex;
+  margin-right: auto;
+  padding-top: 0;
+  padding-bottom: 24px;
+  color: colors.$airframe-color-neutral-black;
+  em {
+    color: colors.$airframe-color-neutral-grey-50;
+    padding: 0 8px 8px 8px;
+    font-size: 14px;
+  }
+}
+
+.aircraft-selected {
+  display: flex;
+  margin-bottom: auto;
+  min-width: 225px;
+  padding: 8px;
+  border-radius: 20px;
+  background-color: colors.$airframe-color-primary-extra-extra-light;
+  color: colors.$airframe-color-neutral-black;
+  font-size: 14px;
+  .aircraft-selected-text {
+    margin-right: auto;
+  }
+  .aircraft-selected-number {
+    display: block;
+    margin-left: 8px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 20px;
+
+    background-color: #ffffff;
+    font-weight: 600;
+  }
+}
+
+::ng-deep .aircraft-search-popup.p-dialog {
+  div.p-dialog-header {
+    justify-content: start;
+    padding-top: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 25px;
+
+    .p-dialog-title {
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 32px;
+    }
+  }
+
+  .p-dialog-content {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 32px;
+    padding-top: 5px;
+  }
+
+  .p-dialog-footer {
+    padding: 0;
+    padding-top: 32px;
+  }
+}
+
+:host ::ng-deep .filters-dropdowns {
+  .p-multiselect,
+  .p-multiselect-panel {
+    width: 190px;
+  }
+}
+
+:host ::ng-deep p-checkbox.select-all-checkbox .p-checkbox-box.p-focus {
+  box-shadow: none;
+}
+
+:host ::ng-deep .p-multiselect .p-multiselect-close {
+  display: none;
+}

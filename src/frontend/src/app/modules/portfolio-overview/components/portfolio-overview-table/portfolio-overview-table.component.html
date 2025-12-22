@@ -1,0 +1,93 @@
+<div #fleetTableContainer>
+
+  <div *ngIf="!this.isModal" class="row reverse table__icon-container">
+      <button class="product-tour-expand airframe__icon-button table__icon" (click)="showModal()" pTooltip="Full screen" tooltipPosition="left" tooltipStyleClass="airframe-tooltip"><em class="fa fa-expand"></em></button>
+      <button class="product-tour-download airframe__icon-button table__icon" (click)="exportExcel()" pTooltip="Download to Excel" tooltipPosition="left" tooltipStyleClass="airframe-tooltip"><em class="fa fa-download"></em></button>
+  </div>
+
+  <p-table
+      [columns]="tableData.scrollableColumns || []"
+      [frozenColumns]="tableData.frozenColumns || []"
+      [value]="tableData.tableRows || []"
+      sortMode="single"
+      [sortField]=this.sortBy.name
+      [sortOrder]="this.sortBy.sortDescending ? -1 : 1"
+      [reorderableColumns]=true
+      [resizableColumns]=true
+      [scrollable]=this.scrollable
+      [scrollHeight]=scrollHeight
+      scrollDirection="both"
+      responsiveLayout="scroll"
+      [defaultSortOrder]="-1"
+      (onSort)="onSort($event.field, $event.order === -1)"
+      (sortFunction)="customSort($event, this.sortBy.name)"
+      [customSort]="true"
+      class="airframe-table">
+
+      <ng-template pTemplate="header" let-columns>
+          <tr>
+              <!-- GroupBy header -->
+              <th scope="col" *ngIf="tableData?.frozenColumns?.[0] as sortableColumn" [pSortableColumn]="sortableColumn" (click)="showSortIcon(sortableColumn)" (mouseenter)="hoverSortIcon(sortableColumn, true)" (mouseleave)="hoverSortIcon(sortableColumn, false)" class="table__cell-width-min-200">
+
+                  <div class="column-header">
+                      <span class="left-text header-overflow table__group-header">{{groupColumnHeader}}</span>
+                      <p-sortIcon class="sort-icon" [field]="'{{(tableData!.frozenColumns as string[])[0]}}'"></p-sortIcon>
+
+                  </div>
+              </th>
+              <!-- Other headers -->
+              <ng-container *ngFor="let column of columns; let columnIndex=index">
+                  <th scope="col" *ngIf="(!(columnIndex | isLastColumn: columns.length) || tableData?.totals?.length === 0)"  [pSortableColumn]="column" pReorderableColumn (click)="showSortIcon(column)" (mouseenter)="hoverSortIcon(column, true)" (mouseleave)="hoverSortIcon(column, false)" [ngClass]="this.scrollable ? 'table__cell-width-min-100 right-text' : 'table__cell-width-min-100'">
+                      <div [ngClass]="this.scrollable ? 'column-header' : 'column-header right-text'">
+                          <span class="header-overflow">{{column}}</span>
+                          <p-sortIcon class="sort-icon" field={{column}}></p-sortIcon>
+                      </div>
+                  </th>
+                  <!-- Totals header -->
+                  <th scope="col" *ngIf="(columnIndex | isLastColumn: columns.length) && tableData?.totals?.length !== 0"  [pSortableColumn]="column" pReorderableColumn [pReorderableColumnDisabled]="true" (click)="showSortIcon(column)" (mouseenter)="hoverSortIcon(column, true)" (mouseleave)="hoverSortIcon(column, false)" [ngClass]="this.scrollable ? 'table__cell-width-min-100 right-text' : 'table__cell-width-min-100'">
+                      <div [ngClass]="this.scrollable ? 'column-header' : 'column-header right-text'">
+                          <span class="header-overflow">TOTALS</span>
+                          <p-sortIcon class="sort-icon" field={{column}}></p-sortIcon>
+                      </div>
+                  </th>
+              </ng-container>
+          </tr>
+          <!-- Totals row -->
+          <tr *ngIf="tableData?.totals?.length !== 0" class="table__totals-row">
+              <th scope="col" class="left-text table__cell-width-min-200">TOTALS</th>
+              <th scope="col" *ngFor="let column of columns" [ngClass]="isModal ? '' : 'table__total-border'" class="table__cell-width-min-100 right-text">
+                {{tableData.totals[0][column] | number}}
+              </th>
+          </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-row let-columns="columns">
+          <tr class="group-row">
+              <td class="column-overflow table__cell-width-min-200">
+                  <div class="left-text">{{row[tableData.frozenColumns?.[0] ?? '']}}</div>
+              </td>
+              <ng-container *ngFor="let column of columns; let columnIndex=index">
+                  <td *ngIf="!(columnIndex | isLastColumn: columns.length) || tableData?.totals?.length === 0" class="table__cell-width-min-10 right-text">
+                      <div>
+                          <ng-container *ngIf="tableData?.totals?.length === 0">
+                              {{row[column] | number: '1.1'}}
+                          </ng-container>
+                          <ng-container *ngIf="tableData?.totals?.length !== 0">
+                              {{row[column] | number}}
+                          </ng-container>
+                      </div>
+                  </td>
+                  <td *ngIf="(columnIndex | isLastColumn: columns.length) && tableData?.totals?.length !== 0" class="table__totals" class="table__cell-width-min-100 right-text">
+                      <div>
+                          {{row[column] | number}}
+                      </div>
+                  </td>
+              </ng-container>
+          </tr>
+      </ng-template>
+  </p-table>
+</div>
+
+<p-dialog *ngIf="displayModal" class="airframe-modal" styleClass="dialog-fullscreen" [ngClass]="displayModal ? 'p-dialog-mask open-modal' : ''" [header]="modalTitle" [(visible)]="displayModal">
+  <ra-portfolio-overview-table [countBy]=this.countBy [pivot]=this.pivot [isModal]=true [pivotColumnHeader]=this.pivotColumnHeader [reorderedScrollableColumns]=this.reorderedScrollableColumns></ra-portfolio-overview-table>
+</p-dialog>
