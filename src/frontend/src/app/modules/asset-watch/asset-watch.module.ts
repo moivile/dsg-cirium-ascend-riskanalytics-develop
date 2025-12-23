@@ -26,7 +26,7 @@ import { BaseUpsellPageComponent } from '../shared/components/base-upsell-page/b
 import { MenuModule } from 'primeng/menu';
 import { AssetWatchSavedSearchDetailsComponent } from './components/asset-watch-saved-search-details/asset-watch-saved-search-details.component';
 import { InputTextModule } from 'primeng/inputtext';
-import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TextareaModule } from 'primeng/textarea';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { SavedSearchesService } from './services/saved-searches.service';
 import { AssetWatchSaveSearchManagementComponent } from './components/asset-watch-save-search-management/asset-watch-save-search-management.component';
@@ -64,7 +64,7 @@ import { AssetWatchSavedSearchFiltersViewComponent } from './components/asset-wa
     BaseUpsellPageComponent,
     MenuModule,
     InputTextModule,
-    InputTextareaModule,
+    TextareaModule,
     InputSwitchModule
   ],
   providers: [AssetWatchService, AssetWatchSummaryService, SavedSearchesService],
