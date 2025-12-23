@@ -21,8 +21,9 @@ describe('HoursAndCyclesTabComponent', () => {
   });
 });
 @Component({
-  selector: 'ra-compare',
-  template: ''
+    selector: 'ra-compare',
+    template: '',
+    standalone: false
 })
 class MockCompareComponent {
   @Input() isEmissions!:boolean;

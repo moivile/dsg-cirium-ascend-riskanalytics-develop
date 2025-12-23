@@ -5,9 +5,10 @@ import { functionalHelpers } from '../../helpers/functional-helpers';
 import { PortfolioOverviewStore } from '../../services/portfolio-overview.store';
 
 @Component({
-  selector: 'ra-portfolio-overview-accordion[accordionContentId][defaultHeight]',
-  templateUrl: './portfolio-overview-accordion.component.html',
-  styleUrls: ['./portfolio-overview-accordion.component.scss']
+    selector: 'ra-portfolio-overview-accordion[accordionContentId][defaultHeight]',
+    templateUrl: './portfolio-overview-accordion.component.html',
+    styleUrls: ['./portfolio-overview-accordion.component.scss'],
+    standalone: false
 })
 export class PortfolioOverviewAccordionComponent implements OnInit, OnDestroy {
 

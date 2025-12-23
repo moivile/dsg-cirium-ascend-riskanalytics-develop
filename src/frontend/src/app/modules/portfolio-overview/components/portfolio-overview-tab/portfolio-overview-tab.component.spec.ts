@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { PortfolioOverviewStackedBarChartComponent } from '../portfolio-overview-stacked-bar-chart/portfolio-overview-stacked-bar-chart.component';
 import { PortfolioOverviewTableComponent } from '../portfolio-overview-table/portfolio-overview-table.component';
 import { IsLastColumnPipe } from '../portfolio-overview-table/table-is-last-column.pipe';
-import { NgChartsModule } from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts';
 import { PortfolioAircraftService } from '../../../shared/services/portfolio-aircraft.service';
 import { BackLinkComponent } from '../../../shared/components/back-link/back-link.component';
 import { TableModule } from 'primeng/table';
@@ -36,7 +36,7 @@ describe('PortfolioOverviewTabComponent', () => {
     const portfoliosServiceSpy = jasmine.createSpyObj('PortfoliosService', ['getPortfolio']);
     const portfoliosAircraftServiceSpy = jasmine.createSpyObj('PortfolioAircraftService', ['getPortfolioAircraft']);
     await TestBed.configureTestingModule({
-      imports: [DropdownModule, FormsModule, NgChartsModule, RouterLink, TableModule, DialogModule, TooltipModule],
+      imports: [DropdownModule, FormsModule, BaseChartDirective, RouterLink, TableModule, DialogModule, TooltipModule],
       declarations: [
         PortfolioOverviewTabComponent,
         PortfolioOverviewSummaryCountsComponent,

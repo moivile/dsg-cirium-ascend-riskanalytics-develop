@@ -3,9 +3,9 @@ import { ComponentFixture, TestBed, fakeAsync, flush } from '@angular/core/testi
 import { AssetWatchStackedBarChartComponent } from './asset-watch-stacked-bar-chart.component';
 import { BehaviorSubject } from 'rxjs';
 import { ChartInputData } from '../../models/chart-input-data';
-import { NgChartsModule } from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts';
 import { ElementRef } from '@angular/core';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { DateConstants } from '../../../shared/models/date-constants';
 
 describe('AssetWatchStackedBarChartComponent', () => {
@@ -15,7 +15,7 @@ describe('AssetWatchStackedBarChartComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AssetWatchStackedBarChartComponent],
-      imports: [NgChartsModule]
+      imports: [BaseChartDirective]
     });
     fixture = TestBed.createComponent(AssetWatchStackedBarChartComponent);
     component = fixture.componentInstance;

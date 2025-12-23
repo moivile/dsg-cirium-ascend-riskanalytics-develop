@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef, OnInit, AfterViewChecked, Input } from '@angular/core';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { MetricOptions } from '../../models/metric-options';
 import { Router } from '@angular/router';
 import { Metric } from '../../models/metric';
@@ -7,9 +7,10 @@ import { PortfolioDetailOptions } from '../../models/portfolio-detail-options';
 import { ComparePortfolioExcelExportService } from '../../services/excel/compare-portfolio-excel-export.service';
 
 @Component({
-  selector: 'ra-compare',
-  templateUrl: './compare-portfolio-tab.component.html',
-  styleUrls: ['./compare-portfolio-tab.component.scss']
+    selector: 'ra-compare',
+    templateUrl: './compare-portfolio-tab.component.html',
+    styleUrls: ['./compare-portfolio-tab.component.scss'],
+    standalone: false
 })
 export class ComparePortfolioTabComponent implements OnInit, AfterViewChecked {
   constructor(

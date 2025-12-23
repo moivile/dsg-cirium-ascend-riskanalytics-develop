@@ -27,9 +27,10 @@ import { BackLinkComponent } from '../../../shared/components/back-link/back-lin
 import { AppStore } from 'src/app/app-store';
 
 @Component({
-  templateUrl: './create-edit-portfolio-tab.component.html',
-  styleUrls: ['./create-edit-portfolio-tab.component.scss'],
-  providers: [CreateEditPortfolioStore, DialogService]
+    templateUrl: './create-edit-portfolio-tab.component.html',
+    styleUrls: ['./create-edit-portfolio-tab.component.scss'],
+    providers: [CreateEditPortfolioStore, DialogService],
+    standalone: false
 })
 export class CreateEditPortfolioTabComponent implements OnInit, OnDestroy, AfterViewChecked {
   filteredAircraftList$!: Observable<Aircraft[]>;

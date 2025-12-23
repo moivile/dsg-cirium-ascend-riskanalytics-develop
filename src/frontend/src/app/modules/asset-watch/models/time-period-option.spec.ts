@@ -1,5 +1,5 @@
 import { TimePeriodOption, getFilterPanelFormStartDate, getFilterPanelFormEndDate } from './time-period-option';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 
 describe('TimePeriodOption', () => {
   it('should return correct start date for Yesterday', () => {

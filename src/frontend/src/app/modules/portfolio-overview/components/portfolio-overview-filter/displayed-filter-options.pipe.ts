@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { FilterOption, PortfolioOverviewFilterService } from './portfolio-overview-filter.service';
 
 @Pipe({
-  name: 'displayedFilterOptions'
+    name: 'displayedFilterOptions',
+    standalone: false
 })
 export class DisplayedFilterOptionsPipe implements PipeTransform {
 

@@ -11,10 +11,11 @@ import { ExcelSheetData } from '../../../shared/models/excel-sheet-data';
 import { DetailsTableHeader } from '../../../shared/models/details-table-header';
 
 @Component({
-  selector: 'ra-portfolio-overview-details-table',
-  templateUrl: './portfolio-overview-details-table.component.html',
-  styleUrls: ['./portfolio-overview-details-table.component.scss'],
-  providers: [PortfolioOverviewDetailsTableService, PrimeNGTableService, ExportExcelService]
+    selector: 'ra-portfolio-overview-details-table',
+    templateUrl: './portfolio-overview-details-table.component.html',
+    styleUrls: ['./portfolio-overview-details-table.component.scss'],
+    providers: [PortfolioOverviewDetailsTableService, PrimeNGTableService, ExportExcelService],
+    standalone: false
 })
 export class PortfolioOverviewDetailsTableComponent implements OnInit, OnDestroy {
   @Input() isModal = false;

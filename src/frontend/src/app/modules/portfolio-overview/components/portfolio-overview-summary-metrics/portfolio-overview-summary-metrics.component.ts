@@ -7,10 +7,11 @@ import { PortfolioOverviewSummaryMetricsService } from './portfolio-overview-sum
 import { PortfolioOverviewSummaryMetricsAgeService } from './portfolio-overview-summary-metrics-age.service';
 
 @Component({
-  selector: 'ra-portfolio-overview-summary-metrics[countBy][summaryTitle]',
-  templateUrl: './portfolio-overview-summary-metrics.component.html',
-  styleUrls: ['./portfolio-overview-summary-metrics.component.scss'],
-  providers: [PortfolioOverviewSummaryMetricsService, PortfolioOverviewSummaryMetricsAgeService]
+    selector: 'ra-portfolio-overview-summary-metrics[countBy][summaryTitle]',
+    templateUrl: './portfolio-overview-summary-metrics.component.html',
+    styleUrls: ['./portfolio-overview-summary-metrics.component.scss'],
+    providers: [PortfolioOverviewSummaryMetricsService, PortfolioOverviewSummaryMetricsAgeService],
+    standalone: false
 })
 export class PortoflioOverviewSummaryMetricsComponent implements OnInit, OnDestroy {
   @Input() countBy!: string;

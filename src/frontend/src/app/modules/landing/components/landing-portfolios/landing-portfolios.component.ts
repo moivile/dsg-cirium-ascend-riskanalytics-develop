@@ -4,14 +4,15 @@ import { combineLatest, map, Observable, startWith, Subscription, tap } from 'rx
 import { FormControl } from '@angular/forms';
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
 import { ConfirmationDialogOptions } from '../../../shared/models/confirmation-dialog-options';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { Router } from '@angular/router';
 import { AppStore } from 'src/app/app-store';
 
 @Component({
-  selector: 'ra-landing-portfolios',
-  templateUrl: './landing-portfolios.component.html',
-  styleUrls: ['./landing-portfolios.component.scss']
+    selector: 'ra-landing-portfolios',
+    templateUrl: './landing-portfolios.component.html',
+    styleUrls: ['./landing-portfolios.component.scss'],
+    standalone: false
 })
 export class LandingPortfoliosComponent implements OnInit, OnDestroy {
   filteredPortfolios$!: Observable<Portfolio[]>;

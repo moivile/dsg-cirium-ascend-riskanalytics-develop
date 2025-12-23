@@ -3,7 +3,8 @@ import { AuthService } from '@auth0/auth0-angular';
 import { Router } from '@angular/router';
 
 @Component({
-  template: ''
+    template: '',
+    standalone: false
 })
 export class LogoutComponent implements OnInit {
   constructor(private readonly authService: AuthService, private readonly router: Router) {

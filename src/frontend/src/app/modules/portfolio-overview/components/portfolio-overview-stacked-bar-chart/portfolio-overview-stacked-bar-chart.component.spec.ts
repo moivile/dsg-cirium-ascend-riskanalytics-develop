@@ -1,6 +1,6 @@
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NgChartsModule } from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts';
 import { PortfolioOverviewStore } from '../../services/portfolio-overview.store';
 import { PortfolioOverviewStackedBarChartComponent } from './portfolio-overview-stacked-bar-chart.component';
 import { PortfolioAircraftService } from '../../../shared/services/portfolio-aircraft.service';
@@ -13,10 +13,10 @@ describe('PortfolioOverviewStackedBarChartComponent', () => {
     const portfoliosServiceSpy = jasmine.createSpyObj('PortfolioAircraftService', ['getPortfolioAircraft']);
 
     await TestBed.configureTestingModule({
-    declarations: [PortfolioOverviewStackedBarChartComponent],
-    imports: [NgChartsModule],
-    providers: [PortfolioOverviewStore, { provide: PortfolioAircraftService, useValue: portfoliosServiceSpy }, provideHttpClient(withInterceptorsFromDi())]
-}).compileComponents();
+      declarations: [PortfolioOverviewStackedBarChartComponent],
+      imports: [BaseChartDirective],
+      providers: [PortfolioOverviewStore, { provide: PortfolioAircraftService, useValue: portfoliosServiceSpy }, provideHttpClient(withInterceptorsFromDi())]
+    }).compileComponents();
     fixture = TestBed.createComponent(PortfolioOverviewStackedBarChartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

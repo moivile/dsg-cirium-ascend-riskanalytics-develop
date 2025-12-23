@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'ra-back-link[backLink]',
-  templateUrl: './back-link.component.html',
-  styleUrls: ['./back-link.component.scss']
+    selector: 'ra-back-link[backLink]',
+    templateUrl: './back-link.component.html',
+    styleUrls: ['./back-link.component.scss'],
+    standalone: false
 })
 export class BackLinkComponent {
   @Input() backLink!: string;

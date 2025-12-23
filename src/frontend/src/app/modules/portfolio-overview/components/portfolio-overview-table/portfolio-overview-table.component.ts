@@ -15,10 +15,11 @@ import { ExportExcelService } from '../../../shared/services/export-excel-servic
 import { OperatorToggleValue } from '../../models/operator-toggle-value';
 
 @Component({
-  selector: 'ra-portfolio-overview-table[countBy]',
-  templateUrl: './portfolio-overview-table.component.html',
-  styleUrls: ['./portfolio-overview-table.component.scss'],
-  providers: [PortfolioOverviewTableService, PrimeNGTableService, PortfolioOverviewAgeTableService, ExportExcelService]
+    selector: 'ra-portfolio-overview-table[countBy]',
+    templateUrl: './portfolio-overview-table.component.html',
+    styleUrls: ['./portfolio-overview-table.component.scss'],
+    providers: [PortfolioOverviewTableService, PrimeNGTableService, PortfolioOverviewAgeTableService, ExportExcelService],
+    standalone: false
 })
 export class PortfolioOverviewTableComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() countBy!: string;

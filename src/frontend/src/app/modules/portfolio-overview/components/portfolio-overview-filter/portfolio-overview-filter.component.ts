@@ -6,13 +6,14 @@ import { PortfolioOverviewStore } from '../../services/portfolio-overview.store'
 import { PortfolioOverviewFilterExcelService } from './portfolio-overview-filter-excel-service';
 
 @Component({
-  selector: 'ra-portfolio-overview-filter',
-  templateUrl: './portfolio-overview-filter.component.html',
-  styleUrls: ['./portfolio-overview-filter.component.scss'],
-  providers: [
-    PortfolioOverviewFilterService,
-    PortfolioOverviewFilterExcelService
-  ]
+    selector: 'ra-portfolio-overview-filter',
+    templateUrl: './portfolio-overview-filter.component.html',
+    styleUrls: ['./portfolio-overview-filter.component.scss'],
+    providers: [
+        PortfolioOverviewFilterService,
+        PortfolioOverviewFilterExcelService
+    ],
+    standalone: false
 })
 export class PortfolioOverviewFilterComponent implements OnInit, OnDestroy, AfterViewInit {
 

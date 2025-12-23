@@ -26,10 +26,11 @@ import { SortEvent } from 'primeng/api';
 type AssetWatchGridModelValue = string | number | boolean | Date | null | undefined;
 
 @Component({
-  selector: 'ra-asset-watch-details-table',
-  templateUrl: './asset-watch-details-table.component.html',
-  styleUrls: ['./asset-watch-details-table.component.scss'],
-  providers: [AssetWatchDetailsTableService, PrimeNGTableService, ExportExcelService, DialogService]
+    selector: 'ra-asset-watch-details-table',
+    templateUrl: './asset-watch-details-table.component.html',
+    styleUrls: ['./asset-watch-details-table.component.scss'],
+    providers: [AssetWatchDetailsTableService, PrimeNGTableService, ExportExcelService, DialogService],
+    standalone: false
 })
 export class AssetWatchDetailsTableComponent implements OnInit {
   @Input() isModal = false;

@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MonthlyUtilizationChartComponent } from './monthly-utilization-chart.component';
-import { NgChartsModule } from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts';
 import { MonthlyUtilization } from '../../models/monthly-utilization';
 import { AppConfigService } from '../../../../app-config.service';
 import { Component, ElementRef, Input } from '@angular/core';
-import { Message } from 'primeng/api';
-import * as dayjs from 'dayjs';
+import { ToastMessageOptions } from 'primeng/api';
+import dayjs from 'dayjs';
 import { DateConstants } from '../../../shared/models/date-constants';
 import { TooltipModule } from 'primeng/tooltip';
 import { MonthlyUtilizationChartObject } from '../../models/monthly-utilization-chart-object';
@@ -19,7 +19,7 @@ describe('MonthlyUtilizationChartComponent', () => {
     appConfigServiceSpy = jasmine.createSpyObj('AppConfigService', ['configuration']);
 
     await TestBed.configureTestingModule({
-      imports: [NgChartsModule, TooltipModule],
+      imports: [BaseChartDirective, TooltipModule],
       declarations: [MonthlyUtilizationChartComponent, MockNoticeComponent],
       providers: [{ provide: AppConfigService, useValue: appConfigServiceSpy }]
     }).compileComponents();
@@ -213,7 +213,7 @@ describe('MonthlyUtilizationChartComponent', () => {
       component.upsellOverlayPlugin = {
         id: '',
         // eslint-disable-next-line @typescript-eslint/no-empty-function
-        beforeDraw: () => {}
+        beforeDraw: () => { }
       };
       component.upsell = true;
 
@@ -232,7 +232,7 @@ describe('MonthlyUtilizationChartComponent', () => {
       component.upsellOverlayPlugin = {
         id: '',
         // eslint-disable-next-line @typescript-eslint/no-empty-function
-        beforeDraw: () => {}
+        beforeDraw: () => { }
       };
       component.upsell = false;
 
@@ -852,9 +852,10 @@ describe('MonthlyUtilizationChartComponent', () => {
 });
 @Component({
   selector: 'ra-notice',
-  template: ''
+  template: '',
+  standalone: false
 })
 class MockNoticeComponent {
   @Input()
-  message!: Message;
+  message!: ToastMessageOptions;
 }

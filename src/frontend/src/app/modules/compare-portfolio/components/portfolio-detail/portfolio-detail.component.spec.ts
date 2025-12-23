@@ -323,8 +323,9 @@ describe('PortfolioDetailComponent', () => {
 });
 
 @Component({
-  selector: 'ra-portfolio-detail-options',
-  template: ''
+    selector: 'ra-portfolio-detail-options',
+    template: '',
+    standalone: false
 })
 class MockPortfolioDetailOptionsComponent {
   @Input() isComparisonPortfolio!: boolean;
@@ -333,8 +334,9 @@ class MockPortfolioDetailOptionsComponent {
 }
 
 @Component({
-  selector: 'ra-monthly-utilization-chart',
-  template: ''
+    selector: 'ra-monthly-utilization-chart',
+    template: '',
+    standalone: false
 })
 class MockMonthlyUtilizationChartComponent {
   @Input() metric!: string;

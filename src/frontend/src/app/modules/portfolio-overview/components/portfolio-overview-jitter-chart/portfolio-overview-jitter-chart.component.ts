@@ -7,10 +7,11 @@ import { Average, PortfolioOverviewJitterChartService } from './portfolio-overvi
 import { PortfolioOverviewStore } from '../../services/portfolio-overview.store';
 
 @Component({
-  selector: 'ra-portfolio-overview-jitter-chart',
-  templateUrl: './portfolio-overview-jitter-chart.component.html',
-  styleUrls: ['./portfolio-overview-jitter-chart.component.scss'],
-  providers: [PortfolioOverviewJitterChartService]
+    selector: 'ra-portfolio-overview-jitter-chart',
+    templateUrl: './portfolio-overview-jitter-chart.component.html',
+    styleUrls: ['./portfolio-overview-jitter-chart.component.scss'],
+    providers: [PortfolioOverviewJitterChartService],
+    standalone: false
 })
 export class PortfolioOverviewJitterChartComponent implements OnInit, OnDestroy {
   @Input() jitterBy!: string;

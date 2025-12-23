@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoticeComponent } from './notice.component';
-import { Message } from 'primeng/api';
+import { ToastMessageOptions } from 'primeng/api';
 
 describe('NoticeComponent', () => {
   let component: NoticeComponent;
@@ -21,7 +21,7 @@ describe('NoticeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  const testMessage: Message = {
+  const testMessage: ToastMessageOptions = {
     severity: 'success',
     summary: 'Summary',
     detail: 'Detail'

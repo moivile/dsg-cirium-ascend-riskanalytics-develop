@@ -5,9 +5,10 @@ import { Aircraft } from '../../../shared/models/aircraft';
 import { functionalHelpers } from '../../helpers/functional-helpers';
 
 @Component({
-  selector: 'ra-portfolio-overview-summary-counts',
-  templateUrl: './portfolio-overview-summary-counts.component.html',
-  styleUrls: ['./portfolio-overview-summary-counts.component.scss']
+    selector: 'ra-portfolio-overview-summary-counts',
+    templateUrl: './portfolio-overview-summary-counts.component.html',
+    styleUrls: ['./portfolio-overview-summary-counts.component.scss'],
+    standalone: false
 })
 export class PortfolioOverviewSummaryCountsComponent implements OnInit, OnDestroy {
 

@@ -4,8 +4,9 @@ import { ProfileService } from '../../../shared/services/profile.service';
 import { AppStore } from 'src/app/app-store';
 
 @Component({
-  templateUrl: './landing-tab.component.html',
-  styleUrls: ['./landing-tab.component.scss']
+    templateUrl: './landing-tab.component.html',
+    styleUrls: ['./landing-tab.component.scss'],
+    standalone: false
 })
 export class LandingTabComponent implements OnInit {
   userFirstName$!: Observable<string>;

@@ -2,7 +2,7 @@
 import { MonthlyUtilization } from '../../models/monthly-utilization';
 import { ExcelSheetData } from '../../../shared/models/excel-sheet-data';
 import { DateConstants } from '../../../shared/models/date-constants';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { MSNUtilizationPerAircraft } from '../../models/monthly-utilization-per-aircraft';
 
 export abstract class ComparePortfolioExcelSheetBaseService {

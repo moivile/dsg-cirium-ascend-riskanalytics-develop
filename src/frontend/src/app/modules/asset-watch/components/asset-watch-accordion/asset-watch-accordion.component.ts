@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject, tap } from 'rxjs';
 
 @Component({
-  selector: 'ra-asset-watch-accordion[accordionContentId][defaultHeight]',
-  templateUrl: './asset-watch-accordion.component.html',
-  styleUrls: ['./asset-watch-accordion.component.scss']
+    selector: 'ra-asset-watch-accordion[accordionContentId][defaultHeight]',
+    templateUrl: './asset-watch-accordion.component.html',
+    styleUrls: ['./asset-watch-accordion.component.scss'],
+    standalone: false
 })
 export class AssetWatchAccordionComponent implements OnInit {
   @Input() accordionContentId!: string;

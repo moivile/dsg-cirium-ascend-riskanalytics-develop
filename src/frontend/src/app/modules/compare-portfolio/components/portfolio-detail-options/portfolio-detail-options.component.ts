@@ -37,9 +37,10 @@ export interface LessorOption {
 }
 
 @Component({
-  selector: 'ra-portfolio-detail-options[isComparisonPortfolio]',
-  templateUrl: './portfolio-detail-options.component.html',
-  styleUrls: ['./portfolio-detail-options.component.scss']
+    selector: 'ra-portfolio-detail-options[isComparisonPortfolio]',
+    templateUrl: './portfolio-detail-options.component.html',
+    styleUrls: ['./portfolio-detail-options.component.scss'],
+    standalone: false
 })
 export class PortfolioDetailOptionsComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() isComparisonPortfolio!: boolean;

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AppConfigService } from '../../../../app-config.service';
 
 @Component({
-  selector: 'ra-error-not-found',
-  templateUrl: './error-not-found.component.html',
-  styleUrls: ['./error-not-found.component.scss']
+    selector: 'ra-error-not-found',
+    templateUrl: './error-not-found.component.html',
+    styleUrls: ['./error-not-found.component.scss'],
+    standalone: false
 })
 export class ErrorNotFoundComponent implements OnInit {
 

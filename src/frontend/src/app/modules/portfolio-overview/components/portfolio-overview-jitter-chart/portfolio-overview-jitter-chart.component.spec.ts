@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 
 import { PortfolioOverviewJitterChartComponent } from './portfolio-overview-jitter-chart.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { NgChartsModule } from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts';
 import { PortfolioAircraftService } from '../../../shared/services/portfolio-aircraft.service';
 import { PortfolioOverviewStore } from '../../services/portfolio-overview.store';
 import { DialogModule } from 'primeng/dialog';
@@ -16,14 +16,14 @@ describe('PortfolioOverviewJitterChartComponent', () => {
     const portfoliosServiceSpy = jasmine.createSpyObj('PortfolioAircraftService', ['getPortfolioAircraft']);
 
     await TestBed.configureTestingModule({
-    declarations: [PortfolioOverviewJitterChartComponent],
-    imports: [NgChartsModule, DialogModule],
-    providers: [
+      declarations: [PortfolioOverviewJitterChartComponent],
+      imports: [BaseChartDirective, DialogModule],
+      providers: [
         PortfolioOverviewStore,
         { provide: PortfolioAircraftService, useValue: portfoliosServiceSpy },
         provideHttpClient(withInterceptorsFromDi())
-    ]
-})
+      ]
+    })
       .compileComponents();
 
     fixture = TestBed.createComponent(PortfolioOverviewJitterChartComponent);

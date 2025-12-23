@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { Aircraft } from '../../../shared/models/aircraft';
 import { DetailsTableHeader } from '../../../shared/models/details-table-header';
 

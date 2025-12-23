@@ -3,9 +3,10 @@ import { PortfolioOverviewStore } from '../../services/portfolio-overview.store'
 import { Group } from './group';
 
 @Component({
-  selector: 'ra-portfolio-overview-grouping',
-  templateUrl: './portfolio-overview-grouping.component.html',
-  styleUrls: ['./portfolio-overview-grouping.component.scss']
+    selector: 'ra-portfolio-overview-grouping',
+    templateUrl: './portfolio-overview-grouping.component.html',
+    styleUrls: ['./portfolio-overview-grouping.component.scss'],
+    standalone: false
 })
 export class PortfolioOverviewGroupingComponent implements OnInit {
 

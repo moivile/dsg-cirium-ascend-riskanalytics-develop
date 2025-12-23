@@ -12,10 +12,11 @@ export interface SortBy {
 }
 
 @Component({
-  selector: 'ra-compare-portfolio-table',
-  templateUrl: './compare-portfolio-table.component.html',
-  styleUrls: ['./compare-portfolio-table.component.scss'],
-  providers: [PrimeNGTableService]
+    selector: 'ra-compare-portfolio-table',
+    templateUrl: './compare-portfolio-table.component.html',
+    styleUrls: ['./compare-portfolio-table.component.scss'],
+    providers: [PrimeNGTableService],
+    standalone: false
 })
 export class ComparePortfolioTableComponent implements OnInit, OnChanges {
   @Input() isModal = false;

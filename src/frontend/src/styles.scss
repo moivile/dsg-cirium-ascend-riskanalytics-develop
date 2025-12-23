@@ -1,6 +1,6 @@
-@import '~primeng/resources/themes/saga-blue/theme.css';
-@import '~primeng/resources/primeng.min.css';
-@import '~primeicons/primeicons.css';
+@import 'primeicons/primeicons.css';
+@import '../node_modules/@flightstats/cirium-design-tokens/dist/airframe/tokens/dark.css';
+@import '../node_modules/@flightstats/cirium-design-tokens/dist/airframe/tokens/light.css';
 
 @import '@airframe/standard/src/scss/foundations/font-family';
 @import '@airframe/standard/src/scss/foundations/colors';
@@ -53,25 +53,25 @@ body {
 }
 
 :root {
-  --airframe-color-chart-primary-1:#{$airframe-color-chart-primary-1};
-  --airframe-color-chart-primary-2:#{$airframe-color-chart-primary-2};
-  --airframe-color-chart-primary-3:#{$airframe-color-chart-primary-3};
-  --airframe-color-chart-primary-4:#{$airframe-color-chart-primary-4};
-  --airframe-color-chart-primary-5:#{$airframe-color-chart-primary-5};
-  --airframe-color-chart-primary-6:#{$airframe-color-chart-primary-6};
-  --airframe-color-chart-primary-border:#{$airframe-color-chart-primary-border};
-  --airframe-color-chart-primary-1-opacity-50:#{$airframe-color-chart-primary-1-opacity-50};
-  --airframe-color-chart-primary-2-opacity-50:#{$airframe-color-chart-primary-2-opacity-50};
-  --airframe-color-chart-primary-3-opacity-50:#{$airframe-color-chart-primary-3-opacity-50};
-  --airframe-color-chart-primary-4-opacity-50:#{$airframe-color-chart-primary-4-opacity-50};
-  --airframe-color-chart-primary-5-opacity-50:#{$airframe-color-chart-primary-5-opacity-50};
-  --airframe-color-chart-primary-6-opacity-50:#{$airframe-color-chart-primary-6-opacity-50};
+  --airframe-color-chart-primary-1: #{$airframe-color-chart-primary-1};
+  --airframe-color-chart-primary-2: #{$airframe-color-chart-primary-2};
+  --airframe-color-chart-primary-3: #{$airframe-color-chart-primary-3};
+  --airframe-color-chart-primary-4: #{$airframe-color-chart-primary-4};
+  --airframe-color-chart-primary-5: #{$airframe-color-chart-primary-5};
+  --airframe-color-chart-primary-6: #{$airframe-color-chart-primary-6};
+  --airframe-color-chart-primary-border: #{$airframe-color-chart-primary-border};
+  --airframe-color-chart-primary-1-opacity-50: #{$airframe-color-chart-primary-1-opacity-50};
+  --airframe-color-chart-primary-2-opacity-50: #{$airframe-color-chart-primary-2-opacity-50};
+  --airframe-color-chart-primary-3-opacity-50: #{$airframe-color-chart-primary-3-opacity-50};
+  --airframe-color-chart-primary-4-opacity-50: #{$airframe-color-chart-primary-4-opacity-50};
+  --airframe-color-chart-primary-5-opacity-50: #{$airframe-color-chart-primary-5-opacity-50};
+  --airframe-color-chart-primary-6-opacity-50: #{$airframe-color-chart-primary-6-opacity-50};
 
-  --airframe-color-chart-tertiary-1:#{$airframe-color-chart-tertiary-1};
-  --airframe-color-chart-tertiary-2:#{$airframe-color-chart-tertiary-2};
-  --airframe-color-chart-tertiary-3:#{$airframe-color-chart-tertiary-3};
-  --airframe-color-chart-tertiary-4:#{$airframe-color-chart-tertiary-4};
-  --airframe-color-chart-tertiary-5:#{$airframe-color-chart-tertiary-5};
+  --airframe-color-chart-tertiary-1: #{$airframe-color-chart-tertiary-1};
+  --airframe-color-chart-tertiary-2: #{$airframe-color-chart-tertiary-2};
+  --airframe-color-chart-tertiary-3: #{$airframe-color-chart-tertiary-3};
+  --airframe-color-chart-tertiary-4: #{$airframe-color-chart-tertiary-4};
+  --airframe-color-chart-tertiary-5: #{$airframe-color-chart-tertiary-5};
 }
 
 .visually-hidden {

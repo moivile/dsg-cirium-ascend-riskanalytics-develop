@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ra-fleet-trends-tab',
-  templateUrl: './fleet-trends-tab.component.html',
-  styleUrl: './fleet-trends-tab.component.scss'
+    selector: 'ra-fleet-trends-tab',
+    templateUrl: './fleet-trends-tab.component.html',
+    styleUrl: './fleet-trends-tab.component.scss',
+    standalone: false
 })
 export class FleetTrendsTabComponent {
   tabs = [

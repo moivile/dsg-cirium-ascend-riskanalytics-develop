@@ -2,7 +2,7 @@
 import * as FileSaver from 'file-saver';
 import * as xlsx from 'xlsx';
 import { ExcelSheetData } from '../models/excel-sheet-data';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { DateConstants } from '../models/date-constants';
 import { PortfolioDetailOptions } from '../../compare-portfolio/models/portfolio-detail-options';
 import { MetricOptions } from '../../compare-portfolio/models/metric-options';

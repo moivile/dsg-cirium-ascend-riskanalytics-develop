@@ -5,13 +5,14 @@ import { IdNamePairModel } from '../../../shared/models/id-name-pair-model';
 import { StringIdNamePairModel } from '../../../shared/models/string-id-name-pair-model';
 import { TimePeriodOption } from '../../models/time-period-option';
 import { FilterPanelFormOptions } from '../../models/filter-panel-form-options';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { dateFormat } from '../../models/filter-panel-form';
 
 @Component({
-  selector: 'ra-saved-search-filters-view',
-  templateUrl: './asset-watch-saved-search-filters-view.component.html',
-  styleUrl: './asset-watch-saved-search-filters-view.component.scss'
+    selector: 'ra-saved-search-filters-view',
+    templateUrl: './asset-watch-saved-search-filters-view.component.html',
+    styleUrl: './asset-watch-saved-search-filters-view.component.scss',
+    standalone: false
 })
 export class AssetWatchSavedSearchFiltersViewComponent {
   savedSearch: SavedSearchModel = this.config.data.savedSearch;

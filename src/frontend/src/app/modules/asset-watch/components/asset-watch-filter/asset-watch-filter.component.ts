@@ -26,7 +26,7 @@ import {
   getTimePeriodEnumValue
 } from '../../models/time-period-option';
 import { RouteCategoryOption } from '../../models/route-category-option';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { PeriodForm } from '../../models/period-form';
 import { AssetWatchStore } from '../../services/asset-watch-store';
 import { AppStore } from 'src/app/app-store';
@@ -42,9 +42,10 @@ import { AircraftWatchlistFilterValues } from '../../models/aircraft-watchlist-f
 import { StringIdNamePairModel } from 'src/app/modules/shared/models/string-id-name-pair-model';
 
 @Component({
-  selector: 'ra-asset-watch-filter',
-  templateUrl: './asset-watch-filter.component.html',
-  styleUrls: ['./asset-watch-filter.component.scss']
+    selector: 'ra-asset-watch-filter',
+    templateUrl: './asset-watch-filter.component.html',
+    styleUrls: ['./asset-watch-filter.component.scss'],
+    standalone: false
 })
 export class AssetWatchFilterComponent implements OnInit, OnDestroy {
   @Input()

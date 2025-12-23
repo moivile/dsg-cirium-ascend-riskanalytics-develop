@@ -12,9 +12,10 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter, map, shareReplay, startWith, Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'ra-fleet-insights',
-  templateUrl: './fleet-insights.component.html',
-  styleUrl: './fleet-insights.component.scss'
+    selector: 'ra-fleet-insights',
+    templateUrl: './fleet-insights.component.html',
+    styleUrl: './fleet-insights.component.scss',
+    standalone: false
 })
 export class FleetInsightsComponent implements OnDestroy {
   fleetDistributionPath = fleetDistributionPath;

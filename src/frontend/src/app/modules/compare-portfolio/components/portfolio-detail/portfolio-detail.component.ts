@@ -3,7 +3,7 @@ import { PortfolioDetailOptions } from '../../models/portfolio-detail-options';
 import { MetricOptions } from '../../models/metric-options';
 import { MonthlyUtilization } from '../../models/monthly-utilization';
 import { Subscription, take, tap } from 'rxjs';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { Claim } from '../../../shared/models/claim';
 import { DateConstants } from '../../../shared/models/date-constants';
 import { UtilizationService } from '../../../shared/services/utilization.service';
@@ -11,9 +11,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Metric } from '../../models/metric';
 
 @Component({
-  selector: 'ra-portfolio-detail[metricOptions][isComparisonPortfolio]',
-  templateUrl: './portfolio-detail.component.html',
-  styleUrls: ['./portfolio-detail.component.scss']
+    selector: 'ra-portfolio-detail[metricOptions][isComparisonPortfolio]',
+    templateUrl: './portfolio-detail.component.html',
+    styleUrls: ['./portfolio-detail.component.scss'],
+    standalone: false
 })
 export class PortfolioDetailComponent implements OnInit, OnChanges {
   @Input() metricOptions!: MetricOptions;

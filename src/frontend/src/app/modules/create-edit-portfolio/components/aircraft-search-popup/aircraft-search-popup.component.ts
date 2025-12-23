@@ -14,9 +14,10 @@ import { ConfirmationDialogOptions } from '../../../shared/models/confirmation-d
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
 import { IdNamePairModel } from '../../../shared/models/id-name-pair-model';
 @Component({
-  selector: 'ra-aircraft-search-popup',
-  templateUrl: './aircraft-search-popup.component.html',
-  styleUrls: ['./aircraft-search-popup.component.scss']
+    selector: 'ra-aircraft-search-popup',
+    templateUrl: './aircraft-search-popup.component.html',
+    styleUrls: ['./aircraft-search-popup.component.scss'],
+    standalone: false
 })
 export class AircraftSearchPopupComponent implements OnInit, OnDestroy, AfterViewInit {
   aircraftList: Aircraft[] = [];

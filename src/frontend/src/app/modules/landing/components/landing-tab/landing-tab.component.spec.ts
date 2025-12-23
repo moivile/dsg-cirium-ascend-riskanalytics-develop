@@ -64,7 +64,8 @@ describe('LandingTabComponent', () => {
 });
 
 @Component({
-  selector: 'ra-landing-portfolios',
-  template: ''
+    selector: 'ra-landing-portfolios',
+    template: '',
+    standalone: false
 })
 class MockLandingPortfoliosComponent {}

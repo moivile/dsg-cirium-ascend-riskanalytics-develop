@@ -1,4 +1,4 @@
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 
 /* eslint-disable @typescript-eslint/no-explicit-any*/
 export enum TimePeriodOption {

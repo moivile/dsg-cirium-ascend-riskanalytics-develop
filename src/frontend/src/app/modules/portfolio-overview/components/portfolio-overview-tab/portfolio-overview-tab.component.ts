@@ -7,10 +7,11 @@ import { OperatorToggleValue } from '../../models/operator-toggle-value';
 import { AppStore } from 'src/app/app-store';
 
 @Component({
-  selector: 'ra-portfolio-overview-tab',
-  templateUrl: './portfolio-overview-tab.component.html',
-  styleUrls: ['./portfolio-overview-tab.component.scss'],
-  providers: [PortfolioOverviewStore, ExportExcelService]
+    selector: 'ra-portfolio-overview-tab',
+    templateUrl: './portfolio-overview-tab.component.html',
+    styleUrls: ['./portfolio-overview-tab.component.scss'],
+    providers: [PortfolioOverviewStore, ExportExcelService],
+    standalone: false
 })
 export class PortfolioOverviewTabComponent implements OnInit, OnDestroy {
   filterExpanded = true;

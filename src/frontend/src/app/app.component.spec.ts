@@ -22,7 +22,8 @@ import {
 } from './route.constants';
 
 @Component({
-  template: '<div></div>'
+    template: '<div></div>',
+    standalone: false
 })
 export class EmptyComponent {}
 

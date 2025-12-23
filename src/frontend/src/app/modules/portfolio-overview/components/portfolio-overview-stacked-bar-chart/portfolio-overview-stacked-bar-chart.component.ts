@@ -9,10 +9,11 @@ import { PortfolioOverviewBarChartService } from './portfolio-overview-stacked-b
 import { OperatorToggleValue } from '../../models/operator-toggle-value';
 
 @Component({
-  selector: 'ra-portfolio-overview-stacked-bar-chart[countBy][xAxisTitle]',
-  templateUrl: './portfolio-overview-stacked-bar-chart.component.html',
-  styleUrls: ['./portfolio-overview-stacked-bar-chart.component.scss'],
-  providers: [PortfolioOverviewBarChartService]
+    selector: 'ra-portfolio-overview-stacked-bar-chart[countBy][xAxisTitle]',
+    templateUrl: './portfolio-overview-stacked-bar-chart.component.html',
+    styleUrls: ['./portfolio-overview-stacked-bar-chart.component.scss'],
+    providers: [PortfolioOverviewBarChartService],
+    standalone: false
 })
 export class PortfolioOverviewStackedBarChartComponent implements OnInit, OnDestroy {
   @Input() countBy!: string;

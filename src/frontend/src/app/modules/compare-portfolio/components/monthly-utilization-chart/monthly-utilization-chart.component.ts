@@ -5,15 +5,16 @@ import { MonthlyUtilization } from '../../models/monthly-utilization';
 import { Metric } from '../../models/metric';
 import { MonthlyUtilizationChartTooltipBuilderService } from './monthly-utilization-chart-tooltip-builder.service';
 import { AppConfigService } from '../../../../app-config.service';
-import { Message } from 'primeng/api';
+import { ToastMessageOptions } from 'primeng/api';
 import { PortfolioDetailOptions } from '../../models/portfolio-detail-options';
 import { DateConstants } from '../../../shared/models/date-constants';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { MonthlyUtilizationChartObject } from '../../models/monthly-utilization-chart-object';
 @Component({
   selector: 'ra-monthly-utilization-chart[monthlyUtilizationChartData][metric][yScaleSuggestedMax][chartLabels][chartXAxisTitle]',
   templateUrl: './monthly-utilization-chart.component.html',
-  styleUrls: ['./monthly-utilization-chart.component.scss']
+  styleUrls: ['./monthly-utilization-chart.component.scss'],
+  standalone: false
 })
 export class MonthlyUtilizationChartComponent implements OnInit, OnChanges {
   @Input() metric!: Metric;
@@ -34,7 +35,7 @@ export class MonthlyUtilizationChartComponent implements OnInit, OnChanges {
   @Input() isModal = false;
   yMaxVal!: number;
   displayModal = false;
-  message!: Message;
+  message!: ToastMessageOptions;
   comparisonPortfolio_chartDataSet = '';
   referencePortFolio_chartDataset = '';
 
@@ -84,7 +85,7 @@ export class MonthlyUtilizationChartComponent implements OnInit, OnChanges {
     }
   }
 
-  constructor(private readonly appConfigService: AppConfigService) {}
+  constructor(private readonly appConfigService: AppConfigService) { }
 
   ngOnInit(): void {
     this.marketingUrl = this.appConfigService.configuration.marketingUrl;

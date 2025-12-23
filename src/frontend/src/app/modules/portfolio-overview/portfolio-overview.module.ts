@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgChartsModule } from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts';
 import { PortfolioOverviewRoutingModule } from './portfolio-overview-routing.module';
 
 import { PortfolioOverviewTabComponent } from './components/portfolio-overview-tab/portfolio-overview-tab.component';
@@ -44,7 +44,7 @@ import { PortfolioOverviewFilterExcelService } from './components/portfolio-over
     PortfolioOverviewRoutingModule,
     DropdownModule,
     FormsModule,
-    NgChartsModule,
+    BaseChartDirective,
     DialogModule,
     TableModule,
     SharedModule,

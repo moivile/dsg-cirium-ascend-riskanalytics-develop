@@ -47,10 +47,11 @@ import { ConfirmationDialogOptions } from '../../../shared/models/confirmation-d
 import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
-  selector: 'ra-asset-watch-tab',
-  templateUrl: './asset-watch-tab.component.html',
-  styleUrls: ['./asset-watch-tab.component.scss'],
-  providers: [DialogService]
+    selector: 'ra-asset-watch-tab',
+    templateUrl: './asset-watch-tab.component.html',
+    styleUrls: ['./asset-watch-tab.component.scss'],
+    providers: [DialogService],
+    standalone: false
 })
 export class AssetWatchTabComponent implements OnInit, AfterViewInit, OnDestroy {
   public saveSearchManagementIsActive = false;

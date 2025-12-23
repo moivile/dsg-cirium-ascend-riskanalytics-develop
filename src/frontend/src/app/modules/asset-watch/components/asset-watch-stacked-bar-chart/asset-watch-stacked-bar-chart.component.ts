@@ -4,12 +4,13 @@ import { BehaviorSubject, Subscription, tap } from 'rxjs';
 import { ChartInputData } from '../../models/chart-input-data';
 import * as htmlToImage from 'html-to-image';
 import { DateConstants } from '../../../shared/models/date-constants';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 
 @Component({
-  selector: 'ra-asset-watch-stacked-bar-chart',
-  templateUrl: './asset-watch-stacked-bar-chart.component.html',
-  styleUrls: ['./asset-watch-stacked-bar-chart.component.scss']
+    selector: 'ra-asset-watch-stacked-bar-chart',
+    templateUrl: './asset-watch-stacked-bar-chart.component.html',
+    styleUrls: ['./asset-watch-stacked-bar-chart.component.scss'],
+    standalone: false
 })
 export class AssetWatchStackedBarChartComponent implements OnInit {
   @Input() inputData$!: BehaviorSubject<ChartInputData>;

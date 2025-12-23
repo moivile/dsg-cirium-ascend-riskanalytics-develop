@@ -6,9 +6,10 @@ import { duplicateSaveSearchValidator } from './save-search-validator';
 import { AppStore } from '../../../../app-store';
 
 @Component({
-  selector: 'ra-saved-search-details',
-  templateUrl: './asset-watch-saved-search-details.component.html',
-  styleUrl: './asset-watch-saved-search-details.component.scss'
+    selector: 'ra-saved-search-details',
+    templateUrl: './asset-watch-saved-search-details.component.html',
+    styleUrl: './asset-watch-saved-search-details.component.scss',
+    standalone: false
 })
 export class AssetWatchSavedSearchDetailsComponent {
   form = this.formBuilder.group({

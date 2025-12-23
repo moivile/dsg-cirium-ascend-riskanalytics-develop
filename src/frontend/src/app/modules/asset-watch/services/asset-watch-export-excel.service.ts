@@ -13,7 +13,7 @@ import { AssetWatchStore } from './asset-watch-store';
 import { Observable, combineLatest, map, take, withLatestFrom } from 'rxjs';
 import { AssetWatchGridRequest } from '../models/asset-watch-grid-request';
 import { AppStore } from '../../../app-store';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 
 @Injectable()
 export class AssetWatchExportExcelService {

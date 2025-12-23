@@ -37,8 +37,9 @@ import { SavedSearchModel } from '../../models/saved-search-model';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 @Component({
-  selector: 'ra-asset-watch-filter',
-  template: ''
+    selector: 'ra-asset-watch-filter',
+    template: '',
+    standalone: false
 })
 class MockAssetWatchFilterComponent {
   @Input() filterExpandedCollapsedClass = '';
@@ -54,8 +55,9 @@ class MockAssetWatchFilterComponent {
 }
 
 @Component({
-  selector: 'ra-asset-watch-details-table',
-  template: ''
+    selector: 'ra-asset-watch-details-table',
+    template: '',
+    standalone: false
 })
 class MockAssetWatchDetailsTableComponent {
   @Input() isModal = false;
@@ -68,8 +70,9 @@ class MockAssetWatchDetailsTableComponent {
 }
 
 @Component({
-  selector: 'ra-asset-watch-stacked-bar-chart',
-  template: ''
+    selector: 'ra-asset-watch-stacked-bar-chart',
+    template: '',
+    standalone: false
 })
 class MockAssetWatchStackedBarChartComponent {
   @Input() isModal = false;
@@ -84,8 +87,9 @@ class MockAssetWatchStackedBarChartComponent {
 }
 
 @Component({
-  selector: 'ra-asset-watch-accordion[accordionContentId][defaultHeight]',
-  template: ''
+    selector: 'ra-asset-watch-accordion[accordionContentId][defaultHeight]',
+    template: '',
+    standalone: false
 })
 class MockAssetWatchAccordionComponent {
   @Input() accordionContentId!: string;

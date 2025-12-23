@@ -12,10 +12,11 @@ import { AssetWatchGridRequest } from '../../models/asset-watch-grid-request';
 import { AssetWatchExportExcelService } from '../../services/asset-watch-export-excel.service';
 
 @Component({
-  selector: 'ra-asset-watch-flight-details-table',
-  templateUrl: './asset-watch-flight-details-table.component.html',
-  styleUrls: ['./asset-watch-flight-details-table.component.scss'],
-  providers: [AssetWatchFlightDetailsTableService, PrimeNGTableService]
+    selector: 'ra-asset-watch-flight-details-table',
+    templateUrl: './asset-watch-flight-details-table.component.html',
+    styleUrls: ['./asset-watch-flight-details-table.component.scss'],
+    providers: [AssetWatchFlightDetailsTableService, PrimeNGTableService],
+    standalone: false
 })
 export class AssetWatchFlightDetailsTableComponent implements OnInit, AfterViewInit {
   @ViewChild('flightDetailsTableContainer')

@@ -5,7 +5,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { SharedModule } from '../shared/shared.module';
 import { TreeSelectModule } from 'primeng/treeselect';
 import { CalendarModule } from 'primeng/calendar';
-import { NgChartsModule } from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts';
 
 import { ComparePortfolioRoutingModule } from './compare-portfolio-routing.module';
 import { ComparePortfolioTabComponent } from './components/compare-portfolio-tab/compare-portfolio-tab.component';
@@ -43,7 +43,7 @@ import { ComparePortfolioTableComponent } from './components/compare-portfolio-t
     TableModule,
     DialogModule,
     CalendarModule,
-    NgChartsModule,
+    BaseChartDirective,
     TooltipModule,
     ReactiveFormsModule
   ],
@@ -56,4 +56,4 @@ import { ComparePortfolioTableComponent } from './components/compare-portfolio-t
     UtilizationService
   ]
 })
-export class ComparePortfolioModule {}
+export class ComparePortfolioModule { }

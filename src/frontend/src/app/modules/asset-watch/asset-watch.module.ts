@@ -12,7 +12,7 @@ import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
-import { NgChartsModule } from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { AssetWatchFilterComponent } from './components/asset-watch-filter/asset-watch-filter.component';
 import { AssetWatchService } from './services/asset-watch.service';
@@ -58,7 +58,7 @@ import { AssetWatchSavedSearchFiltersViewComponent } from './components/asset-wa
     TableModule,
     DialogModule,
     CalendarModule,
-    NgChartsModule,
+    BaseChartDirective,
     ReactiveFormsModule,
     MultiSelectModule,
     BaseUpsellPageComponent,
@@ -70,4 +70,4 @@ import { AssetWatchSavedSearchFiltersViewComponent } from './components/asset-wa
   providers: [AssetWatchService, AssetWatchSummaryService, SavedSearchesService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AssetWatchModule {}
+export class AssetWatchModule { }

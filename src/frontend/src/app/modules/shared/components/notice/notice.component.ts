@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { Message } from 'primeng/api';
+import { ToastMessageOptions } from 'primeng/api';
 
 @Component({
   selector: 'ra-notice',
-  templateUrl: './notice.component.html'
+  templateUrl: './notice.component.html',
+  standalone: false
 })
 export class NoticeComponent {
   @Input()
-  message!: Message;
+  message!: ToastMessageOptions;
 }

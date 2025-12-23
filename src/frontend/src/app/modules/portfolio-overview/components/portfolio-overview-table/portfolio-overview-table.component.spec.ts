@@ -5,7 +5,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { PortfolioOverviewStore } from '../../services/portfolio-overview.store';
 import { PortfolioAircraftService } from '../../../shared/services/portfolio-aircraft.service';
 import { SortBy } from '../../models/sortBy';
-import { NgChartsModule } from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts';
 import { TableModule } from 'primeng/table';
 import { IsLastColumnPipe } from './table-is-last-column.pipe';
 import { of } from 'rxjs';
@@ -28,21 +28,21 @@ describe('PortfolioOverviewTableComponent', () => {
     }));
 
     await TestBed.configureTestingModule({
-    declarations: [
+      declarations: [
         PortfolioOverviewTableComponent,
         IsLastColumnPipe
-    ],
-    imports: [NgChartsModule,
+      ],
+      imports: [BaseChartDirective,
         TableModule],
-    providers: [
+      providers: [
         { provide: PortfolioOverviewStore, useValue: portfolioOverviewStoreSpy },
         PrimeNGTableService,
         { provide: PortfolioAircraftService, useValue: portfoliosServiceSpy },
         PortfolioOverviewFilterExcelService,
         ExportExcelService,
         provideHttpClient(withInterceptorsFromDi())
-    ]
-})
+      ]
+    })
       .compileComponents();
     fixture = TestBed.createComponent(PortfolioOverviewTableComponent);
     component = fixture.componentInstance;
@@ -57,7 +57,7 @@ describe('PortfolioOverviewTableComponent', () => {
           { 'Aircraft Family': 'A320 Family', 'In Service': 1, 'LOI to Option': 0, Storage: 0, 'On Option': 0, 'On Order': 0, Total: 1 }
         ],
       totals: [{ 'Aircraft Family': 'Total', 'In Service': 2, 'LOI to Option': 2, Storage: 1, 'On Option': 1, 'On Order': 1, Total: 7 }],
-      headersInOrder: ['Aircraft Family', 'In Service','LOI to Option','Storage', 'On Option', 'On Order', 'Total']
+      headersInOrder: ['Aircraft Family', 'In Service', 'LOI to Option', 'Storage', 'On Option', 'On Order', 'Total']
     };
     fixture.detectChanges();
   });

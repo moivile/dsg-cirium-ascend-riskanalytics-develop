@@ -6,13 +6,15 @@ import { Router, RouterModule } from '@angular/router';
 import { fleetDistributionRoute, fleetInsightsRoute, fleetTrendsRoute, marketActivityRoute } from '../../route.constants';
 
 @Component({
-  template: '<div></div>'
+    template: '<div></div>',
+    standalone: false
 })
 export class EmptyComponent {}
 
 @Component({
-  selector: 'ra-fleet-insights-filter-panel',
-  template: '<div></div>'
+    selector: 'ra-fleet-insights-filter-panel',
+    template: '<div></div>',
+    standalone: false
 })
 class MockFleetInsightsFilterPanelComponent {}
 

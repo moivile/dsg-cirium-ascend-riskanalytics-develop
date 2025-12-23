@@ -252,8 +252,9 @@ describe('ComparePortfolioTabComponent', () => {
 });
 
 @Component({
-  selector: 'ra-portfolio-detail',
-  template: ''
+    selector: 'ra-portfolio-detail',
+    template: '',
+    standalone: false
 })
 class MockPortfolioDetailComponent {
   @Input() metricOptions?: MetricOptions;
@@ -264,8 +265,9 @@ class MockPortfolioDetailComponent {
 }
 
 @Component({
-  selector: 'ra-compare-portfolio-table',
-  template: ''
+    selector: 'ra-compare-portfolio-table',
+    template: '',
+    standalone: false
 })
 class MockPortfolioTableComponent {
   @Input() isModal = false;

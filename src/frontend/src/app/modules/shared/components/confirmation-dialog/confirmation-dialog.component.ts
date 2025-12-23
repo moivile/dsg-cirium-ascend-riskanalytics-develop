@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
-  selector: 'ra-confirmation-dialog',
-  templateUrl: './confirmation-dialog.component.html',
-  styleUrls: ['./confirmation-dialog.component.scss']
+    selector: 'ra-confirmation-dialog',
+    templateUrl: './confirmation-dialog.component.html',
+    styleUrls: ['./confirmation-dialog.component.scss'],
+    standalone: false
 })
 export class ConfirmationDialogComponent {
   private isClosedByButton = false;

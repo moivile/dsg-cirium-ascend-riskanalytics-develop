@@ -15,10 +15,11 @@ import { AssetWatchService } from '../../services/asset-watch.service';
 import { assetWatchSavedSearchesRoute } from '../../../../route.constants';
 
 @Component({
-  selector: 'ra-asset-watch-save-search-management',
-  templateUrl: './asset-watch-save-search-management.component.html',
-  styleUrl: './asset-watch-save-search-management.component.scss',
-  providers: [AssetWatchSaveSearchManagementStore]
+    selector: 'ra-asset-watch-save-search-management',
+    templateUrl: './asset-watch-save-search-management.component.html',
+    styleUrl: './asset-watch-save-search-management.component.scss',
+    providers: [AssetWatchSaveSearchManagementStore],
+    standalone: false
 })
 export class AssetWatchSaveSearchManagementComponent implements OnInit, OnDestroy {
   @Output() backClicked = new EventEmitter<void>();

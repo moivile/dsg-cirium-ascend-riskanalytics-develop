@@ -11,13 +11,19 @@
       },
       "extends": [
         "eslint:recommended",
-        "plugin:security/recommended",
+        "plugin:security/recommended-legacy",
         "plugin:@typescript-eslint/recommended",
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "semi": "off",
+        "@typescript-eslint/ban-types": "off",
+        "@angular-eslint/prefer-standalone": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-empty-object-type": "off",
+        "@typescript-eslint/no-unused-expressions": "off",
+        "semi": ["error", "always"],
         "@typescript-eslint/semi": ["error"],
         "quotes": ["error", "single", { "allowTemplateLiterals": true }],
         "curly": ["error", "all"],
@@ -64,14 +70,6 @@
         "@angular-eslint/use-pipe-transform-interface": "error",
         "no-undef": "off",
         "security/detect-object-injection": "off",
-        "@typescript-eslint/ban-types": [
-          "error",
-          {
-            "types": {
-              "{}": false
-            }
-          }
-        ],
         "@typescript-eslint/member-ordering": [
           "error",
           {
@@ -124,6 +122,15 @@
             "style": "camelCase"
           }
         ]
+      }
+    },
+    {
+      "files": ["*.spec.ts"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-empty-object-type": "off",
+        "@typescript-eslint/no-unused-expressions": "off"
       }
     },
     {
