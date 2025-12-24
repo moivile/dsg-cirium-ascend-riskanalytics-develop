@@ -1,5 +1,5 @@
 <div class="grouping">
-  <p-dropdown
+  <p-select
     styleClass="airframe-dropdown"
     [options]="groups"
     [(ngModel)]="selectedGroupName"
@@ -7,5 +7,5 @@
     optionValue="groupName"
     dropdownIcon="fa fa-chevron-down"
     (onChange)="changeGroupBy($event.value)">
-  </p-dropdown>
+  </p-select>
 </div>

@@ -3,36 +3,40 @@
     <h3 *ngIf="isHoursAndCycle" class="col">Hours & Cycles Analysis</h3>
     <h3 *ngIf="isEmissions" class="col">Emissions Analysis</h3>
   </div>
-  <span *ngIf="isHoursAndCycle" class="airframe-caption">Use this page to trend, benchmark and report utilization indicators across your portfolio.</span>
-  <span *ngIf="isEmissions" class="airframe-caption">Use this page to trend, benchmark and report emissions indicators across your portfolio.</span>
-  <hr class="title-break"/>
+  <span *ngIf="isHoursAndCycle" class="airframe-caption"
+    >Use this page to trend, benchmark and report utilization indicators across your portfolio.</span
+  >
+  <span *ngIf="isEmissions" class="airframe-caption"
+    >Use this page to trend, benchmark and report emissions indicators across your portfolio.</span
+  >
+  <hr class="title-break" />
 
   <div class="row compare-options">
     <div *ngIf="isHoursAndCycle" class="option">
       <label>Utilization Metrics</label>
-      <p-dropdown
+      <p-select
         [options]="utilizationMetrics"
         styleClass="airframe-dropdown"
         dropdownIcon="fa fa-chevron-down"
         optionLabel="name"
         (onChange)="onUtilizationMetricChange($event.value)">
-      </p-dropdown>
+      </p-select>
     </div>
 
     <div *ngIf="isEmissions" class="option">
       <label>Emissions Metrics</label>
-      <p-dropdown
+      <p-select
         [options]="emissionsMetrics"
         styleClass="airframe-dropdown"
         dropdownIcon="fa fa-chevron-down"
         optionLabel="name"
         (onChange)="onEmissionsMetricChange($event.value)">
-      </p-dropdown>
+      </p-select>
     </div>
 
     <div class="option">
       <label>Start Month</label>
-      <p-calendar
+      <p-datepicker
         styleClass="airframe-calendar"
         [showIcon]="true"
         icon="fa fa-calendar-days"
@@ -42,13 +46,12 @@
         (click)="disableHistoricalDates()"
         [(ngModel)]="selectedStartDate"
         [minDate]="minimumStartDate"
-        [maxDate]="maximumStartDate"
-      ></p-calendar>
+        [maxDate]="maximumStartDate"></p-datepicker>
     </div>
 
     <div class="option">
       <label>End Month</label>
-      <p-calendar
+      <p-datepicker
         styleClass="airframe-calendar"
         placeholder="Select an end date"
         [showIcon]="true"
@@ -60,21 +63,21 @@
         [(ngModel)]="selectedEndDate"
         [minDate]="minimumEndDate"
         [maxDate]="maximumEndDate">
-      </p-calendar>
+      </p-datepicker>
     </div>
   </div>
 
   <div class="row download-to-excel">
     <button
-    class="airframe__icon-button"
-    (click)="exportExcel()"
-    pTooltip="Download to Excel"
-    tooltipPosition="left"
-    tooltipStyleClass="airframe-tooltip"
-    [disabled]="!showTable">
-    <em class="fa fa-download"></em>
-  </button>
-</div>
+      class="airframe__icon-button"
+      (click)="exportExcel()"
+      pTooltip="Download to Excel"
+      tooltipPosition="left"
+      tooltipStyleClass="airframe-tooltip"
+      [disabled]="!showTable">
+      <em class="fa fa-download"></em>
+    </button>
+  </div>
 
   <div class="row">
     <ra-portfolio-detail
@@ -105,10 +108,9 @@
     <h5>Details</h5>
   </div>
   <div class="row" id="detailsRow">
-  <ra-compare-portfolio-table
-   *ngIf="showTable"
-   [metricDetailsTable]="metricDetailsTable"
-   [tableHeaders]="tableHeaders"
-  ></ra-compare-portfolio-table>
+    <ra-compare-portfolio-table
+      *ngIf="showTable"
+      [metricDetailsTable]="metricDetailsTable"
+      [tableHeaders]="tableHeaders"></ra-compare-portfolio-table>
   </div>
 </div>

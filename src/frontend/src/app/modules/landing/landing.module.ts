@@ -6,7 +6,7 @@ import { LandingRoutingModule } from './landing-routing.module';
 import { LandingTabComponent } from './components/landing-tab/landing-tab.component';
 import { LandingPortfoliosComponent } from './components/landing-portfolios/landing-portfolios.component';
 
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
@@ -20,7 +20,7 @@ import { InputTextModule } from 'primeng/inputtext';
     LandingRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    DropdownModule,
+    SelectModule,
     TableModule,
     TooltipModule,
     DialogModule,
@@ -28,4 +28,4 @@ import { InputTextModule } from 'primeng/inputtext';
     InputTextModule
   ],
 })
-export class LandingModule {}
+export class LandingModule { }

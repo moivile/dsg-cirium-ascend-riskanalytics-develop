@@ -131,29 +131,29 @@
       </div>
 
       <div class="row filters__item filter__multiselect ra-multiselect-with-chips">
-        <p-dropdown
+        <p-select
           [formControl]="selectedTimePeriodControl"
           [options]="timePeriodOptions"
           placeholder="Time Period"
           styleClass="airframe-dropdown"
-          dropdownIcon="fa fa-chevron-down"></p-dropdown>
+          dropdownIcon="fa fa-chevron-down"></p-select>
       </div>
       <div class="row filters__display-name">
         <label>Start Date - End Date</label>
       </div>
       <ng-container [formGroup]="periodForm">
         <div class="row filters__item date-option">
-          <p-calendar
+          <p-datepicker
             [ngClass]="{ 'p-calendar-invalid-value': periodForm.controls.periodFormStartDate.invalid }"
             formControlName="periodFormStartDate"
             styleClass="airframe-calendar"
             [showIcon]="true"
             icon="fa fa-calendar-day"
             dateFormat="dd-M-yy"
-            [maxDate]="maximumDate"></p-calendar>
+            [maxDate]="maximumDate"></p-datepicker>
         </div>
         <div class="row filters__item date-option">
-          <p-calendar
+          <p-datepicker
             [ngClass]="{ 'p-calendar-invalid-value': periodForm.controls.periodFormEndDate.invalid }"
             formControlName="periodFormEndDate"
             styleClass="airframe-calendar"
@@ -162,7 +162,7 @@
             icon="fa fa-calendar-day"
             dateFormat="dd-M-yy"
             [maxDate]="maximumDate">
-          </p-calendar>
+          </p-datepicker>
         </div>
       </ng-container>
     </div>

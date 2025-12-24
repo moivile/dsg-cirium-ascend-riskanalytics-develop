@@ -9,7 +9,7 @@ import { PortfolioOverviewSummaryCountsComponent } from './components/portfolio-
 import { PortoflioOverviewSummaryMetricsComponent } from './components/portfolio-overview-summary-metrics/portfolio-overview-summary-metrics.component';
 import { PortfolioOverviewGroupingComponent } from './components/portfolio-overview-grouping/portfolio-overview-grouping.component';
 
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { PortfolioOverviewStackedBarChartComponent } from './components/portfolio-overview-stacked-bar-chart/portfolio-overview-stacked-bar-chart.component';
 import { DialogModule } from 'primeng/dialog';
 import { PortfolioOverviewTableComponent } from './components/portfolio-overview-table/portfolio-overview-table.component';
@@ -42,7 +42,7 @@ import { PortfolioOverviewFilterExcelService } from './components/portfolio-over
   imports: [
     CommonModule,
     PortfolioOverviewRoutingModule,
-    DropdownModule,
+    SelectModule,
     FormsModule,
     BaseChartDirective,
     DialogModule,

@@ -1,89 +1,7 @@
 @use '@airframe/standard/src/scss/foundations/colors';
 @use '@airframe/standard/src/scss/foundations/font-family';
-@use "@airframe/standard/src/scss/components/basic-elements/textfield/textfield";
-@use "@airframe/standard/src/scss/foundations/breakpoints";
-
-.ra-multiselect {
-  height: 40px;
-  width: 100%;
-  border: 1px solid colors.$airframe-color-border-on-light;
-  border-radius: 2px;
-
-  &:not(.p-disabled):hover {
-    border: 1px solid colors.$airframe-color-primary-light;
-    border-radius: 2px;
-    background-color: colors.$airframe-color-neutral-grey-10;
-    border-color: colors.$airframe-color-primary-light;
-  }
-
-  &:not(.p-disabled).p-focus {
-    box-shadow: none;
-    border: 2px solid colors.$airframe-color-foreground-focus;
-  }
-
-  .p-multiselect-trigger {
-    color: colors.$airframe-color-primary-normal;
-    border-left: 1px solid colors.$airframe-color-neutral-grey-30;
-    height: 26px;
-    margin-top: 6.5px;
-  }
-
-  .p-inputtext {
-    padding: 9px 10.5px 12px 10.5px;
-  }
-
-  .p-multiselect-label {
-    color: colors.$airframe-color-neutral-grey-80;
-    font-family: font-family.$font-family-montserrat;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.05px;
-
-    &.p-placeholder {
-      color: colors.$airframe-color-neutral-grey-60;
-      font-weight: 300;
-    }
-  }
-
-  .p-multiselect-items-wrapper {
-    max-height: 216px !important;
-  }
-
-  .p-multiselect-panel {
-    border-bottom: 4px solid colors.$airframe-color-primary-normal;
-
-    .p-multiselect-items {
-      padding: 0;
-      font-family: font-family.$font-family-montserrat;
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 0.05px;
-
-      .p-multiselect-item {
-        height: 40px;
-        padding-top: 10px;
-      }
-
-      .p-multiselect-item.p-highlight {
-        background-color: colors.$airframe-color-primary-normal;
-        color: colors.$airframe-color-neutral-white;
-      }
-
-      .p-multiselect-item:not(.p-highlight):not(.p-disabled) {
-        &:hover {
-          background-color: colors.$airframe-color-primary-extra-extra-light;
-        }
-      }
-    }
-  }
-
-  .p-multiselect-clear-icon {
-    &.p-multiselect-clear-icon {
-      color: colors.$airframe-color-primary-normal;
-      padding-right: 5px;
-    }
-  }
-}
+@use '@airframe/standard/src/scss/components/basic-elements/textfield/textfield';
+@use '@airframe/standard/src/scss/foundations/breakpoints';
 
 .ra-multiselect-with-chips {
   .p-multiselect {
@@ -91,26 +9,10 @@
     border: 1px solid colors.$airframe-color-border-hover-on-dark;
     border-radius: 2px;
     width: 100%;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 12px;
+    font-weight: 400;
     letter-spacing: 0.05px;
     height: auto !important;
-
-    @media (max-width: breakpoints.$airframe-breakpoint-md) {
-      width: 94%;
-    }
-
-    @media (max-width: breakpoints.$airframe-breakpoint-xm) {
-      width: 94%;
-    }
-
-    @media (max-width: breakpoints.$airframe-breakpoint-lg) {
-      width: 94%;
-    }
-
-    @media (max-width: breakpoints.$airframe-breakpoint-xl) {
-      width: 92%;
-    }
 
     &:enabled:focus {
       box-shadow: none;
@@ -145,7 +47,7 @@
       margin-top: 6.5px;
     }
 
-    .p-multiselect-panel {
+    .p-multiselect-overlay {
       border-bottom: 4px solid colors.$airframe-color-primary-normal;
 
       .p-multiselect-header .p-multiselect-close {
@@ -153,28 +55,42 @@
       }
     }
 
-    &.p-multiselect-chip .p-multiselect-token {
-      background-color: colors.$airframe-color-neutral-grey-70-opacity-50;
-      border-radius: 3px;
+    p-chip.p-chip.p-multiselect-chip {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 4px;
+
+      font-size: 12px;
+      background-color: colors.$airframe-color-primary-normal;
+      border-radius: 5px;
       position: relative;
       top: 1px;
       color: colors.$airframe-color-neutral-white;
-      margin: 0.2rem;
+      margin: 0.1rem;
+      padding: 0.05rem 0.4rem;
+
+      & .p-iconwrapper {
+        color: colors.$airframe-color-neutral-white;
+        height: 13px;
+        width: 13px;
+      }
     }
   }
 
-  p-multiselect.p-multiselect-clearable .p-multiselect-clear-icon {
+  p-multiselect.p-multiselect .p-multiselect-clear-icon {
     color: colors.$airframe-color-primary-normal;
-    padding-right: 5px;
-    top: 18px;
   }
 
-  .p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight {
+  .p-multiselect-list-container .p-multiselect-list .p-multiselect-option.p-multiselect-option-selected {
     background-color: colors.$airframe-color-neutral-white;
   }
 
-  .p-multiselect-panel .p-multiselect-items .p-multiselect-item:not(.p-highlight):not(.p-disabled):hover {
+  .p-multiselect-list-container .p-multiselect-list .p-multiselect-option:not(.p-highlight):not(.p-disabled):hover {
     background-color: colors.$airframe-color-primary-extra-extra-light;
+  }
+
+  .p-multiselect-list-container .p-multiselect-list .p-multiselect-option.p-multiselect-option-selected span {
+    color: colors.$airframe-color-primary-normal;
   }
 
   .p-chip {
@@ -188,11 +104,12 @@
   }
 
   .p-multiselect-label {
+    flex-wrap: wrap;
     white-space: normal !important;
     text-overflow: inherit !important;
   }
 
-  .p-checkbox .p-checkbox-box.p-highlight {
+  .p-checkbox.p-highlight .p-checkbox-box {
     box-shadow: none;
     border-color: colors.$airframe-color-primary-normal !important;
     background: colors.$airframe-color-primary-normal;
@@ -224,14 +141,14 @@
     padding-right: 1.5rem;
   }
 
-  .p-multiselect-items {
+  .p-multiselect-list {
     &:enabled:focus {
       box-shadow: none;
       border: 1px solid colors.$airframe-color-primary-normal !important;
     }
   }
 
-  .p-multiselect-item {
+  .p-multiselect-option {
     &:focus-within {
       box-shadow: none;
       border: 1px solid colors.$airframe-color-primary-normal !important;
@@ -253,16 +170,20 @@
     }
   }
 
-  .p-multiselect-panel .p-multiselect-items .p-multiselect-item:focus {
+  .p-multiselect-overlay .p-multiselect-list .p-multiselect-option:focus {
     box-shadow: none !important;
     border: 1px solid colors.$airframe-color-primary-normal !important;
   }
 
-  .p-multiselect-panel {
+  .p-multiselect-overlay {
     border-bottom: 5px solid colors.$airframe-color-primary-normal !important;
   }
 
-  .p-multiselect-panel .p-multiselect-header .p-multiselect-close {
+  .p-multiselect-overlay .p-multiselect-header .p-multiselect-close {
     color: colors.$airframe-color-primary-normal;
+  }
+
+  .p-multiselect-label .p-multiselect-chip-item:nth-child(n + 4) {
+    display: none;
   }
 }

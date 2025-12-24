@@ -1,13 +1,12 @@
 .portfolio-details {
-
   h5 {
     padding-bottom: 10px;
   }
 
   .portfolio-name {
-    min-height: 34px; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
+    min-height: 34px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     position: relative;
     white-space: nowrap;
     word-break: break-word;
@@ -18,16 +17,14 @@
   }
 
   .filters {
-
     margin-top: 20px;
 
     .filter {
-
       label {
         display: block;
       }
 
-      p-dropdown {
+      p-select {
         margin-bottom: 24px;
         margin-right: 17px;
 
@@ -71,10 +68,7 @@
     }
   }
 
-  .p-dropdown {
+  .p-select {
     width: 242px;
   }
 }
-
-
-

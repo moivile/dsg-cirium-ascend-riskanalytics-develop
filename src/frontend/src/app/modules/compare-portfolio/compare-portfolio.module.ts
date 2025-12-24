@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { SharedModule } from '../shared/shared.module';
 import { TreeSelectModule } from 'primeng/treeselect';
-import { CalendarModule } from 'primeng/calendar';
+import { DatePickerModule } from 'primeng/datepicker';
 import { BaseChartDirective } from 'ng2-charts';
 
 import { ComparePortfolioRoutingModule } from './compare-portfolio-routing.module';
@@ -38,11 +38,11 @@ import { ComparePortfolioTableComponent } from './components/compare-portfolio-t
     ComparePortfolioRoutingModule,
     SharedModule,
     TreeSelectModule,
-    DropdownModule,
+    SelectModule,
     InputNumberModule,
     TableModule,
     DialogModule,
-    CalendarModule,
+    DatePickerModule,
     BaseChartDirective,
     TooltipModule,
     ReactiveFormsModule

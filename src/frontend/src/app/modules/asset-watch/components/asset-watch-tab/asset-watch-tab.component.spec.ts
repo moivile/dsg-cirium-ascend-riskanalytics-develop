@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, fakeAsync, flush, tick } from '@angular/core
 
 import { AssetWatchTabComponent } from './asset-watch-tab.component';
 import { TreeSelectModule } from 'primeng/treeselect';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
@@ -22,7 +22,7 @@ import { SummaryGroundEventsModel } from '../../models/summary-ground-events-mod
 import { TimePeriodOption } from '../../models/time-period-option';
 import { AssetWatchService } from '../../services/asset-watch.service';
 import { IdNamePairModel } from '../../../shared/models/id-name-pair-model';
-import { CalendarModule } from 'primeng/calendar';
+import { DatePickerModule } from 'primeng/datepicker';
 import { ExportExcelService } from '../../../shared/services/export-excel-service';
 import { AssetWatchExportExcelService } from '../../services/asset-watch-export-excel.service';
 import { AssetWatchStore } from '../../services/asset-watch-store';
@@ -37,9 +37,9 @@ import { SavedSearchModel } from '../../models/saved-search-model';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 @Component({
-    selector: 'ra-asset-watch-filter',
-    template: '',
-    standalone: false
+  selector: 'ra-asset-watch-filter',
+  template: '',
+  standalone: false
 })
 class MockAssetWatchFilterComponent {
   @Input() filterExpandedCollapsedClass = '';
@@ -55,9 +55,9 @@ class MockAssetWatchFilterComponent {
 }
 
 @Component({
-    selector: 'ra-asset-watch-details-table',
-    template: '',
-    standalone: false
+  selector: 'ra-asset-watch-details-table',
+  template: '',
+  standalone: false
 })
 class MockAssetWatchDetailsTableComponent {
   @Input() isModal = false;
@@ -70,9 +70,9 @@ class MockAssetWatchDetailsTableComponent {
 }
 
 @Component({
-    selector: 'ra-asset-watch-stacked-bar-chart',
-    template: '',
-    standalone: false
+  selector: 'ra-asset-watch-stacked-bar-chart',
+  template: '',
+  standalone: false
 })
 class MockAssetWatchStackedBarChartComponent {
   @Input() isModal = false;
@@ -87,9 +87,9 @@ class MockAssetWatchStackedBarChartComponent {
 }
 
 @Component({
-    selector: 'ra-asset-watch-accordion[accordionContentId][defaultHeight]',
-    template: '',
-    standalone: false
+  selector: 'ra-asset-watch-accordion[accordionContentId][defaultHeight]',
+  template: '',
+  standalone: false
 })
 class MockAssetWatchAccordionComponent {
   @Input() accordionContentId!: string;
@@ -111,33 +111,33 @@ describe('AssetWatchTabComponent', () => {
     savedSearchesServiceSpy = jasmine.createSpyObj('SavedSearchesService', ['getSavedSearch']);
 
     TestBed.configureTestingModule({
-    declarations: [
+      declarations: [
         AssetWatchTabComponent,
         MockAssetWatchDetailsTableComponent,
         MockAssetWatchStackedBarChartComponent,
         MockAssetWatchAccordionComponent,
         MockAssetWatchFilterComponent
-    ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    imports: [TreeSelectModule,
-        DropdownModule,
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [TreeSelectModule,
+        SelectModule,
         InputNumberModule,
         TableModule,
         FormsModule,
         ReactiveFormsModule,
         MultiSelectModule,
         TooltipModule,
-        CalendarModule,
+        DatePickerModule,
         MenuModule],
-    providers: [
+      providers: [
         { provide: AssetWatchService, useValue: assetWatchServiceSpy },
         { provide: ExportExcelService, useValue: exportExcelServiceSpy },
         { provide: AssetWatchExportExcelService, useValue: assetWatchExportExcelServiceSpy },
         {
-            provide: ActivatedRoute,
-            useValue: {
-                snapshot: { params: { id: '99' } }
-            }
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: { params: { id: '99' } }
+          }
         },
         AssetWatchStore,
         AppStore,
@@ -146,8 +146,8 @@ describe('AssetWatchTabComponent', () => {
         { provide: SavedSearchesService, useValue: savedSearchesServiceSpy },
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-}).compileComponents();
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -508,15 +508,17 @@ describe('AssetWatchTabComponent', () => {
       spyOn(component.aircraftWatchlistFilterForm, 'patchValue').and.callThrough();
       component.aircraftOnGroundDeSelected();
       fixture.detectChanges();
-      expect(component.aircraftWatchlistFilterForm.patchValue).toHaveBeenCalledWith( { minNoOfFlights: 0, minTotalGroundStay: 0, minIndividualGroundStay: 0, minCurrentGroundStay: null, maxIndividualGroundStay: 0, maxCurrentGroundStay: 0 },
+      expect(component.aircraftWatchlistFilterForm.patchValue).toHaveBeenCalledWith({ minNoOfFlights: 0, minTotalGroundStay: 0, minIndividualGroundStay: 0, minCurrentGroundStay: null, maxIndividualGroundStay: 0, maxCurrentGroundStay: 0 },
         { emitEvent: true });
     });
     it('On selection of Aircrafts On Ground, patchValue should have been called with correct parameters', () => {
       spyOn(component.aircraftWatchlistFilterForm, 'patchValue').and.callThrough();
       component.aircraftOnGroundSelected();
       fixture.detectChanges();
-      expect(component.aircraftWatchlistFilterForm.patchValue).toHaveBeenCalledWith( { minNoOfFlights: null, minTotalGroundStay: null, minIndividualGroundStay: null, minCurrentGroundStay: 0, maxIndividualGroundStay: null,
-        maxCurrentGroundStay: 0 },
+      expect(component.aircraftWatchlistFilterForm.patchValue).toHaveBeenCalledWith({
+        minNoOfFlights: null, minTotalGroundStay: null, minIndividualGroundStay: null, minCurrentGroundStay: 0, maxIndividualGroundStay: null,
+        maxCurrentGroundStay: 0
+      },
         { emitEvent: true });
     });
     it('should call exportExcel functionon excel option click', () => {

@@ -1,8 +1,7 @@
-﻿@use "@airframe/standard/src/scss/foundations/colors";
+﻿@use '@airframe/standard/src/scss/foundations/colors';
 
-.p-dropdown-clear-icon
-{
-  &.p-dropdown-clear-icon {
+.p-select-clear-icon {
+  &.p-select-clear-icon {
     color: colors.$airframe-color-primary-normal;
     padding-right: 5px;
   }

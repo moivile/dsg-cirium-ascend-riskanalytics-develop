@@ -12,7 +12,7 @@ import { of } from 'rxjs';
 import { SearchAircraftRequest } from '../../../create-edit-portfolio/models/search-aircraft-request';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AircraftSearchResult, AircraftSearchResultDropdowns } from '../../models/aircraft-search-result';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TooltipModule } from 'primeng/tooltip';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -31,7 +31,7 @@ describe('AircraftSearchPopupComponent', () => {
     const confirmationDialogServiceSpy = jasmine.createSpyObj('ConfirmationDialogService', ['confirm']);
 
     await TestBed.configureTestingModule({
-      imports: [TableModule, FormsModule, ReactiveFormsModule, DropdownModule, CheckboxModule, TooltipModule, MultiSelectModule],
+      imports: [TableModule, FormsModule, ReactiveFormsModule, SelectModule, CheckboxModule, TooltipModule, MultiSelectModule],
       declarations: [AircraftSearchPopupComponent],
       providers: [
         DynamicDialogConfig,

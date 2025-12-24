@@ -7,7 +7,7 @@ import { FleetTrendsTabComponent } from './components/fleet-trends-tab/fleet-tre
 import { MarketActivityTabComponent } from './components/market-activity-tab/market-activity-tab.component';
 import { FleetInsightsComponent } from './fleet-insights.component';
 import { FleetInsightsFilterPanelComponent } from './components/fleet-insights-filter-panel/fleet-insights-filter-panel.component';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
@@ -18,6 +18,6 @@ import { TooltipModule } from 'primeng/tooltip';
     FleetTrendsTabComponent,
     MarketActivityTabComponent
   ],
-  imports: [CommonModule, FleetInsightsRoutingModule, DropdownModule, TooltipModule]
+  imports: [CommonModule, FleetInsightsRoutingModule, SelectModule, TooltipModule]
 })
-export class FleetInsightsModule {}
+export class FleetInsightsModule { }

@@ -1,4 +1,6 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+
 .paper {
-    border-radius: 5px;
-    background-color: $airframe-color-neutral-white;
+  border-radius: 5px;
+  background-color: colors.$airframe-color-neutral-white;
 }

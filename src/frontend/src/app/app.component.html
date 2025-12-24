@@ -18,7 +18,7 @@
 <div class="portfolio-picker-section" *ngIf="(isFleetInsightsPage$ | async) === false">
   <div class="portfolio-picker-section-dropdown-wrapper">
     <label>Portfolio</label>
-    <p-dropdown
+    <p-select
       [options]="(appStore.portfolios$ | async) || []"
       styleClass="airframe-dropdown"
       optionLabel="name"
@@ -28,7 +28,7 @@
       [filter]="true"
       [filterBy]="'name'"
       [resetFilterOnHide]="true">
-    </p-dropdown>
+    </p-select>
   </div>
 </div>
 

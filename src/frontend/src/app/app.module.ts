@@ -12,7 +12,7 @@ import { NgProgressHttpModule } from 'ngx-progressbar/http';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { AppStore } from './app-store';
 import { TooltipModule } from 'primeng/tooltip';
 import { createCustomElement } from '@angular/elements';
@@ -41,7 +41,7 @@ function initializeApp(appConfigService: AppConfigService): () => Promise<void> 
     ToastModule,
     FormsModule,
     ReactiveFormsModule,
-    DropdownModule,
+    SelectModule,
     TooltipModule], providers: [
       { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
       {

@@ -4,7 +4,7 @@
       <h5 *ngIf="!isComparisonPortfolio && !shouldCompareAgainstGlobalBenchmark">Portfolio</h5>
       <h5 *ngIf="isComparisonPortfolio && !shouldCompareAgainstGlobalBenchmark">Comparison Portfolio</h5>
       <h5 *ngIf="shouldCompareAgainstGlobalBenchmark">Global Fleet</h5>
-      <p-dropdown
+      <p-select
         *ngIf="isComparisonPortfolio"
         styleClass="airframe-dropdown"
         [options]="(appStore.portfolios$ | async) ?? []"
@@ -12,9 +12,9 @@
         (onChange)="onPortfolioChange()"
         placeholder="Select a portfolio"
         [formControl]="selectedPortfolioControl">
-      </p-dropdown>
+      </p-select>
       <div class="portfolio-name" *ngIf="!isComparisonPortfolio">
-        <h5>{{ shouldCompareAgainstGlobalBenchmark ? '' : appStore.selectedPortfolioName$ | async }}</h5>
+        <h5>{{ shouldCompareAgainstGlobalBenchmark ? '' : (appStore.selectedPortfolioName$ | async) }}</h5>
       </div>
     </div>
 
@@ -58,7 +58,7 @@
 
     <div class="filter">
       <label>Operator</label>
-      <p-dropdown
+      <p-select
         *ngIf="(operatorOptions$ | async) ?? []; let operatorOptions"
         [showClear]="true"
         styleClass="airframe-dropdown"
@@ -70,12 +70,12 @@
         [virtualScrollItemSize]="40"
         [filter]="operatorOptions.length > 10"
         filterBy="name">
-      </p-dropdown>
+      </p-select>
     </div>
 
     <div class="filter">
       <label>Lessor</label>
-      <p-dropdown
+      <p-select
         *ngIf="(lessorOptions$ | async) ?? []; let lessorOptions"
         [showClear]="true"
         styleClass="airframe-dropdown"
@@ -87,7 +87,7 @@
         [virtualScrollItemSize]="40"
         [filter]="lessorOptions.length > 10"
         filterBy="name">
-      </p-dropdown>
+      </p-select>
     </div>
   </div>
 </div>

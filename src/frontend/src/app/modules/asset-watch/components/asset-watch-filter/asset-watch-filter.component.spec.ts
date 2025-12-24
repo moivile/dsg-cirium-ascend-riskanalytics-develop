@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed, fakeAsync, flush, tick } from '@angular/core
 import { AssetWatchFilterComponent } from './asset-watch-filter.component';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { AssetWatchService } from '../../services/asset-watch.service';
-import { CalendarModule } from 'primeng/calendar';
-import { DropdownModule } from 'primeng/dropdown';
+import { DatePickerModule } from 'primeng/datepicker';
+import { SelectModule } from 'primeng/select';
 import { CheckboxModule } from 'primeng/checkbox';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -43,31 +43,31 @@ describe('AssetWatchFilterComponent', () => {
     portfoliosServiceSpy = jasmine.createSpyObj('PortfoliosService', ['getPortfolios']);
 
     TestBed.configureTestingModule({
-    declarations: [AssetWatchFilterComponent],
-    imports: [MultiSelectModule,
-        CalendarModule,
-        DropdownModule,
+      declarations: [AssetWatchFilterComponent],
+      imports: [MultiSelectModule,
+        DatePickerModule,
+        SelectModule,
         CheckboxModule,
         FormsModule,
         ReactiveFormsModule],
-    providers: [
+      providers: [
         { provide: AssetWatchService, useValue: assetWatchServiceSpy },
         { provide: PortfoliosService, useValue: portfoliosServiceSpy },
         AssetWatchStore,
         {
-            provide: ActivatedRoute,
-            useValue: {
-                paramMap: of({ get: () => null }),
-                snapshot: { paramMap: { get: () => null } }
-            }
+          provide: ActivatedRoute,
+          useValue: {
+            paramMap: of({ get: () => null }),
+            snapshot: { paramMap: { get: () => null } }
+          }
         },
         AppStore,
         MessageService,
         { provide: AppUserService, useValue: { getAppUser: () => of({ claims: [] }) } },
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting()
-    ]
-}).compileComponents();
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {

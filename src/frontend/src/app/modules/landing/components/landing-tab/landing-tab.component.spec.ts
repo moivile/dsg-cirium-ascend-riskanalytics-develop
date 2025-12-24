@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LandingTabComponent } from './landing-tab.component';
 import { DialogModule } from 'primeng/dialog';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
 import { ProfileService } from '../../../shared/services/profile.service';
@@ -26,7 +26,7 @@ describe('LandingTabComponent', () => {
     portfolioServiceSpy = jasmine.createSpyObj('PortfoliosService', ['getPortfolios']);
 
     await TestBed.configureTestingModule({
-      imports: [DialogModule, DropdownModule, TableModule, FormsModule],
+      imports: [DialogModule, SelectModule, TableModule, FormsModule],
       declarations: [LandingTabComponent, MockLandingPortfoliosComponent],
       providers: [
         { provide: ProfileService, useValue: profileServiceSpy },
@@ -64,8 +64,8 @@ describe('LandingTabComponent', () => {
 });
 
 @Component({
-    selector: 'ra-landing-portfolios',
-    template: '',
-    standalone: false
+  selector: 'ra-landing-portfolios',
+  template: '',
+  standalone: false
 })
-class MockLandingPortfoliosComponent {}
+class MockLandingPortfoliosComponent { }

@@ -1,6 +1,6 @@
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { PortfolioDetailOptionsComponent } from './portfolio-detail-options.component';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PortfoliosService } from '../../../shared/services/portfolios.service';
 import { TreeSelectModule } from 'primeng/treeselect';
@@ -27,7 +27,7 @@ describe('PortfolioDetailOptionsComponent', () => {
     utilizationServiceSpy = jasmine.createSpyObj('UtilizationService', ['getGroupOptions', 'getOperators', 'getLessors']);
 
     TestBed.configureTestingModule({
-      imports: [FormsModule, DropdownModule, TreeSelectModule, ReactiveFormsModule],
+      imports: [FormsModule, SelectModule, TreeSelectModule, ReactiveFormsModule],
       declarations: [PortfolioDetailOptionsComponent],
       providers: [
         { provide: PortfoliosService, useValue: portfoliosServiceSpy },
@@ -137,7 +137,7 @@ describe('PortfolioDetailOptionsComponent', () => {
   });
 
   describe('when the group options are changed', () => {
-     xit('should load operators', (done) => {
+    xit('should load operators', (done) => {
       // subscribe and assert
       component.operatorOptions$?.subscribe((operatorOptions) => {
         expect(operatorOptions.length).toBe(2);
@@ -168,7 +168,7 @@ describe('PortfolioDetailOptionsComponent', () => {
       // arrange
       utilizationServiceSpy.getOperators.and.returnValue(of([]));
       utilizationServiceSpy.getLessors.and.returnValue(of([]));
-      component.selectedPortfolioControl.setValue({ id: 99, name: 'portfolio 99'} as Portfolio, { emitEvent: false });
+      component.selectedPortfolioControl.setValue({ id: 99, name: 'portfolio 99' } as Portfolio, { emitEvent: false });
       component.selectedOperatorControl.setValue({ id: 1, name: 'operator 1' });
       component.selectedLessorControl.setValue({ id: 1, name: 'lessor 1' });
 
@@ -205,12 +205,12 @@ describe('PortfolioDetailOptionsComponent', () => {
             key: 'AircraftFamily',
             value: [
               {
-                id:1,
-                name:'Widebody Jets'
+                id: 1,
+                name: 'Widebody Jets'
               },
               {
-                id:2,
-                name:'Business Jets'
+                id: 2,
+                name: 'Business Jets'
               }
             ],
             filterIds: [1, 2]

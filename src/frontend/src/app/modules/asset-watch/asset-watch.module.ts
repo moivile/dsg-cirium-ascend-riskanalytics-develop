@@ -5,13 +5,13 @@ import { AssetWatchTabComponent } from './components/asset-watch-tab/asset-watch
 import { SharedModule } from '../shared/shared.module';
 import { TooltipModule } from 'primeng/tooltip';
 import { TreeSelectModule } from 'primeng/treeselect';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { AssetWatchDetailsTableComponent } from './components/asset-watch-details-table/asset-watch-details-table.component';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CalendarModule } from 'primeng/calendar';
+import { DatePickerModule } from 'primeng/datepicker';
 import { BaseChartDirective } from 'ng2-charts';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { AssetWatchFilterComponent } from './components/asset-watch-filter/asset-watch-filter.component';
@@ -52,12 +52,12 @@ import { AssetWatchSavedSearchFiltersViewComponent } from './components/asset-wa
     SharedModule,
     TooltipModule,
     TreeSelectModule,
-    DropdownModule,
+    SelectModule,
     DynamicDialogModule,
     InputNumberModule,
     TableModule,
     DialogModule,
-    CalendarModule,
+    DatePickerModule,
     BaseChartDirective,
     ReactiveFormsModule,
     MultiSelectModule,

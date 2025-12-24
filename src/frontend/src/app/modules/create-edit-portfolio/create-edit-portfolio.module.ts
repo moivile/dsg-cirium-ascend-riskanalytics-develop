@@ -10,7 +10,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { SharedModule } from '../shared/shared.module';
 import { AircraftService } from './services/aircraft.service';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { CheckboxModule } from 'primeng/checkbox';
 import { MultiSelectModule } from 'primeng/multiselect';
 
@@ -26,10 +26,10 @@ import { MultiSelectModule } from 'primeng/multiselect';
     DynamicDialogModule,
     InputTextModule,
     SharedModule,
-    DropdownModule,
+    SelectModule,
     CheckboxModule,
     MultiSelectModule
   ],
   providers: [AircraftService]
 })
-export class CreateEditPortfolioModule {}
+export class CreateEditPortfolioModule { }

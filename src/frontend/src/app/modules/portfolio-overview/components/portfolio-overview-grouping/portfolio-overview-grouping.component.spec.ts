@@ -1,7 +1,7 @@
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { PortfoliosService } from '../../../shared/services/portfolios.service';
 import { PortfolioOverviewStore } from '../../services/portfolio-overview.store';
 
@@ -16,14 +16,14 @@ describe('PortfolioOverviewGroupingComponent', () => {
     portfolioOverviewStoreSpy = jasmine.createSpyObj('PortfolioOverviewStore', ['setGroupBy']);
 
     await TestBed.configureTestingModule({
-    declarations: [PortfolioOverviewGroupingComponent],
-    imports: [DropdownModule, FormsModule],
-    providers: [
+      declarations: [PortfolioOverviewGroupingComponent],
+      imports: [SelectModule, FormsModule],
+      providers: [
         { provide: PortfolioOverviewStore, useValue: portfolioOverviewStoreSpy },
         PortfoliosService,
         provideHttpClient(withInterceptorsFromDi())
-    ]
-})
+      ]
+    })
       .compileComponents();
     fixture = TestBed.createComponent(PortfolioOverviewGroupingComponent);
     component = fixture.componentInstance;

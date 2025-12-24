@@ -3,8 +3,8 @@ import { ComparePortfolioTabComponent } from './compare-portfolio-tab.component'
 import { Component, Input } from '@angular/core';
 import { BackLinkComponent } from '../../../shared/components/back-link/back-link.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { DropdownModule } from 'primeng/dropdown';
-import { CalendarModule } from 'primeng/calendar';
+import { SelectModule } from 'primeng/select';
+import { DatePickerModule } from 'primeng/datepicker';
 import { MetricOptions } from '../../models/metric-options';
 import { FormsModule } from '@angular/forms';
 import { ComparePortfolioExcelExportService } from '../../services/excel/compare-portfolio-excel-export.service';
@@ -21,7 +21,7 @@ describe('ComparePortfolioTabComponent', () => {
     comparePortfolioExcelExportServiceSpy = jasmine.createSpyObj('ComparePortfolioExcelExportService', ['export']);
 
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, DropdownModule, CalendarModule, FormsModule],
+      imports: [RouterTestingModule, SelectModule, DatePickerModule, FormsModule],
       declarations: [ComparePortfolioTabComponent, MockPortfolioDetailComponent, MockPortfolioTableComponent, BackLinkComponent],
       providers: [{ provide: ComparePortfolioExcelExportService, useValue: comparePortfolioExcelExportServiceSpy }]
     }).compileComponents();
@@ -252,9 +252,9 @@ describe('ComparePortfolioTabComponent', () => {
 });
 
 @Component({
-    selector: 'ra-portfolio-detail',
-    template: '',
-    standalone: false
+  selector: 'ra-portfolio-detail',
+  template: '',
+  standalone: false
 })
 class MockPortfolioDetailComponent {
   @Input() metricOptions?: MetricOptions;
@@ -265,9 +265,9 @@ class MockPortfolioDetailComponent {
 }
 
 @Component({
-    selector: 'ra-compare-portfolio-table',
-    template: '',
-    standalone: false
+  selector: 'ra-compare-portfolio-table',
+  template: '',
+  standalone: false
 })
 class MockPortfolioTableComponent {
   @Input() isModal = false;

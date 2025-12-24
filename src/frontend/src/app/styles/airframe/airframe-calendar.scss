@@ -1,0 +1,150 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+@use '@airframe/standard/src/scss/foundations/font-family';
+
+.airframe-calendar {
+
+    display: inline-flex;
+    height: 40px;
+
+    .p-component,
+    .p-link {
+        font-family: font-family.$font-family-montserrat;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .p-inputtext {
+        border-color: colors.$airframe-color-border-on-light;
+        border-width: 1px 0 1px 1px;
+
+        &::placeholder {
+            font-weight: 300;
+        }
+
+        &:enabled {
+            &:hover {
+                background: colors.$airframe-color-neutral-grey-10;
+                border-color: colors.$airframe-color-primary-light;
+
+                +.p-button {
+                    background-color: colors.$airframe-color-neutral-grey-10;
+                    color: colors.$airframe-color-primary-normal;
+                    border-color: colors.$airframe-color-primary-light;
+                }
+            }
+
+            &:focus,
+            &:hover:focus {
+                box-shadow: none;
+                background-color: colors.$airframe-color-neutral-white;
+                border-color: colors.$airframe-color-foreground-focus;
+
+                +.p-button {
+                    color: colors.$airframe-color-primary-normal;
+                    border-width: 2px 2px 2px 0;
+                    border-color: colors.$airframe-color-foreground-focus;
+                }
+            }
+
+            &:focus-within {
+                border-style: solid;
+                border-color: colors.$airframe-color-foreground-focus;
+                border-width: 2px 0 2px 2px;
+                border-radius: 2px 0 0 2px;
+                background-color: colors.$airframe-color-neutral-white;
+            }
+        }
+    }
+
+    .p-datepicker-dropdown {
+        border-color: colors.$airframe-color-border-on-light;
+        color: colors.$airframe-color-primary-normal;
+        background-color: colors.$airframe-color-neutral-white;
+        border-width: 1px 1px 1px 0;
+        border-radius: 0 2px 2px 0;
+
+        &:enabled {
+            &:hover {
+                background-color: colors.$airframe-color-neutral-grey-10;
+                color: colors.$airframe-color-primary-normal;
+                border-color: colors.$airframe-color-primary-light;
+            }
+
+            &:focus,
+            &:hover:focus {
+                box-shadow: none;
+                background-color: colors.$airframe-color-neutral-white;
+            }
+        }
+    }
+
+    .p-datepicker {
+        &:not(.p-disabled) {
+            .p-monthpicker .p-monthpicker-month {
+                &:not(.p-highlight) {
+                    &:not(.p-highlight):hover {
+                        background: colors.$airframe-color-primary-extra-extra-light;
+                    }
+                }
+
+                &.p-monthpicker-month:not(.p-disabled):focus {
+                    box-shadow: none;
+                }
+
+                &.p-highlight {
+                    background: colors.$airframe-color-primary-normal;
+                    color: colors.$airframe-color-neutral-white;
+                }
+            }
+
+            .p-datepicker-header {
+                font-weight: normal;
+
+                .p-datepicker-title {
+
+                    .p-datepicker-year,
+                    .p-datepicker-month {
+                        color: colors.$airframe-color-primary-normal;
+                        font-weight: normal;
+
+                        &:enabled:hover {
+                            color: colors.$airframe-color-primary-normal;
+                            background: colors.$airframe-color-primary-extra-extra-light;
+                            box-shadow: none;
+                        }
+                    }
+                }
+
+                .p-datepicker-prev,
+                .p-datepicker-next {
+                    color: colors.$airframe-color-primary-normal;
+
+                    &:focus {
+                        box-shadow: none;
+                    }
+
+                    &:enabled:hover {
+                        color: colors.$airframe-color-primary-normal;
+                    }
+                }
+            }
+
+            .p-yearpicker {
+                .p-yearpicker-year:not(.p-disabled) {
+                    &:not(.p-highlight):hover {
+                        background: colors.$airframe-color-primary-extra-extra-light;
+                    }
+
+                    &:focus {
+                        box-shadow: none;
+                    }
+
+                    &.p-highlight {
+                        background: colors.$airframe-color-primary-normal;
+                        color: colors.$airframe-color-neutral-white;
+                    }
+                }
+            }
+        }
+    }
+}

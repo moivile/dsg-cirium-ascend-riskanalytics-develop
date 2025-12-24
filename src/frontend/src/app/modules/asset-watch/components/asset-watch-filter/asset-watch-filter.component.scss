@@ -76,15 +76,15 @@
     color: colors.$airframe-color-neutral-grey-80;
 
     @media (min-width: breakpoints.$airframe-breakpoint-md) {
-        width: 136px;
+      width: 136px;
     }
 
     @media (min-width: breakpoints.$airframe-breakpoint-lg) {
-        width: 156px;
+      width: 156px;
     }
 
     @media (min-width: breakpoints.$airframe-breakpoint-xl) {
-        width: 204px;
+      width: 204px;
     }
 
     span {
@@ -99,18 +99,18 @@
     p-treeSelect {
       width: inherit;
     }
-    p-dropdown {
+    p-select {
       width: inherit;
     }
   }
 
   &__route-category-name {
-    border-top: 1px solid #B3B3B3;
+    border-top: 1px solid #b3b3b3;
     padding: 15px 0 0 0;
   }
 
   &__date-range-name {
-    border-top: 1px solid #B3B3B3;
+    border-top: 1px solid #b3b3b3;
     padding: 15px 0 0 0;
   }
 }
@@ -122,9 +122,9 @@
     margin-bottom: 24px;
   }
 
-  p-calendar {
+  p-datepicker {
     width: 100%;
-    .p-calendar {
+    .p-datepicker {
       width: 100%;
     }
   }
@@ -136,12 +136,12 @@
 
 .asset-watch-choose-portfolio {
   padding-bottom: 32px;
-  p-dropdown {
+  p-select {
     width: 100%;
   }
 }
 
-:host ::ng-deep p-calendar.p-calendar-invalid-value .p-button {
+:host ::ng-deep p-datepicker.p-calendar-invalid-value .p-button {
   border-color: #f44336;
 }
 

@@ -78,8 +78,8 @@
     scrollHeight="500px"
     [virtualScroll]="true"
     [virtualScrollItemSize]="28"
-    (onRowSelect)="onRowSelect($event.data)"
-    (onRowUnselect)="onRowUnselect($event.data)">
+    (onRowSelect)="onRowSelect($any($event.data))"
+    (onRowUnselect)="onRowUnselect($any($event.data))">
     <ng-template pTemplate="header">
       <tr>
         <th style="width: 4rem">

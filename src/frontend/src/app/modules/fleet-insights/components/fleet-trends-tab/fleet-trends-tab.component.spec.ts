@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FleetTrendsTabComponent } from './fleet-trends-tab.component';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { TooltipModule } from 'primeng/tooltip';
 
 describe('FleetTrendsTabComponent', () => {
@@ -11,7 +11,7 @@ describe('FleetTrendsTabComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [FleetTrendsTabComponent],
-      imports: [DropdownModule, TooltipModule]
+      imports: [SelectModule, TooltipModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(FleetTrendsTabComponent);

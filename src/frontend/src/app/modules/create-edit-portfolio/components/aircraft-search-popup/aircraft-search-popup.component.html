@@ -116,7 +116,7 @@
       [disabled]="loading"
       [showToggleAll]="false"></p-multiSelect>
 
-      <p-multiSelect
+    <p-multiSelect
       formControlName="companyTypes"
       [options]="searchResultDropdownLists?.companyTypes || []"
       placeholder="ABS/EETC"
@@ -159,8 +159,8 @@
   [loading]="loading"
   dataKey="aircraftId"
   [selection]="checkedAircraftList"
-  (onRowSelect)="onRowSelect($event.data)"
-  (onRowUnselect)="onRowUnselect($event.data)"
+  (onRowSelect)="onRowSelect($any($event.data))"
+  (onRowUnselect)="onRowUnselect($any($event.data))"
   styleClass="airframe-table">
   <ng-template pTemplate="header">
     <tr>

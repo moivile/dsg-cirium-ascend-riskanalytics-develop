@@ -7,7 +7,7 @@ import { PortfolioOverviewTabComponent } from './portfolio-overview-tab.componen
 import { PortfolioOverviewSummaryCountsComponent } from '../portfolio-overview-summary-counts/portfolio-overview-summary-counts.component';
 import { PortoflioOverviewSummaryMetricsComponent } from '../portfolio-overview-summary-metrics/portfolio-overview-summary-metrics.component';
 import { PortfolioOverviewGroupingComponent } from '../portfolio-overview-grouping/portfolio-overview-grouping.component';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { PortfolioOverviewStackedBarChartComponent } from '../portfolio-overview-stacked-bar-chart/portfolio-overview-stacked-bar-chart.component';
 import { PortfolioOverviewTableComponent } from '../portfolio-overview-table/portfolio-overview-table.component';
@@ -36,7 +36,7 @@ describe('PortfolioOverviewTabComponent', () => {
     const portfoliosServiceSpy = jasmine.createSpyObj('PortfoliosService', ['getPortfolio']);
     const portfoliosAircraftServiceSpy = jasmine.createSpyObj('PortfolioAircraftService', ['getPortfolioAircraft']);
     await TestBed.configureTestingModule({
-      imports: [DropdownModule, FormsModule, BaseChartDirective, RouterLink, TableModule, DialogModule, TooltipModule],
+      imports: [SelectModule, FormsModule, BaseChartDirective, RouterLink, TableModule, DialogModule, TooltipModule],
       declarations: [
         PortfolioOverviewTabComponent,
         PortfolioOverviewSummaryCountsComponent,
