@@ -26,13 +26,13 @@
       color: colors.$airframe-color-neutral-black;
     }
 
-    p-select {
+    p-dropdown {
       flex-grow: 1;
     }
   }
 }
 .globalHeader {
-  height: 40px;
+  height: 56px;
   background-color: colors.$airframe-color-neutral-grey-80;
 }
 

@@ -1,0 +1,26 @@
+<div #chartContainer>
+  <div [ngClass]="{ 'bar-chart-loading-overlay': loading }">
+    <ng-container *ngIf="barChartLabels && barChartLabels.length > 0; else noDataBlock">
+      <ng-container *ngIf="barChartLabels.length <= 500; else tooManyItemsBlock">
+        <div *ngIf="barChartDataSets" [ngStyle]="{ 'height.px': chartHeight }" class="barChartArea" (mouseout)="removeTooltip()">
+          <canvas baseChart type="bar" [options]="barChartOptions" [datasets]="barChartDataSets" [labels]="barChartLabels"> </canvas>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #tooManyItemsBlock>
+      <div class="no-data-block">
+        Please filter your search criteria such that the number of results is fewer than 500 rows. Alternatively, refer to the Details table
+        below.
+      </div>
+    </ng-template>
+
+    <ng-template #noDataBlock>
+      <div class="no-data-block">No data for this period</div>
+    </ng-template>
+
+    <div class="loading-overlay">
+      <div class="spinner"></div>
+    </div>
+  </div>
+</div>

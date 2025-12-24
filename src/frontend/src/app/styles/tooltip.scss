@@ -2,15 +2,16 @@
 @use '@airframe/standard/src/scss/foundations/colors';
 
 .helptip .p-tooltip-text {
-  background-color: colors.$airframe-color-status-info-normal !important;
+  background-color: colors.$airframe-color-neutral-grey-80 !important;
   border-radius: 3px;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 0.0466667px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.05px;
+  line-height: 18px;
+  padding: 16px;
+  width: 325px;
+  box-shadow: none !important;
   font-family: font-family.$font-family-montserrat;
-  padding: 12px 12px 12px 12px;
-  width: 280px;
 }
 
 .helptip.p-tooltip-right .p-tooltip-text {
@@ -23,5 +24,5 @@
   border-left: 10px solid transparent;
   border-right: 10px solid colors.$airframe-color-status-info-normal !important;
   margin-left: -15px;
-  margin-top: -20px;
+  margin-top: -5px;
 }

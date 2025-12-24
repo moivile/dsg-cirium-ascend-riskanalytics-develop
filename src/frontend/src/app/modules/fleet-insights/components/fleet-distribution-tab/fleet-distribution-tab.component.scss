@@ -1,0 +1,180 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+@use '@airframe/standard/src/scss/foundations/breakpoints';
+@use '@airframe/standard/src/scss/foundations/font-family';
+
+.mock {
+  width: 100%;
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: colors.$airframe-color-neutral-grey-10-opacity-50;
+}
+
+[hidden] {
+  display: none;
+}
+
+.fleet-insights__container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+}
+
+.fleet-insights__charts-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 1rem;
+}
+
+.fleet-insights__stacked-bar-chart,
+.fleet-insights__pie-chart {
+  width: 100%;
+}
+
+.fleet-insights {
+  padding: 50px 40px 0 40px;
+
+  &__content {
+    padding: 0 16px 16px 16px;
+    padding-left: 16px;
+    margin-top: 16px;
+    display: block;
+  }
+
+  &__content-full-width {
+    box-sizing: border-box;
+    flex-basis: 98%;
+    max-width: 98%;
+    transition: 0.5s;
+  }
+
+  &__flex-right {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+  }
+
+  &__accordion {
+    overflow-y: hidden;
+    position: relative;
+
+    &:after {
+      // fade effect
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 20px;
+      bottom: 0;
+      background-image: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    }
+  }
+
+  &__charts {
+    flex-wrap: nowrap;
+    margin-bottom: 20px;
+  }
+
+  &__stacked-bar-chart {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  &__charts-accordion {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.page-section__title {
+  margin-bottom: 20px;
+  display: block;
+}
+
+.aircraft-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: colors.$airframe-color-black-alpha-95;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+#fleet-insights-content {
+  padding: 0 0 16px 0;
+}
+
+.expand-collapse-button {
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: colors.$airframe-color-background-high-contrast-on-dark;
+  padding: 4px 8px;
+  color: colors.$airframe-color-primary-normal;
+  margin-left: -12px;
+  z-index: 99;
+  position: fixed;
+  top: 200px;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+  display: inline;
+
+  &:hover {
+    color: colors.$airframe-color-background-high-contrast-on-dark;
+    background-color: colors.$airframe-color-primary-normal;
+    border: 1px solid colors.$airframe-color-primary-normal;
+    box-shadow: 0 0 2px 0 colors.$airframe-color-primary-normal;
+  }
+}
+
+.no-data-block {
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: colors.$airframe-color-neutral-grey-10-opacity-50;
+}
+
+:host ::ng-deep .airframe-modal .p-dialog {
+  width: inherit;
+  height: inherit;
+  max-height: 100%;
+}
+
+.disabled-tab {
+  pointer-events: none; // Disable click events
+  color: gray;
+  opacity: 0.6;
+}
+
+:host ::ng-deep .dialog-fullscreen {
+  .p-dialog {
+    height: 90vh;
+    overflow: hidden;
+    background: white;
+  }
+
+  .p-dialog-header {
+    padding-top: 2rem;
+    position: sticky;
+    z-index: 2;
+    background: white;
+    .p-dialog-header-icons {
+      top: 2rem;
+      right: 1rem;
+      position: absolute;
+    }
+  }
+
+  .p-dialog-content {
+    padding-top: 2rem;
+    overflow-y: auto;
+    height: calc(90vh - 6rem);
+    background: white;
+  }
+}

@@ -1,9 +1,12 @@
 import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 
 import { FleetInsightsComponent } from './fleet-insights.component';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { fleetDistributionRoute, fleetInsightsRoute, fleetTrendsRoute, marketActivityRoute } from '../../route.constants';
+import { fleetDistributionRoute, fleetTrendsRoute, marketActivityRoute } from '../../route.constants';
+import { AppStore } from '../../app-store';
+import { AppUserService } from '../../app-user.service';
+import { of } from 'rxjs';
 
 @Component({
     template: '<div></div>',
@@ -16,12 +19,17 @@ export class EmptyComponent {}
     template: '<div></div>',
     standalone: false
 })
-class MockFleetInsightsFilterPanelComponent {}
+class MockFleetInsightsFilterPanelComponent {
+  @Input() isFleetDistributionPage = false;
+  @Input() isFleetTrendsPage$ = of(false);
+  @Input() isMarketActivityPage$ = of(false);
+}
 
 describe('FleetInsightsComponent', () => {
   let component: FleetInsightsComponent;
   let fixture: ComponentFixture<FleetInsightsComponent>;
   let router: Router;
+  let appStore: AppStore;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -43,16 +51,19 @@ describe('FleetInsightsComponent', () => {
                 path: marketActivityRoute,
                 component: EmptyComponent
               },
-              { path: fleetInsightsRoute, redirectTo: fleetDistributionRoute, pathMatch: 'full' }
+              { path: '', redirectTo: fleetDistributionRoute, pathMatch: 'full' }
             ]
           }
         ])
-      ]
+      ],
+      providers: [AppStore, { provide: AppUserService, useValue: { getAppUser: () => of({ claims: [] }) } }]
     }).compileComponents();
 
     fixture = TestBed.createComponent(FleetInsightsComponent);
     component = fixture.componentInstance;
     router = TestBed.inject(Router);
+    appStore = TestBed.inject(AppStore);
+    appStore.setAppUser({ claims: [], userEmailAddress: 'fgpremiumtest@rbi.co.uk' });
     fixture.detectChanges();
   });
 

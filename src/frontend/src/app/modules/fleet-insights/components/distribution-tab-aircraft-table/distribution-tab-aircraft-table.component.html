@@ -1,0 +1,106 @@
+<p-table
+  [value]="isActive ? aircraftList || [] : []"
+  [lazy]="true"
+  (onLazyLoad)="onLazyLoad($event)"
+  [paginator]="true"
+  [rows]="100"
+  [totalRecords]="(distributionTabStore.totalAircraftRecords$ | async) || 0"
+  [loading]="loading"
+  [rowsPerPageOptions]="[50, 100, 200]"
+  class="airframe-table airframe-table--fleet-insight"
+  sortMode="single"
+  [scrollable]="true"
+  scrollDirection="both"
+  [scrollHeight]="'700px'"
+  [sortField]="defaultSortField"
+  [sortOrder]="defaultSortOrder">
+<ng-template pTemplate="header">
+  <tr>
+    <th pSortableColumn="aircraftSerialNumber" style="min-width: 90px" data-column="serial">
+      <div class="airframe-table__sortable-header"><span>Serial</span> <p-sortIcon field="aircraftSerialNumber"></p-sortIcon></div>
+    </th>
+    <th pSortableColumn="aircraftRegistrationNumber" style="min-width: 150px" data-column="registration">
+      <div class="airframe-table__sortable-header">
+        <span>Registration</span> <p-sortIcon field="aircraftRegistrationNumber"></p-sortIcon>
+      </div>
+    </th>
+    <th pSortableColumn="status" style="min-width: 90px" data-column="status">
+      <div class="airframe-table__sortable-header"><span>Status</span> <p-sortIcon field="status"></p-sortIcon></div>
+    </th>
+    <th pSortableColumn="aircraftManufacturer" style="min-width: 90px" data-column="manufacturer">
+      <div class="airframe-table__sortable-header"><span>Manufacturer</span> <p-sortIcon field="aircraftManufacturer"></p-sortIcon></div>
+    </th>
+    <th pSortableColumn="aircraftSeries" style="min-width: 100px" data-column="aircraft-series">
+      <div class="airframe-table__sortable-header"><span>Aircraft Series</span> <p-sortIcon field="aircraftSeries"></p-sortIcon></div>
+    </th>
+    <th pSortableColumn="engineSeries" style="min-width: 90px" data-column="engine-series">
+      <div class="airframe-table__sortable-header"><span>Engine Series</span> <p-sortIcon field="engineSeries"></p-sortIcon></div>
+    </th>
+    <th pSortableColumn="deliverydate" style="min-width: 125px" data-column="delivery-date">
+      <div class="airframe-table__sortable-header"><span>Delivery Date</span> <p-sortIcon field="deliverydate"></p-sortIcon></div>
+    </th>
+    <th pSortableColumn="aircraftAgeYears" style="min-width: 90px" data-column="age">
+      <div class="airframe-table__sortable-header"><span>Age</span> <p-sortIcon field="aircraftAgeYears"></p-sortIcon></div>
+    </th>
+    <th pSortableColumn="aircraftUsage" style="min-width: 90px" data-column="primary-usage">
+      <div class="airframe-table__sortable-header"><span>Primary Usage</span> <p-sortIcon field="aircraftUsage"></p-sortIcon></div>
+    </th>
+    <th pSortableColumn="operator" style="min-width: 90px" data-column="operator">
+      <div class="airframe-table__sortable-header"><span>Operator</span> <p-sortIcon field="operator"></p-sortIcon></div>
+    </th>
+    <th pSortableColumn="manager" style="min-width: 90px" data-column="manager">
+      <div class="airframe-table__sortable-header"><span>Manager</span> <p-sortIcon field="manager"></p-sortIcon></div>
+    </th>
+    <th pSortableColumn="owner" style="min-width: 90px" data-column="owner">
+      <div class="airframe-table__sortable-header"><span>Owner</span> <p-sortIcon field="owner"></p-sortIcon></div>
+    </th>
+    <th pSortableColumn="ownership" style="min-width: 90px" data-column="ownership">
+      <div class="airframe-table__sortable-header"><span>Ownership</span> <p-sortIcon field="ownership"></p-sortIcon></div>
+    </th>
+    <th pSortableColumn="leaseStatus" style="min-width: 90px" data-column="lease-status">
+      <div class="airframe-table__sortable-header"><span>Lease Status</span> <p-sortIcon field="leaseStatus"></p-sortIcon></div>
+    </th>
+    <th pSortableColumn="leaseStart" style="min-width: 125px" data-column="lease-start">
+      <div class="airframe-table__sortable-header"><span>Lease Start</span> <p-sortIcon field="leaseStart"></p-sortIcon></div>
+    </th>
+    <th pSortableColumn="leaseEnd" style="min-width: 125px" data-column="lease-end">
+      <div class="airframe-table__sortable-header"><span>Lease End</span> <p-sortIcon field="leaseEnd"></p-sortIcon></div>
+    </th>
+    <th *ngIf="isAvailabilities" pSortableColumn="availability" style="min-width: 90px" data-column="availability">
+      <div class="airframe-table__sortable-header"><span>Availability</span> <p-sortIcon field="availability"></p-sortIcon></div>
+    </th>
+  </tr>
+</ng-template>
+<ng-template pTemplate="body" let-rowData>
+  <tr>
+    <td data-column="serial">
+      <ng-container *ngIf="rowData.aircraftSerialNumber; else noSerial">
+        <a [href]="getAircraftProfileLink(rowData)" target="_blank" rel="noopener noreferrer">
+          {{ rowData.aircraftSerialNumber }}
+        </a>
+      </ng-container>
+      <ng-template #noSerial>-</ng-template>
+    </td>
+    <td data-column="registration">{{ rowData.aircraftRegistrationNumber || '-' }}</td>
+    <td data-column="status">{{ rowData.status || '-' }}</td>
+    <td data-column="manufacturer">{{ rowData.aircraftManufacturer || '-' }}</td>
+    <td data-column="aircraft-series">{{ rowData.aircraftSeries || '-' }}</td>
+    <td data-column="engine-series">{{ rowData.engineSeries || '-' }}</td>
+    <td data-column="delivery-date">{{ isValidDate(rowData.deliveryDate) ? (rowData.deliveryDate | date : 'dd-MMM-yyyy') : '-' }}</td>
+    <td data-column="age" class="text-right">{{ rowData.aircraftAgeYears || '-' }}</td>
+    <td data-column="primary-usage">{{ rowData.aircraftUsage || '-' }}</td>
+    <td data-column="operator">{{ rowData.operator || '-' }}</td>
+    <td data-column="manager">{{ rowData.manager || '-' }}</td>
+    <td data-column="owner">{{ rowData.owner || '-' }}</td>
+    <td data-column="ownership">{{ rowData.ownership || '-' }}</td>
+    <td data-column="lease-status">{{ rowData.leaseStatus || '-' }}</td>
+    <td data-column="lease-start">{{ rowData.leaseStart ? (rowData.leaseStart | date : 'dd-MMM-yyyy') : '-' }}</td>
+    <td data-column="lease-end">
+      {{ rowData.leaseEnd ? (rowData.leaseEnd | date : 'dd-MMM-yyyy') : '-'
+      }}<span *ngIf="rowData.isLeaseEndEstimated"> <strong> *</strong></span>
+    </td>
+    <td *ngIf="isAvailabilities" data-column="availability">{{ rowData.availability || '-' }}</td>
+  </tr>
+</ng-template>
+</p-table>
+<label>* indicates that the lease end date is estimated.</label>

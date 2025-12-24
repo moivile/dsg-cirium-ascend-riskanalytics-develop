@@ -28,10 +28,13 @@
 @use './app/styles/divider-panel-container';
 @use './app/styles/page-content';
 @use './app/styles/page-section';
+@use './app/styles/sidebar-filter-panel';
+@use './app/styles/field-set-accordion';
+@use './app/styles/navigation-tabs';
 
 @import '@drewbot/sass-flexbox-grid/public/sass-flexbox/main.css';
-@import '@fortawesome/fontawesome-free/css/all.min.css';
-@import 'primeicons/primeicons.css';
+@import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+@import '../node_modules/primeicons/primeicons.css';
 @import '../node_modules/@flightstats/cirium-design-tokens/dist/airframe/tokens/dark.css';
 @import '../node_modules/@flightstats/cirium-design-tokens/dist/airframe/tokens/light.css';
 

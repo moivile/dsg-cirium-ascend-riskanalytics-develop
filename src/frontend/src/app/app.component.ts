@@ -1,31 +1,29 @@
-/* eslint-disable object-shorthand */
 import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { AuthService, IdToken } from '@auth0/auth0-angular';
-import { ScriptInjectorService } from './modules/shared/services/script-injector.service';
 import { AnalyticsService } from './modules/shared/services/analytics-service';
-import { Subject, combineLatest, filter, map, mergeMap, shareReplay, take, takeUntil, tap, withLatestFrom } from 'rxjs';
-import { GlobalConstants } from './modules/shared/models/global-constants';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { GwaAnalyticsMetaTagService } from './modules/shared/services/gwa-tags-data.service';
+import { Subject, filter, map, mergeMap, shareReplay, take, Subscription, distinctUntilChanged, tap } from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
 import { AppStore } from './app-store';
 import { FormControl } from '@angular/forms';
-import {
-  assetWatchRoute,
-  assetWatchSavedSearchesRoute,
-  fleetDistributionRoute,
-  fleetInsightsRoute,
-  fleetTrendsRoute,
-  marketActivityRoute
-} from './route.constants';
+import { fleetDistributionRoute, fleetTrendsRoute, marketActivityRoute } from './route.constants';
+import { AppConfigService } from './app-config.service';
 
 @Component({
-    selector: 'ra-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    standalone: false
+  selector: 'ra-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  standalone: false
 })
 export class AppComponent implements OnInit, OnDestroy {
-  logoutURL!: string;
-  profileToken: string | undefined;
+  readonly headerTitle = 'Fleet Insights';
+  readonly apiHost: string;
+
+
+
+  logoutUrl!: string;
+  token: string | undefined;
+  showGlobalNav = false;
   selectedPortfolioIdControl = new FormControl<number | null>(null);
 
   currUrl$ = this.router.events.pipe(
@@ -37,44 +35,15 @@ export class AppComponent implements OnInit, OnDestroy {
   fleetTrendsRoute = fleetTrendsRoute;
   marketActivityRoute = marketActivityRoute;
 
-  isFleetInsightsPage$ = this.currUrl$.pipe(
-    map((url) => {
-      return url.startsWith(`/${fleetInsightsRoute}`);
-    })
-  );
-
-  get isFleetSummary(): boolean {
-    const url = this.getUrlSegments(this.router.url);
-    if (url.length === 2 && url[0] === 'portfolios' && !isNaN(Number(url[1]))) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  get isPortfoliosPage(): boolean {
-    const url = this.getUrlSegments(this.router.url);
-    if (url.length === 1 && url[0] === 'portfolios') {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  get isHoursAndCyclesPage(): boolean {
-    return this.isPage('hours-and-cycles');
-  }
-
-  get isEmissionsPage(): boolean {
-    return this.isPage('emissions');
-  }
-
-  get isAssetWatchPage(): boolean {
-    return this.isPage('asset-watch');
-  }
-
+  private readonly authAudience: string = 'cae-user-services';
   private readonly headerAndFooterHeight = 130;
   private destroy$ = new Subject<void>();
+  private routerSubscription: Subscription | undefined;
+  private userLoadedSubscription: Subscription | undefined;
+  private gwaUserDataSubscription: Subscription | undefined;
+  private globalHeaderSubscription: Subscription | undefined;
+  private fullStorySubscription: Subscription | undefined;
+  private cachedViperGuidKey: string | null = null;
 
   minimumContentHeight = window.innerHeight - this.headerAndFooterHeight;
 
@@ -85,81 +54,45 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     public readonly authService: AuthService,
-    private readonly scriptInjectorService: ScriptInjectorService,
     private readonly analyticsService: AnalyticsService,
+    private readonly gwaTagsDataService: GwaAnalyticsMetaTagService,
     private readonly router: Router,
     public readonly appStore: AppStore,
-    private readonly activatedRoute: ActivatedRoute
+    private readonly appConfigService: AppConfigService
   ) {
+    this.apiHost = this.appConfigService.configuration.myCiriumApiUrl;
     this.appStore.loadAppUser();
-
-    this.isFleetInsightsPage$.pipe(take(1)).subscribe((isFleetInsightsPage) => {
-      if (!isFleetInsightsPage) {
-        this.appStore.portfoliosLoaded$.pipe(take(1)).subscribe((loaded) => {
-          if (!loaded) {
-            this.appStore.loadPortfolios();
-          }
-        });
-      }
-    });
-
-    this.selectedPortfolioIdControl.valueChanges
-      .pipe(
-        takeUntil(this.destroy$),
-        tap((selectedPortfolioId) => {
-          this.appStore.setSelectedPortfolioId(selectedPortfolioId);
-        })
-      )
-      .subscribe();
-
-    this.appStore.selectedPortfolioId$
-      .pipe(
-        takeUntil(this.destroy$),
-        filter((selectedPortfolioId) => this.selectedPortfolioIdControl.value !== selectedPortfolioId),
-        tap((selectedPortfolioId) => {
-          this.selectedPortfolioIdControl.setValue(selectedPortfolioId);
-        })
-      )
-      .subscribe();
-
-    combineLatest([this.router.events.pipe(filter((event) => event instanceof NavigationEnd)), this.appStore.portfolios$])
-      .pipe(
-        takeUntil(this.destroy$),
-        filter(([, portfolios]) => portfolios?.length > 0),
-        withLatestFrom(this.appStore.selectedPortfolioId$),
-        tap(([[, portfolios], selectedPortfolioId]) => {
-          const currRoute = this.rootRoute(this.activatedRoute);
-          const portfolioIdParam: number = currRoute.snapshot.params['id'] || selectedPortfolioId;
-          const selectedPortfolio = portfolios.find((x) => x.id == portfolioIdParam) ?? portfolios[0];
-          this.appStore.setSelectedPortfolioId(selectedPortfolio?.id ?? null);
-        })
-      )
-      .subscribe();
   }
 
   ngOnInit(): void {
+    this.setupGwaUserData();
     this.loadGlobalHeader();
+    this.setupRouterTracking();
+    this.initializeAdobeAnalytics();
   }
 
   loadGlobalHeader(): void {
-    this.logoutURL = 'logout';
 
-    this.authService
-      .getAccessTokenSilently({
-        authorizationParams: { audience: 'cae-user-services' }
-      })
-      .subscribe(async (token) => {
-        setTimeout(async () => {
-          this.profileToken = token;
-          await this.scriptInjectorService.load([
-            { name: 'id', value: 'globalHeader' },
-            { name: 'src', value: GlobalConstants.globalHeaderSrc },
-            { name: 'type', value: 'module' }
-          ]);
-        }, 5000);
-      });
+    this.globalHeaderSubscription = this.authService.isLoading$
+      .pipe(
+        filter(loading => loading === false),
+        take(1),
+        mergeMap(() => this.authService.isAuthenticated$),
+        filter(isAuth => isAuth === true),
+        take(1),
+        mergeMap(() =>
+          this.authService.getAccessTokenSilently({
+            authorizationParams: { audience: this.authAudience }
+          })
+        ),
+        tap((token) => {
+          this.token = token;
+          this.showGlobalNav = true;
 
-    this.authService.idTokenClaims$
+        }))
+      .subscribe();
+
+    this.fullStorySubscription = this.authService.idTokenClaims$
       .pipe(
         filter((claims) => !!claims),
         take(1),
@@ -171,52 +104,82 @@ export class AppComponent implements OnInit, OnDestroy {
         mergeMap((userId: string) => this.analyticsService.injectFullStoryScript(userId))
       )
       .subscribe();
+
+    this.authService.logout({
+      // do not actually log out at this stage
+      // override default logout functionality and just get the logout url for future use
+      openUrl: (url) => {
+        this.logoutUrl = url;
+      },
+      logoutParams: { returnTo: document.location.origin }
+    }).subscribe();
+
   }
 
-  navigateToAssetWatch(): void {
-    const savedSearchId = localStorage.getItem('savedSearchId');
+  setupGwaUserData(): void {
+    this.gwaUserDataSubscription = this.authService.idTokenClaims$
+      .pipe(
+        filter((claims) => !!claims),
+        take(1),
+        map((claims) => {
+          if (!this.cachedViperGuidKey) {
+            const claimKeys = Object.keys(claims);
+            this.cachedViperGuidKey = claimKeys.find((key) => key.endsWith('viperGuid')) || '';
+          }
 
-    const path = savedSearchId ? `/${assetWatchSavedSearchesRoute}/${savedSearchId}` : `/${assetWatchRoute}`;
+          const userId = claims[this.cachedViperGuidKey] || '';
+          return userId;
+        })
+      )
+      .subscribe((userId: string) => {
+        try {
+          const gwaAccount = this.appConfigService?.configuration?.adobeAnalyticsAccount || '';
 
-    this.router.navigate([path]);
+          this.gwaTagsDataService.setUserData(userId, gwaAccount);
+          this.gwaTagsDataService.trackCurrentPage();
+        } catch (error) { }
+      });
+  }
+
+  setupRouterTracking(): void {
+    this.routerSubscription = this.router.events
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+      .subscribe(() => {
+        try {
+          this.gwaTagsDataService.trackCurrentPage();
+        } catch (error) { }
+      });
+  }
+
+  initializeAdobeAnalytics(): void {
+    this.userLoadedSubscription = this.appStore.appUser$
+      .pipe(
+        filter((user) => !!user),
+        take(1),
+        distinctUntilChanged()
+      )
+      .subscribe({
+        next: async () => {
+          try {
+            await this.analyticsService.injectAdobeLaunchScript();
+          } catch (error) { }
+        },
+        error: () => { }
+      });
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-  }
-
-  private isPage(pageName: string): boolean {
-    const url = this.getUrlSegments(this.router.url);
-    if (url.length === 2 && url[0] === 'portfolios' && url[1] === pageName) {
-      return true;
-    } else if (url.length === 3 && url[0] === 'portfolios' && !isNaN(Number(url[1])) && url[2] === pageName) {
-      return true;
-    } else if (
-      url.length === 4 &&
-      url[0] === 'portfolios' &&
-      url[1] === pageName &&
-      url[2] === 'saved-searches' &&
-      !isNaN(Number(url[3]))
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  private rootRoute(route: ActivatedRoute): ActivatedRoute {
-    while (route.firstChild) {
-      route = route.firstChild;
-    }
-    return route;
+    this.routerSubscription?.unsubscribe();
+    this.userLoadedSubscription?.unsubscribe();
+    this.gwaUserDataSubscription?.unsubscribe();
+    this.globalHeaderSubscription?.unsubscribe();
+    this.fullStorySubscription?.unsubscribe();
   }
 
   private setMinimumContentHeight(): void {
     this.minimumContentHeight = window.innerHeight - this.headerAndFooterHeight;
   }
 
-  private getUrlSegments(url: string): string[] {
-    return url.split('/').filter((segment) => segment !== '');
-  }
 }

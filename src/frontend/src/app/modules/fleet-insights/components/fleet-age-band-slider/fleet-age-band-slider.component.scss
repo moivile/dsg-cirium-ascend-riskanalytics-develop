@@ -1,0 +1,59 @@
+.age-slider {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.age-slider__labels,
+.age-slider__limits {
+  display: flex;
+  justify-content: space-between;
+}
+
+.age-slider__label {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.age-slider__control {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.age-slider__limit {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.age-slider__bands-title {
+  margin-top: 10px;
+}
+
+.age-slider__bands {
+  margin-top: 5px ;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.age-slider__band {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.age-slider__checkbox {
+  cursor: pointer;
+}
+
+.age-slider__text {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+}

@@ -1,1 +1,345 @@
-<p>fleet-insights-filter-panel works!</p>
+<div class="sidebar-filter-panel" [formGroup]="filterPanelForm">
+  <div class="sidebar-filter-panel__header">
+    <h3 class="sidebar-filter-panel__title">Filter By</h3>
+    <button class="sidebar-filter-panel__reset-button airframe__button airframe__button--flat" (click)="onResetAll()">Reset All</button>
+  </div>
+  <hr class="sidebar-filter-panel__divider" />
+
+  <ng-container *ngIf="!isFleetDistributionPage">
+    <div class="sidebar-filter-panel__field">
+      <ra-fleet-insights-interval-date-range-filter
+        [parentForm]="filterPanelForm"
+        [isFleetTrendsPage$]="isFleetTrendsPage$"></ra-fleet-insights-interval-date-range-filter>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="isFleetDistributionPage">
+    <div class="sidebar-filter-panel__field">
+      <label class="sidebar-filter-panel__field-label">Date</label>
+      <p-datepicker
+        class="sidebar-filter-panel__form-control"
+        formControlName="date"
+        styleClass="airframe-calendar"
+        [showIcon]="true"
+        icon="fa fa-calendar-days"
+        view="month"
+        dateFormat="MM yy"
+        [minDate]="minimumDate"
+        [maxDate]="maximumDate">
+      </p-datepicker>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="isMarketActivityPage$ | async">
+    <hr class="sidebar-filter-panel__divider" />
+
+    <ra-multiselect-group
+      [groupTitle]="'Events'"
+      [multiselectConfigs]="eventsMultiselectConfigs"
+      [multiselectFormGroup]="filterPanelForm"
+      [initialVisibleCount]="3"
+      [showToggleAll]="true">
+    </ra-multiselect-group>
+  </ng-container>
+
+  <hr class="sidebar-filter-panel__divider" />
+  <div class="sidebar-filter-panel__field ra-multiselect-with-chips">
+    <label class="sidebar-filter-panel__field-label">Status</label>
+    <p-multiSelect
+      raSmartVirtualScroll
+      class="sidebar-filter-panel__form-control"
+      formControlName="statuses"
+      [options]="(store.filterPanelOptions.statuses$ | async) || []"
+      placeholder="Status"
+      optionLabel="name"
+      optionValue="id"
+      filterMatchMode="startsWith"
+      scrollHeight="190px"
+      [showToggleAll]="false"
+      [resetFilterOnHide]="true"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="30"
+      [filter]="true"
+      display="chip"
+      [showClear]="true"
+      [maxSelectedLabels]="100">
+    </p-multiSelect>
+  </div>
+
+  <div class="sidebar-filter-panel__field ra-multiselect-with-chips">
+    <label class="sidebar-filter-panel__field-label">Primary Usage</label>
+    <p-multiSelect
+      raSmartVirtualScroll
+      class="sidebar-filter-panel__form-control"
+      formControlName="primaryUsages"
+      [options]="(store.filterPanelOptions.primaryUsages$ | async) || []"
+      placeholder="Primary Usage"
+      optionLabel="name"
+      optionValue="id"
+      filterMatchMode="startsWith"
+      scrollHeight="190px"
+      [showToggleAll]="false"
+      [resetFilterOnHide]="true"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="30"
+      [filter]="true"
+      display="chip"
+      [showClear]="true"
+      [maxSelectedLabels]="100">
+    </p-multiSelect>
+  </div>
+
+  <div class="sidebar-filter-panel__field ra-multiselect-with-chips">
+    <label class="sidebar-filter-panel__field-label">Market Class</label>
+    <p-multiSelect
+      raSmartVirtualScroll
+      class="sidebar-filter-panel__form-control"
+      formControlName="marketClasses"
+      [options]="(store.filterPanelOptions.marketClasses$ | async) || []"
+      placeholder="Market Class"
+      optionLabel="name"
+      optionValue="id"
+      filterMatchMode="startsWith"
+      scrollHeight="190px"
+      [showToggleAll]="false"
+      [resetFilterOnHide]="true"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="30"
+      [filter]="true"
+      display="chip"
+      [showClear]="true"
+      [maxSelectedLabels]="100">
+    </p-multiSelect>
+  </div>
+
+  <p-accordion [multiple]="true" class="field-set-accordion">
+    <p-accordion-panel value="aircraft">
+      <p-accordion-header>Aircraft</p-accordion-header>
+      <p-accordion-content>
+        <div *ngFor="let multiselectData of aircraftMultiselectConfigs" class="sidebar-filter-panel__field ra-multiselect-with-chips">
+          <label class="sidebar-filter-panel__field-label">{{ multiselectData.label }}</label>
+          <p-multiSelect
+            raSmartVirtualScroll
+            class="sidebar-filter-panel__form-control"
+            formControlName="{{ multiselectData.controlName }}"
+            [options]="(multiselectData.options$ | async) || []"
+            placeholder="{{ multiselectData.label }}"
+            optionLabel="name"
+            optionValue="id"
+            filterMatchMode="startsWith"
+            scrollHeight="190px"
+            [showToggleAll]="false"
+            [resetFilterOnHide]="true"
+            [virtualScroll]="true"
+            [virtualScrollItemSize]="30"
+            [filter]="true"
+            display="chip"
+            [showClear]="true"
+            [maxSelectedLabels]="100">
+          </p-multiSelect>
+        </div>
+      </p-accordion-content>
+    </p-accordion-panel>
+
+    <p-accordion-panel value="engine">
+      <p-accordion-header>Engine</p-accordion-header>
+      <p-accordion-content>
+        <div *ngFor="let multiselectData of engineMultiselectConfigs" class="sidebar-filter-panel__field ra-multiselect-with-chips">
+          <label class="sidebar-filter-panel__field-label">{{ multiselectData.label }}</label>
+          <p-multiSelect
+            raSmartVirtualScroll
+            class="sidebar-filter-panel__form-control"
+            formControlName="{{ multiselectData.controlName }}"
+            [options]="(multiselectData.options$ | async) || []"
+            placeholder="{{ multiselectData.label }}"
+            optionLabel="name"
+            optionValue="id"
+            filterMatchMode="startsWith"
+            scrollHeight="190px"
+            [showToggleAll]="false"
+            [resetFilterOnHide]="true"
+            [virtualScroll]="true"
+            [virtualScrollItemSize]="30"
+            [filter]="true"
+            display="chip"
+            [showClear]="true"
+            [maxSelectedLabels]="100">
+          </p-multiSelect>
+        </div>
+      </p-accordion-content>
+    </p-accordion-panel>
+
+    <p-accordion-panel value="operator">
+      <p-accordion-header>Operator</p-accordion-header>
+      <p-accordion-content>
+        <div *ngFor="let multiselectData of operatorMultiselectConfigs" class="sidebar-filter-panel__field ra-multiselect-with-chips">
+          <label class="sidebar-filter-panel__field-label">{{ multiselectData.label }}</label>
+          <p-multiSelect
+            raSmartVirtualScroll
+            class="sidebar-filter-panel__form-control"
+            formControlName="{{ multiselectData.controlName }}"
+            [options]="(multiselectData.options$ | async) || []"
+            placeholder="{{ multiselectData.label }}"
+            optionLabel="name"
+            optionValue="id"
+            filterMatchMode="startsWith"
+            scrollHeight="190px"
+            [showToggleAll]="false"
+            [resetFilterOnHide]="true"
+            [virtualScroll]="true"
+            [virtualScrollItemSize]="30"
+            [filter]="true"
+            display="chip"
+            [showClear]="true"
+            [maxSelectedLabels]="100">
+          </p-multiSelect>
+        </div>
+      </p-accordion-content>
+    </p-accordion-panel>
+  </p-accordion>
+
+  <hr class="sidebar-filter-panel__divider" />
+
+  <div class="sidebar-filter-panel__field ra-multiselect-with-chips">
+    <label class="sidebar-filter-panel__field-label">Lessor</label>
+    <p-multiSelect
+      raSmartVirtualScroll
+      class="sidebar-filter-panel__form-control"
+      formControlName="lessors"
+      [options]="(store.filterPanelOptions.lessors$ | async) || []"
+      placeholder="Lessor"
+      optionLabel="name"
+      optionValue="id"
+      filterMatchMode="startsWith"
+      scrollHeight="190px"
+      [showToggleAll]="false"
+      [resetFilterOnHide]="true"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="30"
+      [filter]="true"
+      display="chip"
+      [showClear]="true"
+      [maxSelectedLabels]="100">
+    </p-multiSelect>
+  </div>
+
+  <hr class="sidebar-filter-panel__divider" />
+
+  <div class="sidebar-filter-panel__field">
+    <label class="sidebar-filter-panel__field-label">Age</label>
+    <ra-fleet-age-band-slider [parentForm]="filterPanelForm"></ra-fleet-age-band-slider>
+  </div>
+
+  <ng-container *ngIf="isFleetDistributionPage">
+    <hr class="sidebar-filter-panel__divider" />
+    <div class="sidebar-filter-panel__field ra-multiselect-with-chips">
+      <label class="sidebar-filter-panel__field-label">Ownership</label>
+      <p-multiSelect
+        raSmartVirtualScroll
+        class="sidebar-filter-panel__form-control"
+        formControlName="ownerships"
+        [options]="(distributionOwnershipOptions$ | async) || []"
+        placeholder="Ownership"
+        optionLabel="name"
+        optionValue="id"
+        filterMatchMode="startsWith"
+        scrollHeight="190px"
+        [showToggleAll]="false"
+        [resetFilterOnHide]="true"
+        [virtualScroll]="true"
+        [virtualScrollItemSize]="30"
+        [filter]="true"
+        display="chip"
+        [showClear]="true"
+        [maxSelectedLabels]="100">
+      </p-multiSelect>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="isFleetTrendsPage$ | async">
+    <hr class="sidebar-filter-panel__divider" />
+
+    <div class="sidebar-filter-panel__field ra-multiselect-with-chips">
+      <label class="sidebar-filter-panel__field-label">Ownership</label>
+      <p-multiSelect
+        raSmartVirtualScroll
+        class="sidebar-filter-panel__form-control"
+        formControlName="trendsOwnerships"
+        [options]="trendsDateOwnershipOptions"
+        placeholder="Ownership"
+        optionLabel="name"
+        optionValue="id"
+        filterMatchMode="startsWith"
+        scrollHeight="190px"
+        [showToggleAll]="false"
+        [resetFilterOnHide]="true"
+        [virtualScroll]="true"
+        [virtualScrollItemSize]="30"
+        [filter]="true"
+        display="chip"
+        [showClear]="true"
+        [maxSelectedLabels]="100">
+      </p-multiSelect>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="isFleetDistributionPage || (isFleetTrendsPage$ | async)">
+    <hr class="sidebar-filter-panel__divider" />
+
+    <div class="sidebar-filter-panel__field ra-multiselect-with-chips">
+      <label class="sidebar-filter-panel__field-label">Lease Status</label>
+      <p-multiSelect
+        raSmartVirtualScroll
+        class="sidebar-filter-panel__form-control"
+        formControlName="leaseStatuses"
+        [options]="leaseStatusOptions"
+        placeholder="Lease Status"
+        optionLabel="name"
+        optionValue="id"
+        filterMatchMode="startsWith"
+        scrollHeight="190px"
+        [showToggleAll]="false"
+        [resetFilterOnHide]="true"
+        [virtualScroll]="true"
+        [virtualScrollItemSize]="30"
+        [filter]="true"
+        display="chip"
+        [showClear]="true"
+        [maxSelectedLabels]="100">
+      </p-multiSelect>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="isFleetDistributionPage">
+    <hr class="sidebar-filter-panel__divider" />
+
+    <div class="sidebar-filter-panel__field ra-multiselect-with-chips">
+      <div class="sidebar-filter-panel__field-label-with-tooltip">
+        <label class="sidebar-filter-panel__field-label">Availability</label>
+        <i
+          class="fa fa-question-circle availability-tooltip-icon"
+          pTooltip="Aircraft available for lease in the next 12 months from current date only."
+          tooltipStyleClass="helptip"
+          tooltipPosition="right"></i>
+      </div>
+      <p-multiSelect
+        raSmartVirtualScroll
+        class="sidebar-filter-panel__form-control"
+        formControlName="availabilities"
+        [options]="availabilityOptions"
+        placeholder="Availability"
+        optionLabel="name"
+        optionValue="id"
+        filterMatchMode="startsWith"
+        scrollHeight="190px"
+        [showToggleAll]="false"
+        [resetFilterOnHide]="true"
+        [virtualScroll]="true"
+        [virtualScrollItemSize]="30"
+        [filter]="true"
+        display="chip"
+        [showClear]="true"
+        [maxSelectedLabels]="100">
+      </p-multiSelect>
+    </div>
+  </ng-container>
+</div>

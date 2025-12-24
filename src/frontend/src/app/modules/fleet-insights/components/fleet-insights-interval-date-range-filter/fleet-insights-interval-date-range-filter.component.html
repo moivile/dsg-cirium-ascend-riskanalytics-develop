@@ -1,0 +1,55 @@
+<div [formGroup]="form" class="interval-date-range-filter">
+  <div class="interval-date-range-filter__interval interval">
+    <label class="interval__heading">Interval</label>
+    <label class="interval__radio-group airframe__radiogroup">
+      Monthly
+      <input type="radio" formControlName="intervalType" [value]="IntervalType.Monthly" />
+      <span></span>
+    </label>
+    <label class="interval__radio-group airframe__radiogroup">
+      Quarterly
+      <input type="radio" formControlName="intervalType" [value]="IntervalType.Quarter" id="interval-type-quarter-js" />
+      <span></span>
+    </label>
+    <label class="interval__radio-group airframe__radiogroup">
+      Yearly
+      <input type="radio" formControlName="intervalType" [value]="IntervalType.Year" />
+      <span></span>
+    </label>
+  </div>
+
+  <div class="interval-date-range-filter__date-range date-range">
+    <label class="date-range__label">Start Date - End Date</label>
+    <p-datepicker
+      #startCalendar
+      class="date-range__calendar"
+      formControlName="startDate"
+      styleClass="airframe-calendar"
+      placeholder="Start Date"
+      [showIcon]="true"
+      icon="fa fa-calendar-day"
+      [maxDate]="maximumDate"
+      [minDate]="minimumDate"
+      [dateFormat]="datePickerFormat"
+      [view]="calendarView"
+      [readonlyInput]="true"
+      [required]="true">
+    </p-datepicker>
+
+    <p-datepicker
+      #endCalendar
+      class="date-range__calendar"
+      formControlName="endDate"
+      styleClass="airframe-calendar"
+      placeholder="End Date"
+      [showIcon]="true"
+      icon="fa fa-calendar-day"
+      [maxDate]="maximumDate"
+      [minDate]="minimumDate"
+      [dateFormat]="datePickerFormat"
+      [view]="calendarView"
+      [readonlyInput]="true"
+      [required]="true">
+    </p-datepicker>
+  </div>
+</div>

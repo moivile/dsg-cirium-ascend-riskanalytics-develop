@@ -1,0 +1,66 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+@use '@airframe/standard/src/scss/foundations/font-family';
+
+.field-set-accordion {
+  .p-accordionheader {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+
+  .p-accordionpanel .p-accordionheader > .p-iconwrapper {
+    transition: transform 0.3s;
+    transform: rotate(180deg);
+    color: colors.$airframe-color-primary-normal;
+  }
+
+  .p-accordionpanel.p-accordionpanel-active > .p-iconwrapper {
+    transform: rotate(180deg);
+  }
+
+  .p-accordionpanel .p-accordioncontent-content {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    color: colors.$airframe-color-neutral-grey-80;
+    font-family: font-family.$font-family-montserrat;
+  }
+
+  .p-accordionpanel p-accordion-header.p-accordionheader {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid colors.$airframe-color-background-low-contrast-on-light;
+    background-color: transparent;
+
+    &:hover {
+      background-color: colors.$airframe-color-background-low-contrast-on-light;
+    }
+  }
+
+  .p-accordionpanel p-accordion-header.p-accordionheader {
+    color: colors.$airframe-color-neutral-grey-80;
+    font-family: font-family.$font-family-montserrat;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 24px;
+  }
+
+  p-accordion-panel.p-accordionpanel {
+    padding-top: 12px;
+    border: none;
+  }
+
+  .p-accordionpanel:not(.p-accordionpanel-active) > .p-accordioncontent,
+  .p-accordioncontent-content.ng-animating {
+    overflow: hidden;
+  }
+  .p-accordioncontent.ng-animating {
+    overflow: hidden;
+  }
+
+  .p-accordionpanel.p-accordionpanel-active > .p-accordioncontent {
+    overflow: visible !important;
+  }
+}

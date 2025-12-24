@@ -1,0 +1,57 @@
+<div class="fleet-tab-summary-table-wrapper">
+  <p-table
+    [value]="tableData"
+    [lazy]="false"
+    [paginator]="true"
+    [rows]="defaultRowCount"
+    [totalRecords]="tableData.length || 0"
+    [loading]="summaryTableLoading"
+    [rowsPerPageOptions]="[50, 100, 200]"
+    class="airframe-table airframe-table--fleet-insight fleet-trends-table fleet-trends-custom-style"
+    sortMode="single"
+    [scrollable]="true"
+    scrollDirection="both"
+    [scrollHeight]="'700px'"
+    [frozenColumns]="frozenColumns"
+    (onSort)="onSort($event)"
+    [sortField]="defaultSortField"
+    [sortOrder]="defaultSortOrder">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pFrozenColumn pSortableColumn="grouping">
+          <div class="airframe-table__sortable-header">
+            <span>Grouping</span>
+            <p-sortIcon field="grouping"></p-sortIcon>
+          </div>
+        </th>
+        <th *ngFor="let columnName of columnNames" pSortableColumn="{{ columnName }}" class="text-right">
+          <div class="airframe-table__sortable-header">
+            <span>{{ columnName }}</span>
+            <p-sortIcon field="{{ columnName }}"></p-sortIcon>
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData>
+      <tr>
+        <td pFrozenColumn>{{ rowData.grouping }}</td>
+        <ng-container *ngFor="let value of rowData.values">
+          <td class="text-right">
+            {{ formatRowValue(value) }}
+          </td>
+        </ng-container>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <tr>
+        <td pFrozenColumn><strong>Total</strong></td>
+        <ng-container *ngFor="let columnName of columnNames">
+          <td class="text-right">
+            {{ numberOfAircraftSelected.value ? footerTotals[columnName] || 0 : 100 + '%' }}
+          </td>
+        </ng-container>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

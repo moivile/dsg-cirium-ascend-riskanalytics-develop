@@ -1,0 +1,33 @@
+<div class="multiselect-group" [formGroup]="multiselectFormGroup">
+  <h3 class="multiselect-group__title">{{ groupTitle }}:</h3>
+
+  <div *ngFor="let multiselectData of visibleMultiselects" class="sidebar-filter-panel__field ra-multiselect-with-chips">
+    <label class="sidebar-filter-panel__field-label">{{ multiselectData.label }}</label>
+    <p-multiSelect
+      raSmartVirtualScroll
+      class="sidebar-filter-panel__form-control"
+      styleClass="airframe-dropdown"
+      formControlName="{{ multiselectData.controlName }}"
+      [options]="(multiselectData.options$ | async) || []"
+      placeholder="{{ multiselectData.label }}"
+      optionLabel="name"
+      optionValue="id"
+      filterMatchMode="startsWith"
+      scrollHeight="190px"
+      [showToggleAll]="showToggleAll"
+      [resetFilterOnHide]="true"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="30"
+      [filter]="true"
+      display="chip"
+      [showClear]="true"
+      [maxSelectedLabels]="100">
+    </p-multiSelect>
+  </div>
+
+  <div class="multiselect-group__show-all" *ngIf="hiddenCount > 0">
+    <button class="airframe__button airframe__button--flat" (click)="toggleShowAll()">
+      {{ showAll ? 'Show less' : 'Show all (' + hiddenCount + ')' }}
+    </button>
+  </div>
+</div>

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "riskanalytics": {
+    "fleet": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,15 +17,25 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": ["dayjs", "crypto-js", "lodash", "file-saver"],
-            "outputPath": "dist/riskanalytics",
+            "allowedCommonJsDependencies": [
+              "dayjs",
+              "crypto-js",
+              "lodash",
+              "file-saver"
+            ],
+            "outputPath": "dist/fleet",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -62,18 +72,18 @@
             "ssl": true,
             "sslKey": "./ssl/ciriumlocal.key",
             "sslCert": "./ssl/ciriumlocal.crt",
-            "port": 8053,
+            "port": 8013,
             "disableHostCheck": true,
             "proxyConfig": "./proxy.conf.json",
-            "buildTarget": "riskanalytics:build",
-            "allowedHosts": ["riskanalytics.local.aea.cirium.dev", "localhost", "127.0.0.1"]
+            "buildTarget": "fleet:build",
+            "allowedHosts": ["fleet.local.aea.cirium.dev", "localhost", "127.0.0.1"]
           },
           "configurations": {
             "production": {
-              "buildTarget": "riskanalytics:build:production"
+              "buildTarget": "fleet:build:production"
             },
             "development": {
-              "buildTarget": "riskanalytics:build:development"
+              "buildTarget": "fleet:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -81,32 +91,45 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "riskanalytics:build"
+            "buildTarget": "fleet:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": ["zone.js", "zone.js/testing"],
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": []
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
     }
   },
   "cli": {
-    "schematicCollections": ["@angular-eslint/schematics"],
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ],
     "analytics": false
   }
 }

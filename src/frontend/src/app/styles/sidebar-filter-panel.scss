@@ -1,0 +1,50 @@
+@use '@airframe/standard/src/scss/foundations/font-family';
+@use '@airframe/standard/src/scss/foundations/colors';
+
+.sidebar-filter-panel {
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+  }
+
+  hr.sidebar-filter-panel__divider {
+    padding: 0;
+    margin: 0;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    border: none;
+    box-shadow: none;
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &__field {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  p-datepicker.sidebar-filter-panel__form-control span.p-datepicker.airframe-calendar {
+    width: 100%;
+  }
+
+  .sidebar-filter-panel__form-control .p-placeholder {
+    font-size: 14px;
+    font-weight: 400;
+    color: colors.$airframe-color-neutral-grey-70;
+    font-family: font-family.$font-family-montserrat;
+  }
+}

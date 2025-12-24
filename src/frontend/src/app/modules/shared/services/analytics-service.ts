@@ -12,6 +12,8 @@ export interface UserInfo {
   providedIn: 'root'
 })
 export class AnalyticsService {
+  private adobeLaunchScriptLoaded = false;
+
   constructor(private readonly scriptInjectorService: ScriptInjectorService, private readonly appConfigService: AppConfigService) {}
 
   injectFullStoryScript(userId: string): Promise<void> {
@@ -45,11 +47,54 @@ export class AnalyticsService {
                       g._v="1.3.0";
                   })(window,document,window['_fs_namespace'],'script','user');
                   FS.identify('${userId}', {
-                    displayName: '${userId}',
+                    displayName: '${userId}'
                   });
                 `
       },
       { name: 'data-ot-ignore', value: 'true' }
     ]);
+  }
+
+  injectAdobeLaunchScript(): Promise<void> {
+    if (this.adobeLaunchScriptLoaded) {
+      return Promise.resolve();
+    }
+
+    const adobeLaunchScriptUrl = this.appConfigService.configuration.adobeLaunchScriptUrl;
+
+    return this.scriptInjectorService
+      .load([
+        { name: 'id', value: 'adobeLaunch' },
+        { name: 'src', value: adobeLaunchScriptUrl },
+        { name: 'async', value: 'true' }
+      ])
+      .then(() => {
+        return new Promise<void>((resolve) => {
+          const checkSatellite = setInterval(() => {
+            const satellite = (window as any)['_satellite'];
+            if (satellite) {
+              clearInterval(checkSatellite);
+              setTimeout(() => {
+                if (typeof satellite.pageBottom === 'function') {
+                  satellite.pageBottom();
+                }
+                resolve();
+              }, 100);
+            }
+          }, 50);
+
+          setTimeout(() => {
+            clearInterval(checkSatellite);
+            resolve();
+          }, 5000);
+        });
+      })
+      .then(() => {
+        this.adobeLaunchScriptLoaded = true;
+      })
+      .catch((error) => {
+        this.adobeLaunchScriptLoaded = false;
+        throw error;
+      });
   }
 }

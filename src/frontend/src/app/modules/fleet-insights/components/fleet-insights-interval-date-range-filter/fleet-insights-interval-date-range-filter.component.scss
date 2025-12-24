@@ -1,0 +1,28 @@
+.interval-date-range-filter {
+  display: flex;
+  flex-direction: column;
+}
+
+.interval-date-range-filter__interval {
+  margin-bottom: 12px;
+}
+
+.interval {
+  display: flex;
+  flex-direction: column;
+}
+
+.date-range {
+  display: flex;
+  flex-direction: column;
+}
+
+.date-range__calendar + .date-range__calendar {
+  margin-top: 8px;
+}
+
+:host ::ng-deep .date-range__calendar {
+  .p-datepicker {
+    width: 100%;
+  }
+}

@@ -1,0 +1,18 @@
+@use '@airframe/standard/src/scss/foundations/colors';
+
+.sidebar-filter-panel__field-label-with-tooltip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.availability-tooltip-icon {
+  color: colors.$airframe-color-status-info-extra-dark;
+  cursor: pointer;
+  font-size: 14px;
+
+  &:hover {
+    color: colors.$airframe-color-status-info-normal;
+  }
+}

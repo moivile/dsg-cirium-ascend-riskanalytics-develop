@@ -1,7 +1,12 @@
 <section class="page-content">
   <header class="page-content__header">
-    <h1 class="page-content__title">Fleet Trends</h1>
-    <p class="page-content__description">View the global distribution of the global fleet</p>
+    <div class="page-content__left-header">
+      <h1 class="page-content__title">Fleet Trends</h1>
+      <p class="page-content__description">View the global fleet over time</p>
+    </div>
+    <div class="page-content__right-header">
+      <ra-group-all-data-by-select class="page-content__group-all-data-by-select"> </ra-group-all-data-by-select>
+    </div>
   </header>
 
   <section class="page-section page-content__section">
@@ -9,12 +14,7 @@
       <div class="page-section__left-header">
         <h2 class="page-section__title">Summary</h2>
       </div>
-      <div class="page-section__right-header">
-        <div class="page-section__select">
-          <label>Group by</label>
-          <p-select styleClass="airframe-dropdown" [options]="['Status']"> </p-select>
-        </div>
-      </div>
+      <div class="page-section__right-header"></div>
     </header>
     <div class="page-section__controls">
       <div class="page-section__left-controls">
@@ -23,12 +23,24 @@
           <div class="page-section__metrics-radiogroup">
             <label class="airframe__radiogroup">
               Number of Aircraft
-              <input type="radio" name="metric" value="number" [checked]="true" />
+              <input
+                id="trends-radio-number-of-aircraft"
+                type="radio"
+                name="metric"
+                [value]="true"
+                [(ngModel)]="numberOfAircraftSelected.value"
+                (change)="onNumberOfAircraftSelected($event)" />
               <span></span>
             </label>
             <label class="airframe__radiogroup">
               % of Total Aircraft
-              <input type="radio" name="metric" value="percentage" />
+              <input
+                id="trends-radio-percentage-of-aircraft"
+                type="radio"
+                name="metric"
+                [value]="false"
+                [(ngModel)]="numberOfAircraftSelected.value"
+                (change)="onPercentageOfAircraftSelected($event)" />
               <span></span>
             </label>
           </div>
@@ -36,16 +48,25 @@
       </div>
       <div class="page-section__right-controls">
         <div class="page-section__actions">
-          <button class="airframe__icon-button" pTooltip="Download to Excel" tooltipPosition="left" tooltipStyleClass="airframe-tooltip">
-            <em class="fa fa-download"></em>
-          </button>
-          <button class="airframe__icon-button" pTooltip="Full screen" tooltipPosition="left" tooltipStyleClass="airframe-tooltip">
+          <button
+            class="airframe__icon-button"
+            (click)="showModalChart()"
+            pTooltip="Full screen"
+            tooltipPosition="left"
+            tooltipStyleClass="airframe-tooltip">
             <em class="fa fa-expand"></em>
           </button>
         </div>
       </div>
     </div>
-    <div class="page-section__data-visualization">Chart will go here</div>
+    <div class="page-section__data-visualization">
+      <ra-fleet-trends-stacked-area-chart
+        [chartData$]="chartData$"
+        [loading]="summaryTableLoading"
+        [chartFill]="chartFill"
+        [hasTooManySegments]="hasTooManySegments">
+      </ra-fleet-trends-stacked-area-chart>
+    </div>
   </section>
 
   <section class="page-section page-content__section">
@@ -56,23 +77,90 @@
     <div class="page-section__controls">
       <div class="page-section__left-controls">
         <div class="page-section__navigation-tabs-control airframe__navigation-tabs">
-          <a *ngFor="let tab of tabs" (click)="selectTab(tab)" [class.current-tab]="tab.active">
+          <a *ngFor="let tab of tabs" [class.current-tab]="tab.active">
             {{ tab.title }}
           </a>
         </div>
       </div>
       <div class="page-section__right-controls">
         <div class="page-section__actions">
-          <button class="airframe__icon-button" pTooltip="Download to Excel" tooltipPosition="left" tooltipStyleClass="airframe-tooltip">
+          <button
+            class="airframe__icon-button"
+            pTooltip="Download to Excel"
+            tooltipPosition="left"
+            (click)="exportSummaryToExcel()"
+            tooltipStyleClass="airframe-tooltip">
             <em class="fa fa-download"></em>
           </button>
-          <button class="airframe__icon-button" pTooltip="Full screen" tooltipPosition="left" tooltipStyleClass="airframe-tooltip">
+          <button
+            [disabled]="summaryTableRows < 1"
+            (click)="showModalTable()"
+            class="airframe__icon-button"
+            pTooltip="Full screen"
+            tooltipPosition="left"
+            tooltipStyleClass="airframe-tooltip">
             <em class="fa fa-expand"></em>
           </button>
         </div>
       </div>
     </div>
-    <div class="page-section__data-visualization" *ngIf="tabs[0].active">Table 1 will go here</div>
-    <div class="page-section__data-visualization" *ngIf="tabs[1].active">Table 2 will go here</div>
+    <ng-template #noDataBlock>
+      <div class="page-section__data-visualization no-data-block">{{ noDataMessage }}</div>
+    </ng-template>
+    <div class="page-section__data-visualization" *ngIf="summaryTableRows > 0; else noDataBlock">
+      <ra-fleet-tab-summary-table
+        [tableData]="tableData"
+        [columnNames]="columnNames"
+        [defaultSortField]="defaultSortField"
+        [defaultSortOrder]="defaultSortOrder"
+        [summaryTableLoading]="summaryTableLoading"
+        [numberOfAircraftSelected]="numberOfAircraftSelected"
+        [footerTotals]="footerTotals"
+        [onSort]="onSort.bind(this)"></ra-fleet-tab-summary-table>
+    </div>
   </section>
 </section>
+<p-dialog
+  *ngIf="displayModalTable"
+  class="airframe-modal p-dialog-mask open-modal"
+  header="{{ modalTitle }}"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [(visible)]="displayModalTable"
+  (onShow)="maximizeModalTable(tableModal)"
+  (onHide)="closeModal()"
+  #tableModal>
+  <ra-fleet-tab-summary-table
+    [tableData]="tableData"
+    [columnNames]="columnNames"
+    [defaultSortField]="defaultSortField"
+    [defaultSortOrder]="defaultSortOrder"
+    [summaryTableLoading]="summaryTableLoading"
+    [numberOfAircraftSelected]="numberOfAircraftSelected"
+    [footerTotals]="footerTotals"
+    [onSort]="onSort.bind(this)"></ra-fleet-tab-summary-table>
+</p-dialog>
+<p-dialog
+  *ngIf="displayModalChart"
+  class="airframe-modal"
+  styleClass="dialog-fullscreen custom-dialog-content"
+  [ngClass]="displayModalChart ? 'dialog-open-modal' : ''"
+  [(visible)]="displayModalChart"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [showHeader]="true"
+  [closable]="true"
+  [blockScroll]="true"
+  [dismissableMask]="true"
+  (onShow)="maximizeModalChart(chartModal)"
+  (onHide)="closeModal()"
+  #chartModal>
+  <ra-fleet-trends-stacked-area-chart
+    [chartData$]="chartData$"
+    [loading]="summaryTableLoading"
+    [chartFill]="chartFill"
+    [hasTooManySegments]="hasTooManySegments">
+  </ra-fleet-trends-stacked-area-chart>
+</p-dialog>

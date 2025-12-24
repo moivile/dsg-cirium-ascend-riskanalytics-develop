@@ -1,27 +1,22 @@
 import { Component, OnDestroy } from '@angular/core';
-import {
-  fleetDistributionPath,
-  fleetDistributionRoute,
-  fleetInsightsRoute,
-  fleetTrendsPath,
-  fleetTrendsRoute,
-  marketActivityPath,
-  marketActivityRoute
-} from '../../route.constants';
+import { assetAIRoute, fleetDistributionRoute, fleetTrendsRoute, marketActivityRoute } from '../../route.constants';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, map, shareReplay, startWith, Subject, takeUntil } from 'rxjs';
+import { AppStore } from '../../app-store';
 
 @Component({
-    selector: 'ra-fleet-insights',
-    templateUrl: './fleet-insights.component.html',
-    styleUrl: './fleet-insights.component.scss',
-    standalone: false
+  selector: 'ra-fleet-insights',
+  templateUrl: './fleet-insights.component.html',
+  styleUrl: './fleet-insights.component.scss',
+  standalone: false
 })
 export class FleetInsightsComponent implements OnDestroy {
-  fleetDistributionPath = fleetDistributionPath;
-  fleetTrendsPath = fleetTrendsPath;
-  marketActivityPath = marketActivityPath;
+  fleetDistributionRoute = fleetDistributionRoute;
+  fleetTrendsRoute = fleetTrendsRoute;
+  marketActivityRoute = marketActivityRoute;
+  assetAIRoute = assetAIRoute;
   currentPath: string | undefined;
+  isTestFeatureEnabled$ = this.appStore.isTestFeatureEnabled$;
   private destroy$ = new Subject<void>();
 
   currUrl$ = this.router.events.pipe(
@@ -35,7 +30,7 @@ export class FleetInsightsComponent implements OnDestroy {
 
   isFleetDistributionPage$ = this.currUrl$.pipe(
     map((url) => {
-      return [`/${fleetInsightsRoute}`, `/${fleetDistributionRoute}`].includes(url);
+      return url === `/${fleetDistributionRoute}` || url === `/`;
     })
   );
 
@@ -51,6 +46,8 @@ export class FleetInsightsComponent implements OnDestroy {
     })
   );
 
+  isAssetAiPage$ = this.currUrl$.pipe(map((url) => url === `/${assetAIRoute}`));
+
   isCollapsed = false;
 
   togglePanel(event?: MouseEvent): void {
@@ -60,7 +57,7 @@ export class FleetInsightsComponent implements OnDestroy {
     this.isCollapsed = !this.isCollapsed;
   }
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public readonly appStore: AppStore) {}
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();

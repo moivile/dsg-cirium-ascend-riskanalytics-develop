@@ -1,0 +1,69 @@
+.aa {
+  color: inherit;
+
+  &__container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+
+  &__title {
+    margin: 0 0 0.75rem;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  &__beta-note {
+    font-weight: 400;
+  }
+
+  &__tagline {
+    margin: 0 0 2rem;
+    line-height: 1.4;
+    font-size: 1.125rem;
+    opacity: 0.95;
+  }
+
+  &__lead {
+    margin: 0 auto 1.75rem;
+    max-width: 60ch;
+    line-height: 1.6;
+    font-size: 1.125rem;
+
+    strong {
+      font-weight: 700;
+    }
+
+    em {
+      font-style: italic;
+    }
+  }
+
+  &__body {
+    margin: 0 auto 2rem;
+    max-width: 75ch;
+    line-height: 1.7;
+    font-size: 1rem;
+  }
+
+  &__cta {
+    margin: 2rem 0 0;
+  }
+
+  &__link {
+    text-decoration: underline;
+    opacity: 0.9;
+  }
+
+  @media (max-width: 480px) {
+    &__container {
+      padding: 1.5rem 1rem;
+    }
+    &__lead,
+    &__body {
+      text-align: left;
+    }
+  }
+}

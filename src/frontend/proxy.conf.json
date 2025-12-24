@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "http://host.docker.internal:8054",
+    "target": "http://host.docker.internal:8014",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"

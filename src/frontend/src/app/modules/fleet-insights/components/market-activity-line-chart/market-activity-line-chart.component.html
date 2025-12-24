@@ -1,0 +1,30 @@
+<div #chartContainer>
+  <div [ngClass]="{ 'chart-loading-overlay': loading }">
+    <ng-container *ngIf="tooManyGroupings; else chartOrNoData">
+      <div class="no-data-block">Please filter your search criteria such that the number of results is 10 rows or less. Alternatively, refer to the Details table below.</div>
+    </ng-container>
+
+    <ng-template #chartOrNoData>
+      <ng-container *ngIf="lineChartLabels && lineChartLabels.length > 0; else noDataBlock">
+        <div class="chart-container" [ngStyle]="{ 'height.px': chartHeight }">
+          <canvas
+            #chartDirective
+            baseChart
+            [data]="{ labels: lineChartLabels, datasets: lineChartDataSets }"
+            [options]="lineChartOptions"
+            [type]="'line'"
+            [plugins]="[]">
+          </canvas>
+        </div>
+      </ng-container>
+    </ng-template>
+
+    <ng-template #noDataBlock>
+      <div class="no-data-block">No data for this period</div>
+    </ng-template>
+
+    <div class="loading-overlay">
+      <div class="spinner"></div>
+    </div>
+  </div>
+</div>

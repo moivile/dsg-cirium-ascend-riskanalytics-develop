@@ -1,0 +1,25 @@
+<div #chartContainer>
+  <div [ngClass]="{ 'chart-loading-overlay': loading }">
+    <ng-container *ngIf="!hasTooManySegments && chartLabels && chartLabels.length > 0; else noDataOrTooManySegments">
+      <div class="chart-container" [ngStyle]="{ 'height.px': chartHeight }">
+        <canvas baseChart [type]="chartType" [options]="chartOptions" [data]="chartData"> </canvas>
+      </div>
+    </ng-container>
+
+    <ng-template #noDataOrTooManySegments>
+      <ng-container *ngIf="hasTooManySegments && chartLabels && chartLabels.length > 0; else noDataMessage">
+        <div class="no-data-block">
+          Please filter your search criteria such that the number of results is 10 rows or less. Alternatively, refer to the Details table
+          below.
+        </div>
+      </ng-container>
+      <ng-template #noDataMessage>
+        <div class="no-data-block">No data available for this period</div>
+      </ng-template>
+    </ng-template>
+
+    <div *ngIf="loading" class="loading-overlay">
+      <div class="spinner"></div>
+    </div>
+  </div>
+</div>

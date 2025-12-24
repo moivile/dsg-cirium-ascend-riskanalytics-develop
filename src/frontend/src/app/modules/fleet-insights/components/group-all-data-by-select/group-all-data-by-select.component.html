@@ -1,0 +1,8 @@
+<label>Group All Data By</label>
+<p-treeSelect
+  [options]="(groupAllDataByTreeData$ | async) || []"
+  [formControl]="groupAllDataByControl"
+  selectionMode="single"
+  placeholder="Group All Data By"
+  [filter]="true"
+  filterMode="lenient"></p-treeSelect>

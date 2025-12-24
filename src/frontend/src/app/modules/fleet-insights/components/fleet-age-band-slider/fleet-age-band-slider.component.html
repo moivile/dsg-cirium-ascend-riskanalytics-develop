@@ -1,0 +1,34 @@
+<div class="age-slider" [formGroup]="parentForm">
+  <div class="age-slider__labels">
+    <label class="age-slider__label age-slider__label--young">Young</label>
+    <label class="age-slider__label age-slider__label--late">Late-life</label>
+  </div>
+  <p-slider class="age-slider__control" [range]="true" [min]="0" [max]="30" [formControl]="sliderControl"> </p-slider>
+  <div class="age-slider__limits">
+    <label class="age-slider__limit">0</label>
+    <label class="age-slider__limit">30+</label>
+  </div>
+  <label class="age-slider__bands-title">Age Bands:</label>
+  <div class="age-slider__bands">
+    <label class="age-slider__band">
+      <input
+        class="age-slider__checkbox age-slider__checkbox--young airframe__checkbox airframe__checkbox--primary"
+        type="checkbox"
+        formControlName="IncludeYoungLifeAircraft" />
+      <span class="age-slider__text">Young (0-{{ sliderControl.value[0] }})</span>
+    </label>
+
+    <label class="age-slider__band">
+      <input
+        class="age-slider__checkbox age-slider__checkbox--midlife airframe__checkbox airframe__checkbox--primary"
+        type="checkbox"
+        formControlName="IncludeMidLifeAircraft" />
+      <span class="age-slider__text">Mid-life ({{ sliderControl.value[0] }}-{{ sliderControl.value[1] }})</span>
+    </label>
+
+    <label class="age-slider__band">
+      <input class="age-slider__checkbox age-slider__checkbox--late airframe__checkbox airframe__checkbox--primary" type="checkbox" formControlName="IncludeLateLifeAircraft" />
+      <span class="age-slider__text">Late-life ({{ sliderControl.value[1] }}+ years)</span>
+    </label>
+  </div>
+</div>

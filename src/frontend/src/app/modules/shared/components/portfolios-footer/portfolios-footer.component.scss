@@ -1,5 +1,5 @@
 @use "@airframe/standard/src/scss/foundations/breakpoints";
-@import "@airframe/standard/src/scss/foundations/colors";
+@use "@airframe/standard/src/scss/foundations/colors";
 
 .portfolios-footer {
     bottom: 0;
@@ -8,15 +8,15 @@
     &__link-container {
         height: 234px;
 
+        background-color: colors.$airframe-color-neutral-grey-70;
+        text-align: center;
+
         @media (min-width: breakpoints.$airframe-breakpoint-sm) {
             height: 86px;
         }
         @media (min-width: breakpoints.$airframe-breakpoint-md) {
             height: 49px;
         }
-
-        background-color: $airframe-color-neutral-grey-70;
-        text-align: center;
 
         a {
             font-weight: 400;
@@ -42,8 +42,8 @@
 
     &__copyright {
         height: 41px;
-        background-color: $airframe-color-neutral-grey-80;
-        color: $airframe-color-neutral-white;
+        background-color: colors.$airframe-color-neutral-grey-80;
+        color: colors.$airframe-color-neutral-white;
         padding: 8px;
         vertical-align: middle;
 
@@ -63,12 +63,12 @@
 }
 
 .ot-sdk-show-settings {
-    color: $airframe-color-neutral-white !important;
+    color: colors.$airframe-color-neutral-white !important;
     border: none !important;
     font-size: 12px !important;
     padding: 0 !important;
 
     &:hover {
-        background-color: $airframe-color-neutral-grey-70 !important;
+        background-color: colors.$airframe-color-neutral-grey-70 !important;
     }
 }

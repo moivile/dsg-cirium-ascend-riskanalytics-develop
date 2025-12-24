@@ -1,0 +1,49 @@
+<p-table
+  [value]="(marketActivityTabStore.marketActivitySummaryData$ | async) || []"
+  [lazy]="false"
+  [paginator]="true"
+  [rows]="defaultRowCount"
+  [totalRecords]="(marketActivityTabStore.totalSummaryRecords$ | async) || 0"
+  [loading]="(marketActivityTabStore.loading$ | async) || false"
+  [rowsPerPageOptions]="[50, 100, 200]"
+  class="airframe-table airframe-table--fleet-insight"
+  sortMode="single"
+  [scrollable]="true"
+  scrollDirection="both"
+  [scrollHeight]="'700px'"
+  [sortField]="defaultSortField"
+  [sortOrder]="defaultSortOrder">
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="grouping">
+        <div class="airframe-table__sortable-header">
+          <span>Grouping</span> <p-sortIcon field="grouping"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="numberOfEvents" class="text-right">
+        <div class="airframe-table__sortable-header">
+          <span>Number of Events</span> <p-sortIcon field="numberOfEvents"></p-sortIcon>
+        </div>
+      </th>
+      <th pSortableColumn="percentageOfTotal" class="text-right">
+        <div class="airframe-table__sortable-header">
+          <span>% of Total</span> <p-sortIcon field="percentageOfTotal"></p-sortIcon>
+        </div>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData>
+    <tr>
+      <td>{{ rowData.grouping }}</td>
+      <td class="text-right">{{ rowData.numberOfEvents }}</td>
+      <td class="text-right">{{ rowData.percentageOfTotal | number:'1.1-1' }}%</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <tr>
+      <td>Total</td>
+      <td class="text-right">{{ marketActivityTabStore.totalNumberOfEvents$| async }}</td>
+      <td class="text-right">100%</td>
+    </tr>
+  </ng-template>
+</p-table>
