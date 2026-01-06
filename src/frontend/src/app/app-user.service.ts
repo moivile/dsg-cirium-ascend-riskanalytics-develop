@@ -12,7 +12,7 @@ export interface User {
   providedIn: 'root'
 })
 export class AppUserService {
-  private appUser$ = this.httpClient.get<User>('/api/user/details').pipe(shareReplay(1));
+  private appUser$ = this.httpClient.get<User>('/api/portfolios/user/details').pipe(shareReplay(1));
 
   constructor(private httpClient: HttpClient) {}
 

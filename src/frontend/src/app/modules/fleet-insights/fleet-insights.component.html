@@ -1,56 +1,34 @@
 <nav class="main-nav main-nav--fleet-insights">
+  <span class="main-nav__page-title"> Fleet Insights </span>
   <ul class="main-nav__site-list">
     <li class="main-nav__site-list-item">
-      <a
-        id="fleet-distribution-link"
-        [routerLink]="fleetDistributionRoute"
-        *ngIf="(isFleetDistributionPage$ | async) === false; else fleetDistribution">
+      <a [routerLink]="fleetDistributionPath" *ngIf="(isFleetDistributionPage$ | async) === false; else fleetDistribution">
         Fleet Distribution
       </a>
       <ng-template #fleetDistribution>
-        <a id="fleet-distribution-active" class="active-menu-item"> Fleet Distribution </a>
+        <a class="active-menu-item"> Fleet Distribution </a>
       </ng-template>
     </li>
     <li class="main-nav__site-list-item">
-      <a id="fleet-trends-link" [routerLink]="fleetTrendsRoute" *ngIf="(isFleetTrendsPage$ | async) === false; else fleetTrends">
-        Fleet Trends
-      </a>
+      <a [routerLink]="fleetTrendsPath" *ngIf="(isFleetTrendsPage$ | async) === false; else fleetTrends"> Fleet Trends </a>
       <ng-template #fleetTrends>
-        <a id="fleet-trends-active" class="active-menu-item">Fleet Trends</a>
+        <a class="active-menu-item">Fleet Trends</a>
       </ng-template>
     </li>
     <li class="main-nav__site-list-item">
-      <a
-        id="market-activity-link"
-        [routerLink]="marketActivityRoute"
-        *ngIf="(isMarketActivityPage$ | async) === false; else marketActivity">
-        Market Activity
-      </a>
+      <a [routerLink]="marketActivityPath" *ngIf="(isMarketActivityPage$ | async) === false; else marketActivity"> Market Activity </a>
       <ng-template #marketActivity>
-        <a id="market-activity-active" class="active-menu-item">Market Activity</a>
-      </ng-template>
-    </li>
-    <li class="main-nav__site-list-item">
-      <a id="asset-ai-link" [routerLink]="assetAIRoute" *ngIf="(isAssetAiPage$ | async) === false; else assetAI"> Asset AI </a>
-      <ng-template #assetAI>
-        <a id="asset-ai-active" class="active-menu-item">Asset AI</a>
+        <a class="active-menu-item">Market Activity</a>
       </ng-template>
     </li>
   </ul>
 </nav>
 
 <div class="divider-panel-container divider-panel-container--fleet-insights">
-  <div
-    *ngIf="(isAssetAiPage$ | async) === false"
-    class="divider-panel-container__left-panel"
-    [ngClass]="{ 'divider-panel-container__left-panel--collapsed': isCollapsed }">
-    <ra-fleet-insights-filter-panel
-      [isFleetDistributionPage]="(isFleetDistributionPage$ | async) ?? false"
-      [isFleetTrendsPage$]="isFleetTrendsPage$"
-      [isMarketActivityPage$]="isMarketActivityPage$">
-    </ra-fleet-insights-filter-panel>
+  <div class="divider-panel-container__left-panel" [ngClass]="{ 'divider-panel-container__left-panel--collapsed': isCollapsed }">
+    <ra-fleet-insights-filter-panel></ra-fleet-insights-filter-panel>
   </div>
-  <div *ngIf="(isAssetAiPage$ | async) === false" class="divider-panel-container__divider" (click)="togglePanel()">
+  <div class="divider-panel-container__divider" (click)="togglePanel()">
     <button
       type="button"
       class="divider-panel-container__button"

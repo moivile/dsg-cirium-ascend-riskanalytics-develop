@@ -42,10 +42,16 @@
 
   &__navigation-tabs-control {
     margin-left: 0;
+
   }
 
   &__data-visualization {
     margin-top: 10px;
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: colors.$airframe-color-neutral-grey-10-opacity-50;
   }
 
   &__metrics-label {

@@ -1,0 +1,15 @@
+.p-input-icon-right {
+  position: relative;
+  display: inline-block;
+}
+
+.p-input-icon-right > i {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.p-input-icon-right input {
+  padding-right: 2.25rem;
+}

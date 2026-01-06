@@ -1,5 +1,5 @@
 @use "@airframe/standard/src/scss/foundations/breakpoints";
-@import "@airframe/standard/src/scss/foundations/colors";
+@use "@airframe/standard/src/scss/foundations/colors";
 
 .overview-summary-count {
   padding-top: 20px;
@@ -13,7 +13,7 @@
     bottom: 0;
     margin: auto;
     width: 100%;
-    color: $airframe-color-primary-normal;
+    color: colors.$airframe-color-primary-normal;
 
     @media (min-width: breakpoints.$airframe-breakpoint-sm) {
       padding-right: 12px;

@@ -24,6 +24,7 @@
         "@typescript-eslint/no-empty-object-type": "off",
         "@typescript-eslint/no-unused-expressions": "off",
         "semi": ["error", "always"],
+        "@typescript-eslint/semi": ["error"],
         "quotes": ["error", "single", { "allowTemplateLiterals": true }],
         "curly": ["error", "all"],
         "eol-last": ["error", "always"],

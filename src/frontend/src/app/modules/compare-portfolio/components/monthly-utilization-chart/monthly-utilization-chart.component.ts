@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 import * as htmlToImage from 'html-to-image';
-import { ChartOptions } from 'chart.js';
+import { ChartOptions, Chart, registerables  } from 'chart.js';
 import { MonthlyUtilization } from '../../models/monthly-utilization';
 import { Metric } from '../../models/metric';
 import { MonthlyUtilizationChartTooltipBuilderService } from './monthly-utilization-chart-tooltip-builder.service';
@@ -10,6 +10,7 @@ import { PortfolioDetailOptions } from '../../models/portfolio-detail-options';
 import { DateConstants } from '../../../shared/models/date-constants';
 import dayjs from 'dayjs';
 import { MonthlyUtilizationChartObject } from '../../models/monthly-utilization-chart-object';
+Chart.register(...registerables);
 @Component({
   selector: 'ra-monthly-utilization-chart[monthlyUtilizationChartData][metric][yScaleSuggestedMax][chartLabels][chartXAxisTitle]',
   templateUrl: './monthly-utilization-chart.component.html',

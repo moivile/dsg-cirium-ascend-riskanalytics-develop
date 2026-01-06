@@ -3,13 +3,17 @@ import { Injectable } from '@angular/core';
 import { catchError, EMPTY, Observable, throwError } from 'rxjs';
 import { NoticeService } from './notice.service';
 import { Router } from '@angular/router';
+import { GlobalConstants } from '../models/global-constants';
 
 @Injectable()
 export class FailedRequestInterceptor implements HttpInterceptor {
-  constructor(private noticeService: NoticeService,
-    private readonly router: Router) {}
+  constructor(private noticeService: NoticeService, private readonly router: Router) {}
 
   public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (request.context.get(GlobalConstants.skipFailedRequestInterceptor)) {
+      return next.handle(request);
+    }
+
     return next.handle(request).pipe(
       catchError((response: HttpErrorResponse) => {
         if (response.status === 400) {

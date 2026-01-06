@@ -12,16 +12,15 @@ import { NgProgressHttpModule } from 'ngx-progressbar/http';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { AppStore } from './app-store';
 import { TooltipModule } from 'primeng/tooltip';
 import { createCustomElement } from '@angular/elements';
 import { EvBadge } from '@flightstats/evolve-components/dist/ev-badge';
+import { AssetWatchStore } from './modules/asset-watch/services/asset-watch-store';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
-import { EvTheme } from '@flightstats/evolve-components/dist/ev-theme';
-import { EvGlobalNav } from '@flightstats/evolve-components/dist/ev-global-nav';
 
 function initializeApp(appConfigService: AppConfigService): () => Promise<void> {
   return (): Promise<void> => {
@@ -32,9 +31,7 @@ function initializeApp(appConfigService: AppConfigService): () => Promise<void> 
 @NgModule({
   declarations: [AppComponent],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [
-    BrowserModule,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], imports: [BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AuthModule.forRoot(),
@@ -44,29 +41,28 @@ function initializeApp(appConfigService: AppConfigService): () => Promise<void> 
     ToastModule,
     FormsModule,
     ReactiveFormsModule,
-    DropdownModule,
-    TooltipModule
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeApp,
-      deps: [AppConfigService],
-      multi: true
-    },
-    MessageService,
-    { provide: 'WINDOW', useValue: window },
-    AppStore,
-    provideHttpClient(withInterceptorsFromDi()),
-    provideCharts(withDefaultRegisterables()),
-    providePrimeNG({
-      theme: {
-        preset: Aura,
-        options: { darkModeSelector: '.my-app-dark' }
-      }
-    })
-  ]
+    SelectModule,
+    TooltipModule], providers: [
+      { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
+      {
+        provide: APP_INITIALIZER,
+        useFactory: initializeApp,
+        deps: [AppConfigService],
+        multi: true
+      },
+      MessageService,
+      { provide: 'WINDOW', useValue: window },
+      AppStore,
+      AssetWatchStore,
+      provideHttpClient(withInterceptorsFromDi()),
+      provideCharts(withDefaultRegisterables()),
+      providePrimeNG({
+        theme: {
+          preset: Aura,
+          options: { darkModeSelector: '.my-app-dark' }
+        }
+      })
+    ]
 })
 export class AppModule implements DoBootstrap {
   constructor(private injector: Injector) { }
@@ -76,17 +72,5 @@ export class AppModule implements DoBootstrap {
       injector: this.injector
     });
     customElements.define('ev-badge', EvBadgeElement);
-
-    const EvGlobalNavElement = createCustomElement(EvGlobalNav, {
-      injector: this.injector
-    });
-    customElements.define('ev-global-nav', EvGlobalNavElement);
-
-
-    const EvThemeElement = createCustomElement(EvTheme, {
-      injector: this.injector
-    });
-    customElements.define('ev-theme', EvThemeElement);
-
   }
 }

@@ -5,5 +5,4 @@ export interface DetailsTableHeader {
   type: string;
   pipeFormat?: string;
   hidden?: boolean;
-  className?: string;
 }

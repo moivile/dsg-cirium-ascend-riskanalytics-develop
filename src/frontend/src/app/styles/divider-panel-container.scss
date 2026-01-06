@@ -5,12 +5,11 @@
   min-height: calc(100vh - 130px);
 
   &__left-panel {
-    width: clamp(220px, 25%, 320px);
-    transition: width 0.4s ease-in-out, opacity 0.4s ease-in-out;
+    width: 260px;
+    transition: width 0.4s ease-in-out;
 
     &--collapsed {
       width: 10px;
-      opacity: 0;
     }
   }
 
@@ -57,7 +56,6 @@
 
   &__right-panel {
     flex: 1;
-    overflow-x: auto;
     background-color: colors.$airframe-color-neutral-white;
   }
 

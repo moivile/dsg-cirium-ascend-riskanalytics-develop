@@ -2,19 +2,8 @@
   padding: 32px 40px;
   padding-bottom: 0;
 
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding-bottom: 20px;
-  }
-
-  &__left-header {
-    flex-grow: 1;
-  }
-
-  &__group-all-data-by-select {
-    width: 260px;
+  &__header{
+    padding-bottom: 20px; ;
   }
 
   &__title {

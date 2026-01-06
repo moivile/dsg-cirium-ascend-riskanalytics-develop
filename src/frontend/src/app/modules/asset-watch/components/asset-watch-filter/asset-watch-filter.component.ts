@@ -42,10 +42,10 @@ import { AircraftWatchlistFilterValues } from '../../models/aircraft-watchlist-f
 import { StringIdNamePairModel } from 'src/app/modules/shared/models/string-id-name-pair-model';
 
 @Component({
-    selector: 'ra-asset-watch-filter',
-    templateUrl: './asset-watch-filter.component.html',
-    styleUrls: ['./asset-watch-filter.component.scss'],
-    standalone: false
+  selector: 'ra-asset-watch-filter',
+  templateUrl: './asset-watch-filter.component.html',
+  styleUrls: ['./asset-watch-filter.component.scss'],
+  standalone: false
 })
 export class AssetWatchFilterComponent implements OnInit, OnDestroy {
   @Input()
@@ -98,7 +98,7 @@ export class AssetWatchFilterComponent implements OnInit, OnDestroy {
     private readonly activatedRoute: ActivatedRoute,
     private readonly savedSearchesService: SavedSearchesService,
     private router: Router
-  ) {}
+  ) { }
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
@@ -112,7 +112,7 @@ export class AssetWatchFilterComponent implements OnInit, OnDestroy {
         if (!selectedRegions || selectedRegions.length === 0) {
           return allCountries;
         }
-        return allCountries.filter(({ regionCode }) => selectedRegions.includes(regionCode.toString())).map(({ id, name }) => ({ id, name }));
+        return allCountries.filter(({ regionCode }) => regionCode != null && selectedRegions.includes(regionCode.toString())).map(({ id, name }) => ({ id, name }));
       })
     );
 
@@ -155,7 +155,7 @@ export class AssetWatchFilterComponent implements OnInit, OnDestroy {
           this.assetWatchStore.setAirportsFilterOptions(airportsDataArray);
 
           const filteredCityIds = (this.filterPanelForm.controls.cities.value || []).filter((id) =>
-            citiesDataArray.some((city) => city.id ===id)
+            citiesDataArray.some((city) => city.id === id)
           );
           this.filterPanelForm.controls.cities.setValue(filteredCityIds, { emitEvent: false });
 

@@ -6,16 +6,88 @@
 </p-toast>
 
 <div class="globalHeader">
-  <ev-theme>
-    <ev-global-nav
-      *ngIf="showGlobalNav"
-      class="globalHeader"
-      [logoutUrl]="logoutUrl"
-      [token]="token"
-      [headerTitle]="headerTitle"
-      [apiHost]="apiHost"></ev-global-nav>
-  </ev-theme>
+  <af-global-header
+    class="globalHeader"
+    loginUrl="not-required-but-cannot-be-empty"
+    logoutUrl="{{ logoutURL }}"
+    profileToken="{{ profileToken }}"
+    [attr.authenticated]="(authService.isAuthenticated$ | async) ? 'true' : null">
+  </af-global-header>
 </div>
+
+<div class="portfolio-picker-section" *ngIf="(isFleetInsightsPage$ | async) === false">
+  <div class="portfolio-picker-section-dropdown-wrapper">
+    <label>Portfolio</label>
+    <p-select
+      [options]="(appStore.portfolios$ | async) || []"
+      styleClass="airframe-dropdown"
+      optionLabel="name"
+      optionValue="id"
+      placeholder="Select a portfolio"
+      [formControl]="selectedPortfolioIdControl"
+      [filter]="true"
+      [filterBy]="'name'"
+      [resetFilterOnHide]="true">
+    </p-select>
+  </div>
+</div>
+
+<nav class="main-nav" *ngIf="(isFleetInsightsPage$ | async) === false">
+  <a class="main-nav__logo" routerLink="" pTooltip="Home (Portfolios)" tooltipPosition="left" tooltipStyleClass="airframe-tooltip">
+    <em class="fa-solid fa-house"></em>
+  </a>
+  <ul class="main-nav__site-list">
+    <li class="main-nav__site-list-item">
+      <a
+        *ngIf="!isFleetSummary && !!(appStore.selectedPortfolioId$ | async); else fleetSummary"
+        routerLink="/portfolios/{{ appStore.selectedPortfolioId$ | async }}"
+        [ngClass]="{ 'menu-item-inaccessible': (appStore.isPortfoliosEmpty$ | async) }"
+        >Fleet Summary</a
+      >
+      <ng-template #fleetSummary>
+        <a class="active-menu-item">Fleet Summary</a>
+      </ng-template>
+    </li>
+    <li class="main-nav__site-list-item">
+      <a
+        *ngIf="!isHoursAndCyclesPage; else hoursandcycles"
+        routerLink="/portfolios/hours-and-cycles"
+        [ngClass]="{ 'menu-item-inaccessible': (appStore.isPortfoliosEmpty$ | async) }"
+        >Hours & Cycles</a
+      >
+      <ng-template #hoursandcycles>
+        <a class="active-menu-item">Hours & Cycles</a>
+      </ng-template>
+    </li>
+    <li class="main-nav__site-list-item">
+      <a
+        *ngIf="!isEmissionsPage; else emissions"
+        routerLink="/portfolios/emissions"
+        [ngClass]="{
+          'menu-item-inaccessible': (appStore.appUserHasEmissionsAddOn$ | async) === false || (appStore.isPortfoliosEmpty$ | async)
+        }"
+        >Emissions</a
+      >
+      <ng-template #emissions>
+        <a class="active-menu-item">Emissions</a>
+      </ng-template>
+    </li>
+    <li class="main-nav__site-list-item">
+      <a
+        *ngIf="!isAssetWatchPage; else assetWatchText"
+        [ngClass]="{
+          'menu-item-inaccessible': (appStore.appUserHasAssetWatchAddOn$ | async) === false || (appStore.isPortfoliosEmpty$ | async)
+        }"
+        (click)="navigateToAssetWatch()"
+        class="clickable-item">
+        Flights
+      </a>
+      <ng-template #assetWatchText>
+        <a class="active-menu-item">Flights</a>
+      </ng-template>
+    </li>
+  </ul>
+</nav>
 
 <div [ngStyle]="{ 'minHeight.px': minimumContentHeight }">
   <router-outlet></router-outlet>

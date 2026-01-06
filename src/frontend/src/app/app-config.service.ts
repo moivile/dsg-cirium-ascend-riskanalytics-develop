@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import { HttpClient, HttpBackend } from '@angular/common/http';
-import { AuthClientConfig } from '@auth0/auth0-angular';
+import {AuthClientConfig} from '@auth0/auth0-angular';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +18,12 @@ export class AppConfigService {
   }
 
   load(): Promise<void> {
-    const jsonFile = '/api/configuration/frontend';
+    const jsonFile = '/api/riskanalytics/configuration/frontend';
     return new Promise<void>((resolve) => {
       this.httpClient.get<any>(jsonFile)
         .subscribe((response: IConfiguration) => {
 
-          const { generalConfiguration, auth0Configuration } = response;
+          const {generalConfiguration, auth0Configuration} = response;
 
           this.authClientConfig.set({
             domain: auth0Configuration.domain,
@@ -31,10 +31,10 @@ export class AppConfigService {
             useRefreshTokens: true,
             useRefreshTokensFallback: true,
             authorizationParams:
-            {
-              redirect_uri: document.location.origin,
-              audience: auth0Configuration.audience,
-            },
+              {
+                redirect_uri: document.location.origin,
+                audience: auth0Configuration.audience,
+              },
             httpInterceptor: {
               allowedList: [
                 {
@@ -46,7 +46,7 @@ export class AppConfigService {
                   },
                 },
                 {
-                  uri: generalConfiguration.myCiriumApiUrl + '/api/*',
+                  uri: generalConfiguration.myCiriumApiUrl + '/*',
                   tokenOptions: {
                     authorizationParams: { audience: 'my-cirium' },
                   },
@@ -69,9 +69,6 @@ export interface IGeneralConfiguration {
   marketingUrl: string;
   fullStoryOrganisationId: string;
   supportEmailAddress: string;
-  aircraftProfileUrlTemplate: string;
-  adobeLaunchScriptUrl: string;
-  adobeAnalyticsAccount: string;
 }
 
 interface IAuth0Configuration {

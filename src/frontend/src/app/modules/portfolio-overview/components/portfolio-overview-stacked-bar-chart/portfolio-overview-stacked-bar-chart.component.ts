@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts';
+import { Chart, registerables } from 'chart.js';
 import { combineLatest, Subscription, tap } from 'rxjs';
 import { Aircraft } from '../../../shared/models/aircraft';
 import { SortBy } from '../../models/sortBy';
@@ -7,6 +8,7 @@ import { PortfolioOverviewStore } from '../../services/portfolio-overview.store'
 import { Group } from '../portfolio-overview-grouping/group';
 import { PortfolioOverviewBarChartService } from './portfolio-overview-stacked-bar-chart.service';
 import { OperatorToggleValue } from '../../models/operator-toggle-value';
+Chart.register(...registerables);
 
 @Component({
     selector: 'ra-portfolio-overview-stacked-bar-chart[countBy][xAxisTitle]',
