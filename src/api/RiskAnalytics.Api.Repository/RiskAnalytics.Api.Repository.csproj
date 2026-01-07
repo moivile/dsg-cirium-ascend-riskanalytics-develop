@@ -10,7 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.66" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-    <PackageReference Include="Snowflake.Data" Version="5.1.0" />
+    <PackageReference Include="Snowflake.Data" Version="5.2.1" />
     <PackageReference Include="Tomlyn.Signed" Version="0.19.0" />
 
   </ItemGroup>
